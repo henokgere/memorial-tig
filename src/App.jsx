@@ -5,6 +5,7 @@ import OurHeroes from './pages/OurHeroes';
 import Story from './pages/Story';
 import TigrayHistory from './pages/TigrayHistory';
 import AboutUs from './pages/AboutUs';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );
