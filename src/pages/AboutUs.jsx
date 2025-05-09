@@ -10,12 +10,12 @@ export default function AboutUs() {
           {/* Mission Statement */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4 text-[#383C00]">Our Mission</h2>
-            <p className="mb-4">
+            <p className="text-gray-600 mb-4">
               We honor the lives of Tigrayan students and scholars whose dreams were 
               cut short by conflict. This memorial serves as a sacred space to remember 
               their potential and preserve their legacies.
             </p>
-            <p>
+            <p className="text-gray-600">
               Through remembrance, we seek to transform grief into purpose and ensure 
               these tragedies are never forgotten nor repeated.
             </p>
@@ -24,13 +24,13 @@ export default function AboutUs() {
           {/* Origin Story */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4 text-[#383C00]">How This Began</h2>
-            <p className="mb-4">
+            <p className="text-gray-600 mb-4">
               In 2020, a group of solders and civilians from Tigrayan heritage came together 
               after losing friends and family members in the war. What started as 
               a small memorial grew into this digital space for collective mourning 
               and historical preservation.
             </p>
-            <p>
+            <p className="text-gray-600">
               Each name represents not just a life lost, but generations of potential 
               erased.
             </p>
