@@ -6,6 +6,7 @@ import Story from './pages/Story';
 import TigrayHistory from './pages/TigrayHistory';
 import AboutUs from './pages/AboutUs';
 import Footer from './components/Footer';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/story" element={<Story />} />
             <Route path="/tigray-history" element={<TigrayHistory />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact-us" element={<ContactUs />} />
           </Routes>
         </main>
         <Footer />

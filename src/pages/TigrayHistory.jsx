@@ -18,7 +18,7 @@ export default function TigrayHistory() {
           <p>The legacy of Axum remains central to Tigrayan and Ethiopian identity.</p>
         </>
       ),
-      image: "/axum-obelisk.jpg"
+      image: "/OSK.jpeg"
     },
     yohanes: {
       title: "Emperor Yohanes IV",
@@ -34,7 +34,7 @@ export default function TigrayHistory() {
           <p>His leadership preserved Ethiopian independence during the Scramble for Africa.</p>
         </>
       ),
-      image: "/yohanes-iv.jpg"
+      image: "/OIP.jpeg"
     },
     adwa: {
       title: "Battle of Adwa (1896)",
@@ -50,7 +50,7 @@ export default function TigrayHistory() {
           <p>This victory preserved Ethiopian sovereignty until 1936.</p>
         </>
       ),
-      image: "/adwa-battle.jpg"
+      image: "/adwa.jpeg"
     },
     derg: {
       title: "Derg Period (1974-1991)",
@@ -66,7 +66,7 @@ export default function TigrayHistory() {
           <p>This period radicalized Tigrayan politics and led to armed struggle.</p>
         </>
       ),
-      image: "/derg-period.jpg"
+      image: "/derg.jpeg"
     },
     war: {
       title: "Tigray War (2020-2022)",
@@ -83,7 +83,7 @@ export default function TigrayHistory() {
           <p>The war caused immense suffering with lasting generational trauma.</p>
         </>
       ),
-      image: "/tigray-war.jpg"
+      image: "/tigray.jpeg"
     }
   };
 
@@ -119,8 +119,8 @@ export default function TigrayHistory() {
             />
           </div>
           <div className="p-6 md:w-2/3">
-            <h2 className="text-2xl font-bold mb-4">{historyPeriods[activePeriod].title}</h2>
-            <div className="prose max-w-none">
+            <h2 className="text-black text-2xl font-bold mb-4">{historyPeriods[activePeriod].title}</h2>
+            <div className="text-gray-700 prose max-w-none">
               {historyPeriods[activePeriod].content}
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function TigrayHistory() {
       </div>
 
       {/* Historical Context */}
-      <div className="mt-12 bg-gray-50 p-6 rounded-lg">
+      <div className="mt-12 bg-[#505050] p-6 rounded-lg">
         <h3 className="text-xl font-semibold mb-4">Tigray's Enduring Legacy</h3>
         <p>
           From the ancient Axumite civilization to its pivotal role in modern Ethiopia, Tigray has been a 
