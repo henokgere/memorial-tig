@@ -17,11 +17,11 @@ export default function HeroSection() {
         <h1 className="text-4xl text-[#202020] font-bold mb-4 animate-fadeIn">
           Honoring the Lives of MIT Students
         </h1>
-        <h2 className="text-xl text-[#505050] mb-6 animate-fadeIn delay-100">
+        <h2 className="text-xl text-[#272727] mb-6 animate-fadeIn delay-100">
           Lost in the Tigray War
         </h2>
         
-        <p className="text-base italic mb-8 max-w-2xl mx-auto animate-fadeIn delay-200">
+        <p className="text-[#454545] text-base italic mb-8 max-w-2xl mx-auto animate-fadeIn delay-200">
           A tribute to the bright friends taken too soon—may their legacy inspire future generations.
         </p>
         
