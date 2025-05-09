@@ -6,12 +6,12 @@ const navLinks = [
     name: "Home",
   },
   { 
-    path: "/our-friends", 
-    name: "Our friends",
+    path: "/our-heroes", 
+    name: "Our heroes",
   },
   { 
-    path: "/tigray-genocide", 
-    name: "Tigray genocide",
+    path: "/tigray-history", 
+    name: "Tigray history",
   },
   { 
     path: "/about-us", 
