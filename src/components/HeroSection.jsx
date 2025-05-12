@@ -15,7 +15,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-4xl text-[#202020] font-bold mb-4 animate-fadeIn">
-          Honoring the Lives of MIT Students
+          Honoring the Lives of Tigrians
         </h1>
         <h2 className="text-xl text-[#272727] mb-6 animate-fadeIn delay-100">
           Lost in the Tigray War
