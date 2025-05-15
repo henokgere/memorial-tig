@@ -8,6 +8,7 @@ import AboutUs from './pages/AboutUs';
 import Footer from './components/Footer';
 import ContactUs from './pages/ContactUs';
 import MemorialForm from './pages/MemorialForm';
+import ListPage from './pages/ListPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/tigray-history" element={<TigrayHistory />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/list" element={<ListPage />} />
             <Route path="/form" element={<MemorialForm />} />
           </Routes>
         </main>
