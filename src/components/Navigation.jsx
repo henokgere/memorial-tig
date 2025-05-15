@@ -27,7 +27,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-4">
-            <span className="text-xl font-semibold text-gray-900">Memorial</span>
+            <span className="text-xl font-semibold text-gray-900">{t("Memorial")}</span>
           </div>
 
           {/* Desktop Links */}
