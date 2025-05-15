@@ -9,11 +9,11 @@ export default function DynamicInput({
   required = false,
   className = '',
 }) {
-  const inputClass = `w-full border p-2 rounded bg-[#fafafa] focus:outline-none focus:ring-2 focus:ring-[#383C00] ${className}`;
+  const inputClass = `w-full border p-2 rounded text-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-[#383C00] ${className}`;
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={name} className="block font-medium mb-1">
+      <label htmlFor={name} className="block text-gray-400 font-medium mb-1">
         {label} {required && '*'}
       </label>
 
