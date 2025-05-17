@@ -96,6 +96,12 @@ export default function Navigation() {
                   >
                     ትግርኛ
                   </button>
+                  <button
+                    onClick={() => changeLanguage('fr')}
+                    className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
+                  >
+                    French
+                  </button>
                 </div>
               )}
             </div>
@@ -172,6 +178,9 @@ export default function Navigation() {
                 <button onClick={() => changeLanguage('tg')} className="text-left text-gray-700 text-sm hover:underline">
                   ትግርኛ
                 </button>
+                <button onClick={() => changeLanguage('fr')} className="text-left text-gray-700 text-sm hover:underline">
+                    French
+                  </button>
               </div>
             </div>
             <Link to="/login">

@@ -1,6 +1,9 @@
 {
-    "welcome": "Welcome to my app",
-    "description": "This is an example of internationalization.",
-    "change_language": "Change Language"
-  }
-  
+  "Memorial": "Memorial",
+  "home": "Home",
+  "our_heroes": "Our heroes",
+  "tigray_history": "Tigray history",
+  "about_us": "About us",
+  "contact_us": "Contact us",
+  "list": "Lists"
+}

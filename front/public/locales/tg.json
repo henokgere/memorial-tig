@@ -1,19 +1,10 @@
 {
     "Memorial": "ዝኽሪ",
-    "welcome": "ናብ ካዝና እንቋዕ ብደሓን መጻእኩም",
-    "description": "እዚ ሓደ ኣብነት ኣህጉራዊ ምዕባለ እዩ ።",
-    "change_language": "Change Language",
-    "Kazna": "ካዝና",
-    "empowering you to save, invest, and build a secure future.": "ንኽትዕቅብን ንኽትውፍርን ውሑስ መጻኢ ክትሃንጽን ሓይሊ ዝህብ።",
-    "Smart savings": "ስማርት ዕቋር",
-    "secure investments": "ውሑስ ወፍሪታት ምግባር",
-    "and a brighter tomorrow.": "ከምኡ’ውን ዝደመቐ ጽባሕ።",
-    "Kazna is a fintech and savings company dedicated to empowering individuals and businesses with smart financial solutions. Our mission is to make saving simple, secure, and rewarding, helping our customers build long-term financial stability and wealth.": "ካዝና ንውልቀሰባትን ትካላት ንግድን ብብልሓት ፋይናንሳዊ ፍታሕ ንምሕያል ዝዓለመ ናይ ፊንቴክን ዕቋርን ኩባንያ እዩ። ተልእኾና ዕቋር ቀሊል፣ ውሑስን ዓስቢ ዘለዎን ምግባር እዩ፣ ዓማዊልና ንነዊሕ እዋን ዝጸንሕ ፋይናንሳዊ ምርግጋእን ሃብትን ንምህናጽ ምሕጋዝ እዩ።",
-    "At Kazna, we believe that financial security starts with the right tools and strategies. Whether you’re saving for the future, investing in new opportunities, or managing your personal and business finances, we provide innovative solutions tailored to your needs.": "ኣብ ካዝና ፋይናንሳዊ ድሕነት ካብ ቅኑዕ መሳርሕታትን ስትራተጂታትን ከም ዝጅምር ንኣምን። ንመጻኢ ትዕቅብ ትኹን፡ ኣብ ሓደስቲ ዕድላት ትውፍር ትኹን፡ ወይ’ውን ውልቃውን ንግዳውን ፋይናንስካ ትመርሕ፡ ምስ ድሌታትካ ዝተመጣጠነ መሃዝቲ መፍትሒታት ንህብ።",
-    "With cutting-edge technology, transparent services, and a commitment to financial empowerment, Kazna is more than just a savings platform—it’s your partner in success. Join us on the journey to financial freedom and turn your savings into a foundation for a prosperous future.": "ምስ ምዕቡል ቴክኖሎጂ፡ ግሉጽ ኣገልግሎታትን ንፋይናንሳዊ ምሕያል ተወፋይነትን፡ ካዝና ካብ ናይ ዕቋር መድረኽ ንላዕሊ’ዩ-ኣብ ዓወት መሻርኽትኻ’ዩ። ኣብ ጉዕዞ ፋይናንሳዊ ናጽነት ተጸንበሩና እሞ ዕቋርኩም ናብ መሰረት ብልጽግና መጻኢ ቀይርዎ።",
-    "Vendors": "ሸየጥቲ",
-    "Banks": "ባንክታት",
-    "Equb types": "ኢኩብ ዓይነታት"
-
+    "home": "ናይ መጀመርታ ገጽ",
+    "our_heroes": "ጀጋኑ",
+    "tigray_history": "ታሪኽ ትግራይ",
+    "about_us": "ብዛዕባና",
+    "contact_us": "ርኸቡና",
+    "list": "ዝርዝር"
   }
   
