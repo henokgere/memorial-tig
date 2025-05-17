@@ -1,24 +1,34 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
+const { protect } = require('../../../middlewares/authMiddleware');
 const {
-  register, login, verifyEmail,
-  forgotPassword, resetPassword,
-  getAllUsers, updateUser, deleteUser
+  registerUser,
+  loginUser,
+  getMe,
+  logoutUser
 } = require('../controllers/userController');
 
-const { protect } = require('../../../middlewares/authMiddleware');
-const { adminOnly } = require('../../../middlewares/adminMiddleware');
+// Auth routes
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+router.get('/me', protect, getMe);
+router.get('/logout', protect, logoutUser);
 
-// Public
-router.post('/register', register);
-router.post('/login', login);
-router.get('/verify/:token', verifyEmail);
-router.post('/forgot', forgotPassword);
-router.post('/reset/:token', resetPassword);
+// Google OAuth
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login', session: false }), (req, res) => {
+  const { user } = req;
+  const token = user.getSignedJwtToken();
+  res.redirect(`/auth/success?token=${token}`);
+});
 
-// Admin only
-router.get('/', protect, adminOnly, getAllUsers);
-router.put('/:id', protect, adminOnly, updateUser);
-router.delete('/:id', protect, adminOnly, deleteUser);
+// Facebook OAuth
+router.get('/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email'] }));
+router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login', session: false }), (req, res) => {
+  const { user } = req;
+  const token = user.getSignedJwtToken();
+  res.redirect(`/auth/success?token=${token}`);
+});
 
 module.exports = router;

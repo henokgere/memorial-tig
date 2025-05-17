@@ -1,92 +1,72 @@
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const { sendEmailVerification } = require('../../../utils/emailUtils');
 
-// Helper: generate JWT
-const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-
-exports.register = async (req, res) => {
+// Register
+exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
-  const userExists = await User.findOne({ email });
-  if (userExists) return res.status(400).json({ message: 'Email already in use' });
 
-  const user = await User.create({ name, email, password });
-  const token = user.createToken('emailVerificationToken');
-  await user.save();
+  try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ success: false, error: 'User already exists' });
+    }
 
-  // Send verification link (mocked)
-  const verificationLink = `http://localhost:3000/api/users/verify/${token}`;
-  console.log('Email Verification Link:', verificationLink);
+    user = await User.create({ name, email, password });
 
-  res.status(201).json({ message: 'User registered, please verify your email' });
+    // Optionally send email verification
+    await sendEmailVerification(user);
+
+    sendTokenResponse(user, 201, res);
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Server Error' });
+  }
 };
 
-exports.verifyEmail = async (req, res) => {
-  const user = await User.findOne({
-    emailVerificationToken: req.params.token,
-    emailVerificationExpires: { $gt: Date.now() }
-  });
-  if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
-
-  user.emailVerified = true;
-  user.emailVerificationToken = undefined;
-  user.emailVerificationExpires = undefined;
-  await user.save();
-
-  res.json({ message: 'Email verified successfully' });
-};
-
-exports.login = async (req, res) => {
+// Login
+exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email }).select('+password');
-  if (!user || !(await user.correctPassword(password, user.password)))
-    return res.status(401).json({ message: 'Invalid credentials' });
 
-  const token = generateToken(user._id);
-  res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+  try {
+    const user = await User.findOne({ email }).select('+password');
+    if (!user || !(await user.matchPassword(password))) {
+      return res.status(401).json({ success: false, error: 'Invalid credentials' });
+    }
+
+    sendTokenResponse(user, 200, res);
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Server Error' });
+  }
 };
 
-exports.forgotPassword = async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(404).json({ message: 'No user with that email' });
-
-  const token = user.createToken('passwordResetToken');
-  await user.save();
-
-  const resetLink = `http://localhost:3000/api/users/reset/${token}`;
-  console.log('Password Reset Link:', resetLink);
-
-  res.json({ message: 'Reset link sent' });
+// Get current user
+exports.getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Server Error' });
+  }
 };
 
-exports.resetPassword = async (req, res) => {
-  const user = await User.findOne({
-    passwordResetToken: req.params.token,
-    passwordResetExpires: { $gt: Date.now() }
+// Logout
+exports.logoutUser = (req, res) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
   });
-  if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
 
-  user.password = req.body.password;
-  user.passwordResetToken = undefined;
-  user.passwordResetExpires = undefined;
-  await user.save();
-
-  res.json({ message: 'Password updated successfully' });
+  res.status(200).json({ success: true, data: {} });
 };
 
-exports.getAllUsers = async (req, res) => {
-  const users = await User.find().select('-password');
-  res.json(users);
-};
+// Utility
+const sendTokenResponse = (user, statusCode, res) => {
+  const token = user.getSignedJwtToken();
+  const options = {
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
+  };
 
-exports.updateUser = async (req, res) => {
-  const { name, role } = req.body;
-  const user = await User.findByIdAndUpdate(req.params.id, { name, role }, { new: true });
-  if (!user) return res.status(404).json({ message: 'User not found' });
-  res.json(user);
-};
-
-exports.deleteUser = async (req, res) => {
-  const user = await User.findByIdAndDelete(req.params.id);
-  if (!user) return res.status(404).json({ message: 'User not found' });
-  res.json({ message: 'User deleted' });
+  res.status(statusCode).cookie('token', token, options).json({ success: true, token });
 };

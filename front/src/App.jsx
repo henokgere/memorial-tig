@@ -9,6 +9,9 @@ import Footer from './components/Footer';
 import ContactUs from './pages/ContactUs';
 import MemorialForm from './pages/MemorialForm';
 import ListPage from './pages/ListPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
@@ -17,13 +20,15 @@ function App() {
         <Navigation />
         <main className="container mx-auto px-4 py-8">
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/" element={<Home />} />
             <Route path="/our-heroes" element={<OurHeroes />} />
             <Route path="/story" element={<Story />} />
             <Route path="/tigray-history" element={<TigrayHistory />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/list" element={<ListPage />} />
+            <Route path="/list" element={<AuthProvider><ListPage /></AuthProvider>} />
             <Route path="/form" element={<MemorialForm />} />
           </Routes>
         </main>

@@ -1,61 +1,73 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const config = require('../../../config/server');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please provide a name']
+    required: [true, 'Please add a name'],
+    trim: true,
+    maxlength: [50, 'Name cannot be more than 50 characters']
   },
   email: {
     type: String,
-    required: [true, 'Please provide an email'],
+    required: [true, 'Please add an email'],
     unique: true,
     lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email']
+    validate: [validator.isEmail, 'Please add a valid email']
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 6,
+    required: [true, 'Please add a password'],
+    minlength: [6, 'Password must be at least 6 characters'],
     select: false
+  },
+  avatar: {
+    type: String
   },
   role: {
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
   },
-  emailVerified: {
+  googleId: {
+    type: String
+  },
+  facebookId: {
+    type: String
+  },
+  isVerified: {
     type: Boolean,
     default: false
   },
-  emailVerificationToken: String,
-  emailVerificationExpires: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date
-}, {
-  timestamps: true
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-// Hash password before saving
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
+// Encrypt password using bcrypt
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
-// Check password
-userSchema.methods.correctPassword = async function (candidate, actual) {
-  return await bcrypt.compare(candidate, actual);
+// Sign JWT and return
+userSchema.methods.getSignedJwtToken = function() {
+  return jwt.sign({ id: this._id }, config.jwtSecret, {
+    expiresIn: process.env.JWT_EXPIRE || '30d'
+  });
 };
 
-// Generate token (used for email verification & password reset)
-userSchema.methods.createToken = function (field) {
-  const token = crypto.randomBytes(32).toString('hex');
-  this[field] = token;
-  this[`${field}Expires`] = Date.now() + 3600000; // 1 hour
-  return token;
+// Match user entered password to hashed password in database
+userSchema.methods.matchPassword = async function(enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 module.exports = mongoose.model('User', userSchema);
