@@ -56,20 +56,6 @@ export default function Footer() {
             </div>
             <p className="text-xs text-gray-300">Get updates at: notime.tigrayleganu.org</p>
           </div>
-
-          {/* Donation CTA */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold mb-2">Support Our Mission</h3>
-            <p className="text-sm">
-              Your contribution helps preserve the memory of those we've lost.
-            </p>
-            <a
-              href="/donate"
-              className="inline-block shadow shadow-gray-600 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-md transition text-white font-medium text-sm"
-            >
-              Donate Now
-            </a>
-          </div>
         </div>
 
         {/* Copyright */}
