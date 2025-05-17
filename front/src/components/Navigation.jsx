@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
+import i18n from '../i18n';
 
 const navLinks = [
   { path: "/", name: "home" },
@@ -14,7 +15,7 @@ const navLinks = [
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -72,7 +73,7 @@ export default function Navigation() {
                     አማርኛ
                   </button>
                   <button
-                    onClick={() => changeLanguage('ti')}
+                    onClick={() => changeLanguage('tg')}
                     className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
                   >
                     ትግርኛ
@@ -129,7 +130,7 @@ export default function Navigation() {
                 <button onClick={() => changeLanguage('am')} className="text-left text-gray-700 text-sm hover:underline">
                   አማርኛ
                 </button>
-                <button onClick={() => changeLanguage('ti')} className="text-left text-gray-700 text-sm hover:underline">
+                <button onClick={() => changeLanguage('tg')} className="text-left text-gray-700 text-sm hover:underline">
                   ትግርኛ
                 </button>
               </div>
