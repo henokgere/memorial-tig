@@ -1,39 +1,89 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import '@fontsource/rock-salt'; // Artistic handwritten font
+import '@fontsource/caveat';    // Optional for subtitle
+import { Link } from 'react-router-dom';
+
+const images = ['/1.png', '/2.png', '/3.png'];
+
+const styles = {
+  textWrapper: {
+    display: 'inline-block',
+    backgroundColor: '#fff7e677', // light painted background
+    padding: '0.5rem 1rem',
+    borderRadius: '0.75rem',
+    boxShadow: '2px 2px 10px rgba(0,0,0,0.1)',
+    marginBottom: '1rem',
+  },
+  heroTitle: {
+    fontFamily: "'Rock Salt', cursive",
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    color: '#202020',
+  },
+  heroSubtitle: {
+    fontFamily: "'Caveat', cursive",
+    fontSize: '1.5rem',
+    color: '#272727',
+  },
+  heroParagraph: {
+    backgroundColor: '#3b3b3b77',
+    padding: '1rem',
+    borderRadius: '0.75rem',
+    fontStyle: 'italic',
+    color: '#fff7e6',
+    maxWidth: '40rem',
+    margin: '0 auto 2rem',
+    boxShadow: '1px 1px 6px #3b3b3b',
+  },
+};
 
 export default function HeroSection() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Rotate every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative h-[450px] my-8 flex items-center justify-center bg-memorial-dark text-white overflow-hidden">
-      {/* Background overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
-      
-      {/* Background image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('/1.png')" }}
+
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-1000"
+        style={{ backgroundImage: `url('${images[currentImageIndex]}')` }}
       ></div>
-      
+
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <h1 className="text-4xl text-[#202020] font-bold mb-4 animate-fadeIn">
-          Honoring the Lives of Tigrians
-        </h1>
-        <h2 className="text-xl text-[#272727] mb-6 animate-fadeIn delay-100">
-          Lost in the Tigray War
-        </h2>
-        
-        <p className="text-[#454545] text-base italic mb-8 max-w-2xl mx-auto animate-fadeIn delay-200">
+        <div style={styles.textWrapper}>
+          <div style={styles.heroTitle}>Honoring the Lives of Tigrians</div>
+        </div>
+
+        <div style={styles.textWrapper}>
+          <h2 className="animate-fadeIn delay-100" style={styles.heroSubtitle}>
+            Lost in the Tigray War
+          </h2>
+        </div>
+
+        <p className="animate-fadeIn delay-200" style={styles.heroParagraph}>
           A tribute to the bright friends taken too soon—may their legacy inspire future generations.
         </p>
-        
+
         <div className="flex flex-col md:flex-row justify-center gap-4 animate-fadeIn delay-300">
-          <a 
-            href="/our-heroes" 
+          <Link
+            to="/our-heroes"
             className="px-6 py-3 bg-red-700 hover:bg-red-500 rounded-lg transition text-white font-semibold"
           >
             View Memorial
-          </a>
-          <a 
-            href="/donate" 
+          </Link>
+          <a
+            href="https://donateme/donate"
             className="px-6 py-3 bg-[#505050] hover:bg-[#7e7e7e] rounded-lg transition text-white font-semibold"
           >
             Donate Now
