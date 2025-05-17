@@ -17,6 +17,9 @@ export default function Navigation() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const { t } = useTranslation();
 
+  // ✅ Check if user is logged in (adjust key based on your app)
+  const isRegistered = !!localStorage.getItem("token");
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLangMenuOpen(false);
@@ -26,7 +29,6 @@ export default function Navigation() {
     <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex items-center space-x-4">
             <span className="text-xl font-semibold text-gray-900">{t("Memorial")}</span>
           </div>
@@ -48,6 +50,22 @@ export default function Navigation() {
                 {t(link.name)}
               </NavLink>
             ))}
+
+            {/* ✅ Conditionally show /list */}
+            {isRegistered && (
+              <NavLink
+                to="/list"
+                className={({ isActive }) =>
+                  `text-sm font-medium ${
+                    isActive
+                      ? 'text-[#383C00] border-b-2 border-[#383C00]'
+                      : 'text-gray-500 hover:text-gray-700'
+                  } pb-1 px-1`
+                }
+              >
+                {t("list")}
+              </NavLink>
+            )}
 
             {/* Language Switcher */}
             <div className="relative">
@@ -81,7 +99,10 @@ export default function Navigation() {
                 </div>
               )}
             </div>
-            <Link to={'/login'}><UserCircle2 color='#383C00' /></Link>
+
+            <Link to="/login">
+              <UserCircle2 color="#383C00" />
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -121,6 +142,23 @@ export default function Navigation() {
               </NavLink>
             ))}
 
+            {/* ✅ Conditionally show /list in mobile */}
+            {isRegistered && (
+              <NavLink
+                to="/list"
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  `block text-sm font-medium ${
+                    isActive
+                      ? 'text-[#383C00] border-b-2 border-[#383C00]'
+                      : 'text-gray-500 hover:text-gray-700'
+                  } pb-1 px-1`
+                }
+              >
+                {t("list")}
+              </NavLink>
+            )}
+
             {/* Language Selector */}
             <div className="mt-4 px-2">
               <span className="text-gray-600 text-sm mb-1 block">🌐 Language:</span>
@@ -136,7 +174,9 @@ export default function Navigation() {
                 </button>
               </div>
             </div>
-            <Link to={'/login'}><UserCircle2 color='#383C00' /></Link>
+            <Link to="/login">
+              <UserCircle2 color="#383C00" />
+            </Link>
           </div>
         )}
       </div>
