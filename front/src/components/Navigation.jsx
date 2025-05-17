@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Globe } from 'lucide-react';
+import { Globe, UserCircle2 } from 'lucide-react';
 import i18n from '../i18n';
 
 const navLinks = [
@@ -81,6 +81,7 @@ export default function Navigation() {
                 </div>
               )}
             </div>
+            <Link to={'/login'}><UserCircle2 color='#383C00' /></Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -135,6 +136,7 @@ export default function Navigation() {
                 </button>
               </div>
             </div>
+            <Link to={'/login'}><UserCircle2 color='#383C00' /></Link>
           </div>
         )}
       </div>
