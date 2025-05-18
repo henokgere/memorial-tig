@@ -7,23 +7,28 @@ const images = ['/1.png', '/2.png', '/3.png'];
 
 const styles = {
   textWrapper: {
-    display: 'inline-block',
-    backgroundColor: '#fff7e677', // light painted background
-    padding: '0.5rem 1rem',
-    borderRadius: '0.75rem',
-    boxShadow: '2px 2px 10px rgba(0,0,0,0.1)',
+    display: 'block',
+    width: '100%',
+    backgroundImage: "url('/brush.png')",
+    backgroundSize: 'cover',
+    backgroundRepeat: 'repeat',
+    backgroundPosition: 'center',
+    padding: '1.25rem 2rem',
+    borderRadius: '1rem',
     marginBottom: '1rem',
   },
   heroTitle: {
     fontFamily: "'Rock Salt', cursive",
     fontSize: '2.5rem',
-    fontWeight: 'bold',
-    color: '#202020',
+    fontWeight: 'bolder',
+    color: '#e1e1e1',
+    textShadow: "2px 2px 20px #1a1a1a"
   },
   heroSubtitle: {
     fontFamily: "'Caveat', cursive",
     fontSize: '1.5rem',
-    color: '#272727',
+    fontWeight: 'bold',
+    color: '#e2e2e2',
   },
   heroParagraph: {
     backgroundColor: '#3b3b3b77',
@@ -37,6 +42,7 @@ const styles = {
   },
 };
 
+
 export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -49,7 +55,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-[450px] my-8 flex items-center justify-center bg-memorial-dark text-white overflow-hidden">
+    <section className="relative min-h-[450px] my-8 flex items-center justify-center bg-memorial-dark text-white overflow-hidden">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
