@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '@fontsource/rock-salt'; // Artistic handwritten font
 import '@fontsource/caveat';    // Optional for subtitle
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const images = ['/1.png', '/2.png', '/3.png'];
 
@@ -45,6 +46,7 @@ const styles = {
 
 export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,12 +70,12 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div style={styles.textWrapper}>
-          <div style={styles.heroTitle}>Honoring the Lives of Tigrians</div>
+          <div style={styles.heroTitle}>{t('Honoring the Lives of Tigrians')}</div>
         </div>
 
         <div style={styles.textWrapper}>
           <h2 className="animate-fadeIn delay-100" style={styles.heroSubtitle}>
-            Lost in the Tigray War
+            {t("Lost in the Tigray War")}
           </h2>
         </div>
 
