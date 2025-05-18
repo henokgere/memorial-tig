@@ -29,9 +29,12 @@ export default function Navigation() {
     <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-4">
-            <span className="text-xl font-semibold text-gray-900">{t("Memorial")}</span>
-          </div>
+          <Link to='/'>
+            <div className="flex items-center space-x-4">
+              <img src="/vite.png" width={30} alt="" />
+              <span className="text-xl font-semibold text-gray-900">{t("Memorial")}</span>
+            </div>
+          </Link>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-6">
