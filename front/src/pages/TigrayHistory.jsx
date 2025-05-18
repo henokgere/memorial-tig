@@ -89,7 +89,7 @@ export default function TigrayHistory() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold text-center mb-8">Tigray Through History</h1>
+      <h1 className="text-gray-700 text-3xl font-bold text-center mb-8">Tigray Through History</h1>
       
       {/* Timeline Navigation */}
       <div className="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">

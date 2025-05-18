@@ -17,8 +17,9 @@ export default function MemorialTribute() {
             
             <p className="text-lg md:text-xl leading-relaxed mb-8 italic">
               We remember the bright young minds whose lives were tragically cut short, 
-              their dreams left unfulfilled, and their voices silenced too soon. Though 
-              they are no longer with us, their legacy of hope, ambition, and resilience 
+              their dreams left unfulfilled,
+               {/* and their voices silenced too soon.  */}
+               Though they are no longer with us, their legacy of hope, ambition, and resilience 
               will live on in the hearts of those who knew them and the generations they 
               continue to inspire.
             </p>

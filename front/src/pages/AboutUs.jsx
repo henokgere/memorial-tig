@@ -2,7 +2,7 @@ export default function AboutUs() {
     return (
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">About This Memorial</h1>
+          <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">About This Memorial</h1>
           <div className="w-24 h-1 bg-[#383C00] mx-auto"></div>
         </div>
   
