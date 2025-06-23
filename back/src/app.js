@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
-const config = require('../config/server');
+const config = require('./config/server');
 
 // Route files
 const memorials = require('./domains/memorials/routes/memorialRoutes');
