@@ -16,7 +16,7 @@ import { AuthProvider } from './context/AuthContext';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
-axios.defaults.baseURL = 'https://localhost:5000'; 
+axios.defaults.baseURL = 'http://localhost:5000'; 
 
 function App() {
   return (
