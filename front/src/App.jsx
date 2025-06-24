@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
@@ -14,6 +15,8 @@ import Register from './pages/Register';
 import { AuthProvider } from './context/AuthContext';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+
+axios.defaults.baseURL = 'https://localhost:5000'; 
 
 function App() {
   return (
