@@ -1,11 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 export default function ContactUs() {
+  const {t} = useTranslation()
     return (
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">Connect & Support</h1>
+          <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">{t("Connect & Support")}</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Reach out to share stories, ask questions, or support our memorial efforts.
+            {t("Reach out to share stories, ask questions, or support our memorial efforts.")}
           </p>
           <div className="w-24 h-1 bg-[#383C00] mx-auto mt-4"></div>
         </div>
@@ -15,7 +18,7 @@ export default function ContactUs() {
           <div className="space-y-6">
             {/* Fundraising Section */}
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-4 text-[#383C00]">Support Our Cause</h2>
+              <h2 className="text-2xl font-bold mb-4 text-[#383C00]">{t("Support Our Cause")}</h2>
               <div className="space-y-4">
                 <a 
                   href="https://gofundme.com/mit-tigray-memorial" 
@@ -29,8 +32,8 @@ export default function ContactUs() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-bold">GoFundMe Campaign</h3>
-                    <p className="text-sm text-gray-600">Help us expand the memorial and support families</p>
+                    <h3 className="font-bold">"{t("GoFundMe Campaign")}</h3>
+                    <p className="text-sm text-gray-600">{t("Help us expand the memorial and support families")}</p>
                   </div>
                 </a>
   
@@ -46,8 +49,8 @@ export default function ContactUs() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-bold">PayPal Donations</h3>
-                    <p className="text-sm text-gray-600">Direct financial support</p>
+                    <h3 className="font-bold">{t("PayPal Donations")}</h3>
+                    <p className="text-sm text-gray-600">{t("Direct financial support")}</p>
                   </div>
                 </a>
               </div>

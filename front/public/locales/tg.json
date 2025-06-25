@@ -7,6 +7,46 @@
     "contact_us": "ርኸቡና",
     "list": "ዝርዝር",
     "Honoring the Lives of Tigrians": "ምኽባር ህይወት ተጋሩ",
-    "Lost in the Tigray War": "ኣብ ኩናት ትግራይ ዝጠፍአ"
+    "Lost in the Tigray War": "ኣብ ኩናት ትግራይ ዝጠፍአ",
+    "A tribute to the bright friends taken too soon—may their legacy inspire future generations.": "ነቶም ኣብ ቀረባ እዋን ዝተወሰዱ ንፉዓት ኣዕሩኽ ክብሪ-ሕድሮም ንመጻኢ ወለዶታት የነቓቕሕ።",
+    "View Memorial": "ዝኽሪ ርአ",
+    "Donate Now": "ሕጂ ወፈያ",
+    "Gallery": "ማዕከለ-ስዕላት",
+    "virtual_museum": "ምናባዊ ሙዚየም",
+    "A Tribute Through Film": "ብፊልም ኣቢሉ ዝግበር ክብሪ",
+    "Watch this heartfelt video that commemorates the lives lost in the Tigray War — their voices echo through our memories.": "ነዚ ኣብ ኲናት ትግራይ ዝጠፍአ ህይወት ዝዝክር ልባዊ ቪድዮ ተኸታተሉ — ድምጾም ብተዘክሮታትና የቃልሕ።",
+    "Gone But Never Forgotten": "ከይዱ ግን ፈጺሙ ኣይተረሰዐን።",
+    "Support Our Mission": "ተልእኾና ደግፉ",
+    "We remember the bright young minds whose lives were tragically cut short, their dreams left unfulfilled, Though they are no longer with us, their legacy of hope, ambition, and resilience will live on in the hearts of those who knew them and the generations they continue to inspire.": "ህይወቶም ብዘሕዝን መንገዲ ዝተሓጽረ፡ ሕልምታቶም ከይተፈጸመ ዝተረፉ ንፉዓት መንእሰያት ኣእምሮታት ንዝክር፡ ድሕሪ ሕጂ ምሳና እኳ እንተዘይሃለዉ፡ ሕድሪ ተስፋኦምን ህርፋንን ጽንዓትን ኣብ ልቢ እቶም ዝፈልጥዎምን ብቐጻሊ ዘነቓቕሕዎም ወለዶታትን ክነብር እዩ።",
+    "Your contribution helps preserve the memory of those we've lost.": "ኣበርክቶኹም ዝኽሪ ናይቶም ዝሰኣንናዮም ንምዕቃብ ይሕግዝ።",
+    "Tigray Through History": "ትግራይ ብታሪኽ",
+    "Kingdom of Axum": "ንግስነት ኣክሱም",
+    "Emperor Yohanes IV": "ሃጸይ ዮሃንስ ራብዓይ",
+    "Battle of Adwa (1896)": "ውግእ ዓድዋ (1896)",
+    "Derg Period (1974-1991)": "ዘመነ ደርጊ (1974-1991)",
+    "Tigray War (2020-2022)": "ኲናት ትግራይ (2020-2022)",
+    "Tigray's Enduring Legacy": "ነባሪ ሕድሪ ትግራይ",
+    "From the ancient Axumite civilization to its pivotal role in modern Ethiopia, Tigray has been a cradle of African civilization, a bastion of resistance against colonialism, and a center of cultural preservation. Despite recent tragedies, Tigrayans continue drawing strength from their rich history as they rebuild.": "ካብ ጥንታዊ ስልጣነ ኣክሱማዊት ክሳብ ኣብ ዘመናዊት ኢትዮጵያ ዝነበራ ዓብዪ ግደ፣ ትግራይ ዓንዲል ስልጣነ ኣፍሪቃ፣ ዕርዲ ተቓውሞ ኣንጻር መግዛእቲ፣ ማእከል ምዕቃብ ባህሊ ኮይና ጸኒሓ እያ። ኣብ ቀረባ እዋን ትራጀዲታት እኳ እንተጋጠሙ ተጋሩ ዳግመ ህንፀቶም እናሃነፁ ካብ ሃብታም ታሪኾም ሓይሊ ምውሳድ ይቕፅሉ ኣለው።",
+
+    "About This Memorial": "ብዛዕባ እዚ ዝኽሪ",
+    "Our Mission": "ተልእኾና",
+    "How This Began": "እዚ ከመይ ጀሚሩ",
+    "We honor the lives of Tigrayan students and scholars whose dreams were cut short by conflict. This memorial serves as a sacred space to remember their potential and preserve their legacies.": "ሂወት ተጋሩ ተምሃሮን ሊቃውንትን ብግርጭት ሕልሞም ዝተቖረፀሎም ነኽብር። እዚ መዘከርታ እዚ ዓቕሞም ንምዝካርን ሕድሮም ንምዕቃብን ከም ቅዱስ ቦታ ኮይኑ የገልግል።",
+    "Through remembrance, we seek to transform grief into purpose and ensure these tragedies are never forgotten nor repeated.": "ብዝኽሪ ኣቢልና ንሓዘን ናብ ዕላማ ክንቅይሮን እዞም ትራጀዲታት ፈጺሞም ከምዘይርሳዕን ከምዘይድገሙን ከነረጋግጽን ንጽዕር።",
+    "In 2020, a group of solders and civilians from Tigrayan heritage came together after losing friends and family members in the war. What started as a small memorial grew into this digital space for collective mourning and historical preservation.": "ኣብ 2020 ካብ ቅርሲ ተጋሩ ዝመፁ ጉጅለ ወተሃደራትን ሲቪላትን ኣብቲ ኲናት ፈተውቶምን ኣባላት ቤተሰቦምን ስኢኖም ኣብ ሓደ መፂኦም እዮም። እቲ ከም ንእሽቶ መዘከርታ ዝጀመረ ናብዚ ዲጂታላዊ ቦታ ንሓባራዊ ሓዘንን ምዕቃብ ታሪኽን ዓብዩ።",
+    "Each name represents not just a life lost, but generations of potential erased.": "ነፍሲ ወከፍ ስም ንዝጠፍአ ህይወት ጥራይ ዘይኮነስ፡ ንዝተደምሰሰ ዓቕሚ ወለዶታት ዝውክል እዩ።",
+
+    "Connect & Support": "ምትእስሳርን ምድጋፍን",
+    "Reach out to share stories, ask questions, or support our memorial efforts.": "ዛንታታት ንምክፋል፡ ሕቶታት ንምሕታት፡ ወይ ንናይ ዝኽሪ ጻዕርታትና ንምድጋፍ ኢድካ ዘርግሕ።",
+    "Support Our Cause": "ዕላማና ደግፉ",
+    "GoFundMe Campaign": "ጎስጓስ ጎፋንድሚ",
+    "Help us expand the memorial and support families": "ነቲ ዝኽሪ ንምስፋሕን ንስድራቤታት ንምድጋፍን ሓግዙና",
+    "Direct financial support": "ቀጥታዊ ፋይናንሳዊ ደገፍ",
+
+    "Reset Password": "ፓስዎርድ ዳግማይ ምትካል",
+    "New Password": "ሓድሽ ፓስዎርድ",
+    "Confirm Password": "ፓስዎርድ ኣረጋግጽ"
+
+
   }
   
