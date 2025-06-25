@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 // @route   GET /api/memorials
 // @access  Public
 exports.getMemorials = asyncHandler(async (req, res) => {
-  const memorials = await Memorial.find().populate('tributes');
+  const memorials = await Memorial.find();
   res.status(200).json({
     success: true,
     count: memorials.length,
@@ -17,7 +17,7 @@ exports.getMemorials = asyncHandler(async (req, res) => {
 // @route   GET /api/memorials/:id
 // @access  Public
 exports.getMemorial = asyncHandler(async (req, res) => {
-  const memorial = await Memorial.findById(req.params.id).populate('tributes');
+  const memorial = await Memorial.findById(req.params.id);
   
   if (!memorial) {
     return res.status(404).json({

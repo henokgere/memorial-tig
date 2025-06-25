@@ -79,11 +79,11 @@ const memorialSchema = new mongoose.Schema({
 });
 
 // Virtual for tributes
-memorialSchema.virtual('tributes', {
-  ref: 'Tribute',
-  localField: '_id',
-  foreignField: 'memorial',
-  justOne: false
-});
+// memorialSchema.virtual('tributes', {
+//   ref: 'Tribute',
+//   localField: '_id',
+//   foreignField: 'memorial',
+//   justOne: false
+// });
 
 module.exports = mongoose.model('Memorial', memorialSchema);
