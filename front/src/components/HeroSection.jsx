@@ -80,7 +80,7 @@ export default function HeroSection() {
         </div>
 
         <p className="animate-fadeIn delay-200" style={styles.heroParagraph}>
-          A tribute to the bright friends taken too soon—may their legacy inspire future generations.
+          {t("A tribute to the bright friends taken too soon—may their legacy inspire future generations.")}
         </p>
 
         <div className="flex flex-col md:flex-row justify-center gap-4 animate-fadeIn delay-300">
@@ -88,13 +88,13 @@ export default function HeroSection() {
             to="/our-heroes"
             className="px-6 py-3 shadow shadow-gray-600 bg-red-700 hover:bg-red-500 rounded-lg transition text-white font-semibold"
           >
-            View Memorial
+            {t("View Memorial")}
           </Link>
           <a
             href="https://donateme/donate"
             className="px-6 py-3 shadow shadow-gray-600 bg-[#505050] hover:bg-[#7e7e7e] rounded-lg transition text-white font-semibold"
           >
-            Donate Now
+            {t("Donate Now")}
           </a>
         </div>
       </div>

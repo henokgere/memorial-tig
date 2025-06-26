@@ -1,8 +1,11 @@
 import React from 'react';
 import '@fontsource/rock-salt';
 import '@fontsource/caveat';
+import { useTranslation } from 'react-i18next';
 
 export default function HomeVideoPreview() {
+  const { t } = useTranslation()
+
   return (
     <section className="relative h-[100vh] w-full overflow-hidden">
       {/* YouTube Video Background */}
@@ -34,7 +37,7 @@ export default function HomeVideoPreview() {
             boxShadow: '2px 2px 10px rgba(0,0,0,0.2)',
           }}
         >
-          A Tribute Through Film
+          {t("A Tribute Through Film")}
         </h1>
         <p
           className="text-l mt-2 max-w-xl"
@@ -47,7 +50,7 @@ export default function HomeVideoPreview() {
             boxShadow: '1px 1px 6px rgba(0,0,0,0.1)',
           }}
         >
-          Watch this heartfelt video that commemorates the lives lost in the Tigray War — their voices echo through our memories.
+          {t("Watch this heartfelt video that commemorates the lives lost in the Tigray War — their voices echo through our memories.")}
         </p>
       </div>
     </section>
