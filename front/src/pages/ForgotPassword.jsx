@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/forgot-password', { email });
+      await axios.post('/api/users/forgot-password', { email });
       toast.success('Reset link sent! Please check your email.');
     } catch (err) {
       toast.error(err.response?.data?.error || 'Something went wrong');

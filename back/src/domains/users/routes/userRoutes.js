@@ -10,6 +10,8 @@ const {
   updateUser,
   deleteUser,
   assignRole,
+  forgotPassword,
+  resetPassword
 } = require("../controllers/userController");
 
 // Auth routes
@@ -180,5 +182,8 @@ router.get(
     res.redirect(`/auth/success?token=${token}`);
   }
 );
+
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password/:token', resetPassword);
 
 module.exports = router;

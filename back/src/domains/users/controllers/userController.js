@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const { sendEmailVerification } = require("../../../utils/emailUtils");
+const { sendEmailVerification, sendPasswordResetEmail } = require("../../../utils/emailUtils");
 
 // Register
 exports.registerUser = async (req, res) => {
@@ -62,6 +62,46 @@ exports.logoutUser = (req, res) => {
 
   res.status(200).json({ success: true, data: {} });
 };
+
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    const rawToken = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_RESET_SECRET,
+      { expiresIn: "15m" }
+    );
+
+    await sendPasswordResetEmail({ user, rawToken });
+
+    res.status(200).json({ message: "Password reset link sent" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_RESET_SECRET);
+    const user = await User.findById(decoded.userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    user.password = password;
+    await user.save();
+
+    res.status(200).json({ message: "Password reset successful" });
+  } catch (err) {
+    return res.status(400).json({ error: "Invalid or expired token" });
+  }
+};
+
 
 // Utility
 const sendTokenResponse = (user, statusCode, res) => {
