@@ -6,7 +6,9 @@ const {
   registerUser,
   loginUser,
   getMe,
-  logoutUser
+  logoutUser,
+  forgotPassword,
+  resetPassword,
 } = require('../controllers/userController');
 
 // Auth routes
@@ -14,6 +16,8 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/me', protect, getMe);
 router.get('/logout', protect, logoutUser);
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password/:token', resetPassword);
 
 // Google OAuth
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
