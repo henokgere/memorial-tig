@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function TigrayHistory() {
   const [activePeriod, setActivePeriod] = useState('axum');
+  const { t } = useTranslation()
 
   const historyPeriods = {
     axum: {
@@ -89,7 +91,7 @@ export default function TigrayHistory() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-gray-700 text-3xl font-bold text-center mb-8">Tigray Through History</h1>
+      <h1 className="text-gray-700 text-3xl font-bold text-center mb-8">{t("Tigray Through History")}</h1>
       
       {/* Timeline Navigation */}
       <div className="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">
@@ -103,7 +105,7 @@ export default function TigrayHistory() {
                 : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
             }`}
           >
-            {historyPeriods[period].title}
+            {t(historyPeriods[period].title)}
           </button>
         ))}
       </div>
@@ -119,7 +121,7 @@ export default function TigrayHistory() {
             />
           </div>
           <div className="p-6 md:w-2/3">
-            <h2 className="text-black text-2xl font-bold mb-4">{historyPeriods[activePeriod].title}</h2>
+            <h2 className="text-black text-2xl font-bold mb-4">{t(historyPeriods[activePeriod].title)}</h2>
             <div className="text-gray-700 prose max-w-none">
               {historyPeriods[activePeriod].content}
             </div>
@@ -129,12 +131,9 @@ export default function TigrayHistory() {
 
       {/* Historical Context */}
       <div className="mt-12 bg-[#505050] p-6 rounded-lg">
-        <h3 className="text-xl font-semibold mb-4">Tigray's Enduring Legacy</h3>
+        <h3 className="text-xl font-semibold mb-4">{t("Tigray's Enduring Legacy")}</h3>
         <p>
-          From the ancient Axumite civilization to its pivotal role in modern Ethiopia, Tigray has been a 
-          cradle of African civilization, a bastion of resistance against colonialism, and a center of 
-          cultural preservation. Despite recent tragedies, Tigrayans continue drawing strength from their 
-          rich history as they rebuild.
+          {t("From the ancient Axumite civilization to its pivotal role in modern Ethiopia, Tigray has been a cradle of African civilization, a bastion of resistance against colonialism, and a center of cultural preservation. Despite recent tragedies, Tigrayans continue drawing strength from their rich history as they rebuild.")}
         </p>
       </div>
     </div>
