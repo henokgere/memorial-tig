@@ -1,45 +1,42 @@
+import { useTranslation } from "react-i18next";
+
 export default function AboutUs() {
+  const { t } = useTranslation()
+
     return (
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">About This Memorial</h1>
+          <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">{t("About This Memorial")}</h1>
           <div className="w-24 h-1 bg-[#383C00] mx-auto"></div>
         </div>
   
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Mission Statement */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">Our Mission</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">{t("Our Mission")}</h2>
             <p className="text-gray-600 mb-4">
-              We honor the lives of Tigrayan students and scholars whose dreams were 
-              cut short by conflict. This memorial serves as a sacred space to remember 
-              their potential and preserve their legacies.
+              {t("We honor the lives of Tigrayan students and scholars whose dreams were cut short by conflict. This memorial serves as a sacred space to remember their potential and preserve their legacies.")}
             </p>
             <p className="text-gray-600">
-              Through remembrance, we seek to transform grief into purpose and ensure 
-              these tragedies are never forgotten nor repeated.
+              {t("Through remembrance, we seek to transform grief into purpose and ensure these tragedies are never forgotten nor repeated.")}
             </p>
           </div>
   
           {/* Origin Story */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">How This Began</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">{t("How This Began")}</h2>
             <p className="text-gray-600 mb-4">
-              In 2020, a group of solders and civilians from Tigrayan heritage came together 
-              after losing friends and family members in the war. What started as 
-              a small memorial grew into this digital space for collective mourning 
-              and historical preservation.
+              {t("In 2020, a group of solders and civilians from Tigrayan heritage came together after losing friends and family members in the war. What started as a small memorial grew into this digital space for collective mourning and historical preservation.")}
             </p>
             <p className="text-gray-600">
-              Each name represents not just a life lost, but generations of potential 
-              erased.
+              {t("Each name represents not just a life lost, but generations of potential erased.")}
             </p>
           </div>
         </div>
   
         {/* Team Section */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Our Team</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">{t("Our Team")}</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               { name: "Yohannes Berhe", role: "Historical Researcher", bio: "History PhD candidate" },
