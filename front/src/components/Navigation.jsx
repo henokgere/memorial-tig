@@ -6,7 +6,14 @@ import i18n from '../i18n';
 
 const navLinks = [
   { path: "/", name: "home" },
-  { path: "/our-heroes", name: "our_heroes" },
+  {
+    name: "our_heroes",
+    dropdown: true,
+    children: [
+      { path: "/our-heroes", name: "Gallery" },
+      { path: "/virtual-museum", name: "virtual_museum" }
+    ]
+  },
   { path: "/tigray-history", name: "tigray_history" },
   { path: "/about-us", name: "about_us" },
   { path: "/contact-us", name: "contact_us" }
@@ -16,8 +23,6 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const { t } = useTranslation();
-
-  // ✅ Check if user is logged in (adjust key based on your app)
   const isRegistered = !!localStorage.getItem("token");
 
   const changeLanguage = (lng) => {
@@ -38,23 +43,45 @@ export default function Navigation() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `text-sm font-medium ${
-                    isActive
-                      ? 'text-[#383C00] border-b-2 border-[#383C00]'
-                      : 'text-gray-500 hover:text-gray-700'
-                  } pb-1 px-1`
-                }
-              >
-                {t(link.name)}
-              </NavLink>
-            ))}
+            {navLinks.map((link) =>
+              link.dropdown ? (
+                <div key={link.name} className="relative group">
+                  <button className="text-sm font-medium text-gray-500 hover:text-gray-700 pb-1 px-1 group-hover:text-[#383C00]">
+                    {t(link.name)}
+                  </button>
+                  <div className="absolute left-0 mt-1 w-40 bg-white border rounded shadow hidden group-hover:block z-20">
+                    {link.children.map((child) => (
+                      <NavLink
+                        key={child.path}
+                        to={child.path}
+                        className={({ isActive }) =>
+                          `block px-4 py-2 text-sm ${
+                            isActive ? 'text-[#383C00]' : 'text-gray-700 hover:bg-gray-100'
+                          }`
+                        }
+                      >
+                        {t(child.name)}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `text-sm font-medium ${
+                      isActive
+                        ? 'text-[#383C00] border-b-2 border-[#383C00]'
+                        : 'text-gray-500 hover:text-gray-700'
+                    } pb-1 px-1`
+                  }
+                >
+                  {t(link.name)}
+                </NavLink>
+              )
+            )}
 
-            {/* ✅ Conditionally show /list */}
             {isRegistered && (
               <NavLink
                 to="/list"
@@ -81,30 +108,18 @@ export default function Navigation() {
               </button>
               {langMenuOpen && (
                 <div className="absolute right-0 mt-2 w-28 bg-white border rounded shadow z-10">
-                  <button
-                    onClick={() => changeLanguage('en')}
-                    className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
-                  >
-                    English
-                  </button>
-                  <button
-                    onClick={() => changeLanguage('am')}
-                    className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
-                  >
-                    አማርኛ
-                  </button>
-                  <button
-                    onClick={() => changeLanguage('tg')}
-                    className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
-                  >
-                    ትግርኛ
-                  </button>
-                  <button
-                    onClick={() => changeLanguage('fr')}
-                    className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
-                  >
-                    French
-                  </button>
+                  {["en", "am", "tg", "fr"].map((lng) => (
+                    <button
+                      key={lng}
+                      onClick={() => changeLanguage(lng)}
+                      className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
+                    >
+                      {lng === "en" && "English"}
+                      {lng === "am" && "አማርኛ"}
+                      {lng === "tg" && "ትግርኛ"}
+                      {lng === "fr" && "French"}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -134,24 +149,45 @@ export default function Navigation() {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden flex flex-col space-y-2 mt-2 pb-4">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className={({ isActive }) =>
-                  `block text-sm font-medium ${
-                    isActive
-                      ? 'text-[#383C00] border-b-2 border-[#383C00]'
-                      : 'text-gray-500 hover:text-gray-700'
-                  } pb-1 px-1`
-                }
-              >
-                {t(link.name)}
-              </NavLink>
-            ))}
+            {navLinks.map((link) =>
+              link.dropdown ? (
+                <div key={link.name} className="px-2">
+                  <span className="text-sm font-medium text-gray-500">{t(link.name)}</span>
+                  <div className="ml-4 mt-1 flex flex-col space-y-1">
+                    {link.children.map((child) => (
+                      <NavLink
+                        key={child.path}
+                        to={child.path}
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `text-sm ${
+                            isActive ? 'text-[#383C00]' : 'text-gray-700 hover:text-gray-900'
+                          }`
+                        }
+                      >
+                        {t(child.name)}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `block text-sm font-medium ${
+                      isActive
+                        ? 'text-[#383C00] border-b-2 border-[#383C00]'
+                        : 'text-gray-500 hover:text-gray-700'
+                    } pb-1 px-1`
+                  }
+                >
+                  {t(link.name)}
+                </NavLink>
+              )
+            )}
 
-            {/* ✅ Conditionally show /list in mobile */}
             {isRegistered && (
               <NavLink
                 to="/list"
@@ -172,20 +208,21 @@ export default function Navigation() {
             <div className="mt-4 px-2">
               <span className="text-gray-600 text-sm mb-1 block">🌐 Language:</span>
               <div className="flex flex-col space-y-2">
-                <button onClick={() => changeLanguage('en')} className="text-left text-gray-700 text-sm hover:underline">
-                  English
-                </button>
-                <button onClick={() => changeLanguage('am')} className="text-left text-gray-700 text-sm hover:underline">
-                  አማርኛ
-                </button>
-                <button onClick={() => changeLanguage('tg')} className="text-left text-gray-700 text-sm hover:underline">
-                  ትግርኛ
-                </button>
-                <button onClick={() => changeLanguage('fr')} className="text-left text-gray-700 text-sm hover:underline">
-                    French
+                {["en", "am", "tg", "fr"].map((lng) => (
+                  <button
+                    key={lng}
+                    onClick={() => changeLanguage(lng)}
+                    className="text-left text-gray-700 text-sm hover:underline"
+                  >
+                    {lng === "en" && "English"}
+                    {lng === "am" && "አማርኛ"}
+                    {lng === "tg" && "ትግርኛ"}
+                    {lng === "fr" && "French"}
                   </button>
+                ))}
               </div>
             </div>
+
             <Link to="/login">
               <UserCircle2 color="#383C00" />
             </Link>

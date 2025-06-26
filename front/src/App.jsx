@@ -14,6 +14,7 @@ import Register from './pages/Register';
 import { AuthProvider } from './context/AuthContext';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import VirtualMuseum from './pages/VirtualMuseum';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/" element={<Home />} />
             <Route path="/our-heroes" element={<OurHeroes />} />
+            <Route path="/virtual-museum" element={<VirtualMuseum />} />
             <Route path="/story" element={<Story />} />
             <Route path="/tigray-history" element={<TigrayHistory />} />
             <Route path="/about-us" element={<AboutUs />} />
