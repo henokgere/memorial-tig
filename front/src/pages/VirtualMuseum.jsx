@@ -24,20 +24,20 @@ const VirtualMuseum = () => {
       id: 1,
       name: "Origins Room",
       description: "Explore the historical context and outbreak of the conflict",
-      image: "/room1-panorama.jpg",
+      image: "/room1-panorama.png",
       exhibits: [
         {
           id: 101,
           title: "Timeline of Events",
           description: "Chronological account of key events in the Tigray conflict",
-          image: "/exhibits/timeline.jpg",
+          image: "/exhibits/timeline.png",
           detailedContent: "Detailed timeline content..."
         },
         {
           id: 102,
           title: "Geopolitical Context",
           description: "Regional factors influencing the conflict",
-          image: "/exhibits/geopolitics.jpg",
+          image: "/exhibits/geopolitics.png",
           detailedContent: "Detailed geopolitical content..."
         }
       ]
@@ -52,14 +52,14 @@ const VirtualMuseum = () => {
           id: 201,
           title: "Victims' Stories",
           description: "Personal accounts from those affected",
-          image: "/exhibits/victims.jpg",
+          image: "/exhibits/victims.png",
           detailedContent: "Detailed victims content..."
         },
         {
           id: 202,
           title: "Memorial Wall",
           description: "Names and photographs of those lost",
-          image: "/exhibits/wall.jpg",
+          image: "/exhibits/wall.png",
           detailedContent: "Detailed memorial content..."
         }
       ]
