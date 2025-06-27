@@ -1,19 +1,35 @@
-import MemorialCard from '../components/MemorialCard';
 
-const memorialData = [
-  { id: 1, name: "Full Name", years: "1990 - 2015" },
-  { id: 2, name: "Full Name", years: "1990 - 2015" },
-  { id: 3, name: "Full Name", years: "1990 - 2015" },
-  { id: 4, name: "Full Name", years: "1990 - 2015" },
-  { id: 5, name: "Full Name", years: "1990 - 2015" },
-  { id: 6, name: "Full Name", years: "1990 - 2015" },
-  { id: 7, name: "Full Name", years: "1990 - 2015" },
-  { id: 8, name: "Full Name", years: "1990 - 2015" },
-  { id: 9, name: "Full Name", years: "1990 - 2015" },
-  // Add more entries as needed
-];
+import { useState, useEffect } from 'react';
+import MemorialCard from '../components/MemorialCard';
+import api from '../utils/axios';
 
 export default function OurHeroes() {
+  const [memorialData, setMemorialData] = useState([]);
+
+ useEffect(() => {
+  const fetchMemorials = async () => {
+    try {
+      const response = await api.get('/memorials');
+      console.log('RAW response.data:', response.data);
+
+      const arrayData = response.data.data; 
+
+      if (!Array.isArray(arrayData)) {
+        throw new Error('Invalid data format received');
+      }
+
+      setMemorialData(arrayData);
+      console.log('Memorial data fetched successfully:', arrayData);
+    } catch (error) {
+      console.error('Failed to fetch memorial data', error);
+    }
+  };
+
+  fetchMemorials();
+}, []);
+
+
+
   return (
     <section className="py-16 px-4 bg-[#4E4E4E]">
       <div className="max-w-6xl mx-auto">
@@ -23,11 +39,15 @@ export default function OurHeroes() {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {memorialData.map((person) => (
-            <MemorialCard 
-              key={person.id}
-              name={person.name}
-              years={person.years}
-            />
+            <div key={person._id} className="flex flex-col items-center">
+              <MemorialCard
+                name={person.name}
+                years={`${person.birthDate} - ${person.deathDate}`}
+              />
+              <button className="mt-2 text-sm font-semibold text-400 hover:underline pointer-events-auto">
+                View Detail
+              </button>
+            </div>
           ))}
         </div>
         
