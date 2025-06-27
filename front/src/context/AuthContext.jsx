@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
         if (token) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await axios.get('/api/auth/me');
-          setUser(res.data.data);
+          setUser(res.data.data)
         }
       } catch (err) {
         console.error(err);
