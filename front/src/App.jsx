@@ -19,6 +19,7 @@ import ProtectedRoute from './layouts/ProtectedRoutes';
 import RoleProtectedRoute from './layouts/RoleProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password/:token" element={<ResetPassword />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/" element={<Home />} />
               <Route path="/our-heroes" element={<OurHeroes />} />
               <Route path="/virtual-museum" element={<VirtualMuseum />} />
