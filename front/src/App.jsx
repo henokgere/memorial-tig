@@ -11,11 +11,12 @@ import MemorialForm from './pages/MemorialForm';
 import ListPage from './pages/ListPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthProvider } from './context/AuthContext'; // ✅ wraps everything
+import { AuthProvider } from './context/AuthContext';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import VirtualMuseum from './pages/VirtualMuseum';
 import ProtectedRoute from './layouts/ProtectedRoutes';
+import RoleProtectedRoute from './layouts/RoleProtectedRoute';
 
 function App() {
   return (
@@ -39,12 +40,19 @@ function App() {
               <Route
                 path="/list"
                 element={
-                  <ProtectedRoute>
+                  <RoleProtectedRoute allowedRoles={['admin', 'editor']}>
                     <ListPage />
-                  </ProtectedRoute>
+                  </RoleProtectedRoute>
                 }
               />
-              <Route path="/form" element={<MemorialForm />} />
+              <Route
+                path="/form"
+                element={
+                  <RoleProtectedRoute allowedRoles={['admin', 'creator']}>
+                    <MemorialForm />
+                  </RoleProtectedRoute>
+                }
+              />
             </Routes>
           </main>
           <Footer />
