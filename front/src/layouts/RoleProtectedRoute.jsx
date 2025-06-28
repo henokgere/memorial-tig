@@ -11,9 +11,7 @@ const RoleProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   if (!allowedRoles.includes(currentUser.role)) {
-    return <Navigate to="/" replace />;
-    // Or you could redirect to an unauthorized page
-    // return <Navigate to="/unauthorized" replace />;
+    return <Navigate to="/unauthorized" replace />;
   }
 
   return children;

@@ -17,6 +17,7 @@ import ResetPassword from './pages/ResetPassword';
 import VirtualMuseum from './pages/VirtualMuseum';
 import ProtectedRoute from './layouts/ProtectedRoutes';
 import RoleProtectedRoute from './layouts/RoleProtectedRoute';
+import Unauthorized from './pages/Unauthorized';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Navigation />
           <main className="container mx-auto px-4 py-8">
             <Routes>
+              <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
