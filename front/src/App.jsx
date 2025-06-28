@@ -18,6 +18,7 @@ import VirtualMuseum from './pages/VirtualMuseum';
 import ProtectedRoute from './layouts/ProtectedRoutes';
 import RoleProtectedRoute from './layouts/RoleProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
                   </RoleProtectedRoute>
                 }
               />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
