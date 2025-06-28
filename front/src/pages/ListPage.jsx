@@ -1,61 +1,57 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { AuthContext } from '../context/AuthContext';
 
 export default function ListPage() {
   const tableRef = useRef();
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   // Sample data
   const sampleData = [
     {
       id: '100345832132',
-      fullName: 'Birhane kahsay',
-      highlight: 'The war was merciless. Weeks turned into months, and',
-      protein: 'When the war broke out, everything changed.',
-      fat: 'When the war broke out, everything changed.',
+      fullName: 'Birhane Kahsay',
+      highlight: 'The war was merciless. Weeks turned into months...',
+      shortStory: 'When the war broke out, everything changed...',
+      memorialMessage: 'We remember your courage and sacrifice...',
       createdAt: '12-04-2024',
       image: 'https://via.placeholder.com/40'
     },
-    {
-      id: '100345832322',
-      fullName: 'Yoneta testsy',
-      highlight: 'The war was merciless. Weeks turned into months, and',
-      protein: 'When the war broke out, everything changed.',
-      fat: 'When the war broke out, everything changed.',
-      createdAt: '12-04-2024',
-      image: 'https://via.placeholder.com/40'
-    }
-    // Add more data as needed
+    // More data...
   ];
+
+  // Only show Add New button for admin/creator roles
+  const showAddButton = ['admin', 'creator'].includes(currentUser?.role);
 
   const exportPDF = () => {
     const doc = new jsPDF();
     autoTable(doc, {
-      head: [['ID', 'Full name', 'Highlight', 'Protein', 'Fat', 'Created At']],
+      head: [['ID', 'Full Name', 'Highlight', 'Short Story', 'Created At']],
       body: sampleData.map(d => [
-        d.id, d.fullName, d.highlight, d.protein, d.fat, d.createdAt
+        d.id, 
+        d.fullName, 
+        d.highlight.substring(0, 50) + '...', 
+        d.shortStory.substring(0, 50) + '...', 
+        d.createdAt
       ])
     });
     doc.save('memorial-list.pdf');
   };
 
   const exportCSV = () => {
-    const headers = ['ID', 'Full name', 'Highlight', 'Protein', 'Fat', 'Created At'];
+    const headers = ['ID', 'Full Name', 'Highlight', 'Short Story', 'Created At'];
     const rows = sampleData.map(row => [
       row.id,
       row.fullName,
-      row.highlight,
-      row.protein,
-      row.fat,
+      `"${row.highlight}"`,
+      `"${row.shortStory}"`,
       row.createdAt
     ]);
 
-    const csvContent = headers.join(',') + '\n' + rows.map(r =>
-      r.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')
-    ).join('\n');
-
+    const csvContent = headers.join(',') + '\n' + rows.join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -68,41 +64,63 @@ export default function ListPage() {
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
         <div className="space-x-2">
-          <button onClick={exportPDF} className="px-3 py-1 bg-gray-800 text-white rounded">PDF</button>
-          <button onClick={exportCSV} className="px-3 py-1 bg-blue-600 text-white rounded">CSV</button>
+          <button onClick={exportPDF} className="px-3 py-1 bg-gray-800 text-white rounded hover:bg-gray-700 transition">
+            Export PDF
+          </button>
+          <button onClick={exportCSV} className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Export CSV
+          </button>
         </div>
-        <button onClick={() => navigate('/form')} className="px-4 py-2 bg-black text-white rounded-full">Add new</button>
+        
+        {showAddButton && (
+          <button 
+            onClick={() => navigate('/form')} 
+            className="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition"
+          >
+            Add New Memorial
+          </button>
+        )}
       </div>
 
-      <div className="overflow-x-auto">
-        <table ref={tableRef} className="min-w-full border text-sm bg-white rounded shadow">
-          <thead className="bg-gray-200">
+      <div className="overflow-x-auto bg-white rounded-lg shadow">
+        <table ref={tableRef} className="min-w-full">
+          <thead className="bg-gray-100">
             <tr>
-              <th className="p-2">Image</th>
-              <th className="p-2">ID</th>
-              <th className="p-2">Full name</th>
-              <th className="p-2">Highlight</th>
-              <th className="p-2">Protein</th>
-              <th className="p-2">Fat</th>
-              <th className="p-2">Created at</th>
-              <th className="p-2">Action</th>
+              <th className="p-3 text-left">Image</th>
+              <th className="p-3 text-left">ID</th>
+              <th className="p-3 text-left">Full Name</th>
+              <th className="p-3 text-left">Highlight</th>
+              <th className="p-3 text-left">Created At</th>
+              <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-200">
             {sampleData.map((item, idx) => (
-              <tr key={idx} className="border-t">
-                <td className="p-2">
-                  <img src={item.image} alt="thumb" className="w-10 h-10 rounded" />
+              <tr key={idx} className="hover:bg-gray-50">
+                <td className="p-3">
+                  <img src={item.image} alt="Profile" className="w-10 h-10 rounded-full object-cover" />
                 </td>
-                <td className="p-2">{item.id}</td>
-                <td className="p-2">{item.fullName}</td>
-                <td className="p-2 truncate max-w-xs">{item.highlight}</td>
-                <td className="p-2">{item.protein}</td>
-                <td className="p-2">{item.fat}</td>
-                <td className="p-2">{item.createdAt}</td>
-                <td className="p-2 space-x-2">
-                  <button className="text-blue-600 hover:underline">✏️</button>
-                  <button className="text-red-600 hover:underline">🗑️</button>
+                <td className="p-3">{item.id}</td>
+                <td className="p-3 font-medium">{item.fullName}</td>
+                <td className="p-3 max-w-xs truncate">{item.highlight}</td>
+                <td className="p-3">{item.createdAt}</td>
+                <td className="p-3 space-x-2">
+                  <button 
+                    className="text-blue-600 hover:text-blue-800"
+                    onClick={() => navigate(`/memorial/${item.id}`)}
+                  >
+                    View
+                  </button>
+                  {['admin', 'editor'].includes(currentUser?.role) && (
+                    <>
+                      <button className="text-yellow-600 hover:text-yellow-800">
+                        Edit
+                      </button>
+                      <button className="text-red-600 hover:text-red-800">
+                        Delete
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

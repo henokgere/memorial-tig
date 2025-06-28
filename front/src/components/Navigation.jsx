@@ -124,7 +124,7 @@ export default function Navigation() {
               )}
             </div>
 
-            <Link to="/login">
+            <Link to="/profile">
               <UserCircle2 color="#383C00" />
             </Link>
           </div>

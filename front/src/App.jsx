@@ -11,11 +11,15 @@ import MemorialForm from './pages/MemorialForm';
 import ListPage from './pages/ListPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthProvider } from './context/AuthContext'; // ✅ wraps everything
+import { AuthProvider } from './context/AuthContext';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import VirtualMuseum from './pages/VirtualMuseum';
 import ProtectedRoute from './layouts/ProtectedRoutes';
+import RoleProtectedRoute from './layouts/RoleProtectedRoute';
+import Unauthorized from './pages/Unauthorized';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -25,10 +29,19 @@ function App() {
           <Navigation />
           <main className="container mx-auto px-4 py-8">
             <Routes>
+              <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password/:token" element={<ResetPassword />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/" element={<Home />} />
               <Route path="/our-heroes" element={<OurHeroes />} />
               <Route path="/virtual-museum" element={<VirtualMuseum />} />
@@ -39,12 +52,20 @@ function App() {
               <Route
                 path="/list"
                 element={
-                  <ProtectedRoute>
+                  <RoleProtectedRoute allowedRoles={['admin', 'editor']}>
                     <ListPage />
-                  </ProtectedRoute>
+                  </RoleProtectedRoute>
                 }
               />
-              <Route path="/form" element={<MemorialForm />} />
+              <Route
+                path="/form"
+                element={
+                  <RoleProtectedRoute allowedRoles={['admin', 'creator']}>
+                    <MemorialForm />
+                  </RoleProtectedRoute>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
