@@ -8,6 +8,7 @@ const navLinks = [
   { path: "/", name: "home" },
   {
     name: "our_heroes",
+    path: "our-heroes",
     dropdown: true,
     children: [
       { path: "/our-heroes", name: "Gallery" },
@@ -46,10 +47,10 @@ export default function Navigation() {
             {navLinks.map((link) =>
               link.dropdown ? (
                 <div key={link.name} className="relative group">
-                  <button className="text-sm font-medium text-gray-500 hover:text-gray-700 pb-1 px-1 group-hover:text-[#383C00]">
+                  <button className="text-sm font-medium text-gray-500 hover:text-gray-700 pb-1 px-1">
                     {t(link.name)}
                   </button>
-                  <div className="absolute left-0 mt-1 w-40 bg-white border rounded shadow hidden group-hover:block z-20">
+                  <div className="absolute left-0 top-full w-40 bg-white border rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
                     {link.children.map((child) => (
                       <NavLink
                         key={child.path}
