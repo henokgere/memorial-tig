@@ -10,14 +10,14 @@ export default function TigrayHistory() {
       title: "Kingdom of Axum",
       content: (
         <>
-          <p className="mb-4">The Axumite Kingdom (100-940 AD) was a powerful ancient civilization centered in Tigray, known for:</p>
+          <p className="mb-4">{t("The Axumite Kingdom (100-940 AD) was a powerful ancient civilization centered in Tigray, known for:")}</p>
           <ul className="list-disc pl-5 mb-4 space-y-2">
-            <li>One of Africa's earliest coinage systems</li>
-            <li>The famous Obelisks of Axum</li>
-            <li>Being one of the first Christian kingdoms (4th century AD)</li>
-            <li>Controlling trade routes between Africa and Asia</li>
+            <li>{t("One of Africa's earliest coinage systems")}</li>
+            <li>{t("The famous Obelisks of Axum")}</li>
+            <li>{t("Being one of the first Christian kingdoms (4th century AD)")}</li>
+            <li>{t("Controlling trade routes between Africa and Asia")}</li>
           </ul>
-          <p>The legacy of Axum remains central to Tigrayan and Ethiopian identity.</p>
+          <p>{t("The legacy of Axum remains central to Tigrayan and Ethiopian identity.")}</p>
         </>
       ),
       image: "/OSK.jpeg"
@@ -26,14 +26,14 @@ export default function TigrayHistory() {
       title: "Emperor Yohanes IV",
       content: (
         <>
-          <p className="mb-4">Yohanes IV (1872-1889) was a Tigrayan emperor who:</p>
+          <p className="mb-4">{t("Yohanes IV (1872-1889) was a Tigrayan emperor who:")}</p>
           <ul className="list-disc pl-5 mb-4 space-y-2">
-            <li>United northern Ethiopia against Egyptian expansion</li>
-            <li>Defended Ethiopian sovereignty against European colonialism</li>
-            <li>Established Mekelle as his capital</li>
-            <li>Died heroically at the Battle of Metemma against Mahdist forces</li>
+            <li>{t("United northern Ethiopia against Egyptian expansion")}</li>
+            <li>{t("Defended Ethiopian sovereignty against European colonialism")}</li>
+            <li>{t("Established Mekelle as his capital")}</li>
+            <li>{t("Died heroically at the Battle of Metemma against Mahdist forces")}</li>
           </ul>
-          <p>His leadership preserved Ethiopian independence during the Scramble for Africa.</p>
+          <p>{t("His leadership preserved Ethiopian independence during the Scramble for Africa.")}</p>
         </>
       ),
       image: "/OIP.jpeg"
@@ -42,14 +42,14 @@ export default function TigrayHistory() {
       title: "Battle of Adwa (1896)",
       content: (
         <>
-          <p className="mb-4">The Tigrayan-led victory at Adwa under Emperor Menelik II:</p>
+          <p className="mb-4">{t("The Tigrayan-led victory at Adwa under Emperor Menelik II:")}</p>
           <ul className="list-disc pl-5 mb-4 space-y-2">
-            <li>Crushed Italian colonial ambitions</li>
-            <li>Marked Africa's first defeat of a European power</li>
-            <li>Featured crucial Tigrayan generals like Ras Alula</li>
-            <li>Inspired anti-colonial movements worldwide</li>
+            <li>{t("Crushed Italian colonial ambitions")}</li>
+            <li>{t("Marked Africa's first defeat of a European power")}</li>
+            <li>{t("Featured crucial Tigrayan generals like Ras Alula")}</li>
+            <li>{t("Inspired anti-colonial movements worldwide")}</li>
           </ul>
-          <p>This victory preserved Ethiopian sovereignty until 1936.</p>
+          <p>{t("This victory preserved Ethiopian sovereignty until 1936.")}</p>
         </>
       ),
       image: "/adwa.jpeg"
@@ -58,14 +58,14 @@ export default function TigrayHistory() {
       title: "Derg Period (1974-1991)",
       content: (
         <>
-          <p className="mb-4">The communist Derg regime's impact on Tigray:</p>
+          <p className="mb-4">{t("The communist Derg regime's impact on Tigray:")}</p>
           <ul className="list-disc pl-5 mb-4 space-y-2">
-            <li>Imposed harsh land reforms and collectivization</li>
-            <li>Triggered the 1983-85 famine that hit Tigray hardest</li>
-            <li>Sparked the formation of the TPLF resistance</li>
-            <li>Fought brutal counter-insurgency campaigns</li>
+            <li>{t("Imposed harsh land reforms and collectivization")}</li>
+            <li>{t("Triggered the 1983-85 famine that hit Tigray hardest")}</li>
+            <li>{t("Sparked the formation of the TPLF resistance")}</li>
+            <li>{t("Fought brutal counter-insurgency campaigns")}</li>
           </ul>
-          <p>This period radicalized Tigrayan politics and led to armed struggle.</p>
+          <p>{t("This period radicalized Tigrayan politics and led to armed struggle.")}</p>
         </>
       ),
       image: "/derg.jpeg"
@@ -74,15 +74,15 @@ export default function TigrayHistory() {
       title: "Tigray War (2020-2022)",
       content: (
         <>
-          <p className="mb-4">The devastating conflict featured:</p>
+          <p className="mb-4">{t("The devastating conflict featured:")}</p>
           <ul className="list-disc pl-5 mb-4 space-y-2">
-            <li>Federal government siege and bombardment of Tigray</li>
-            <li>Massacres like those in Axum and Mai Kadra</li>
-            <li>Systematic sexual violence as weapon of war</li>
-            <li>Deliberate starvation through aid blockades</li>
-            <li>Destruction of cultural heritage sites</li>
+            <li>{t("Federal government siege and bombardment of Tigray")}</li>
+            <li>{t("Massacres like those in Axum and Mai Kadra")}</li>
+            <li>{t("Systematic sexual violence as weapon of war")}</li>
+            <li>{t("Deliberate starvation through aid blockades")}</li>
+            <li>{t("Destruction of cultural heritage sites")}</li>
           </ul>
-          <p>The war caused immense suffering with lasting generational trauma.</p>
+          <p>{t("The war caused immense suffering with lasting generational trauma.")}</p>
         </>
       ),
       image: "/tigray.jpeg"
