@@ -11,36 +11,46 @@ import MemorialForm from './pages/MemorialForm';
 import ListPage from './pages/ListPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext'; // ✅ wraps everything
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import VirtualMuseum from './pages/VirtualMuseum';
+import ProtectedRoute from './layouts/ProtectedRoutes';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-memorial-dark text-white">
-        <Navigation />
-        <main className="container mx-auto px-4 py-8">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/our-heroes" element={<OurHeroes />} />
-            <Route path="/virtual-museum" element={<VirtualMuseum />} />
-            <Route path="/story" element={<Story />} />
-            <Route path="/tigray-history" element={<TigrayHistory />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/list" element={<AuthProvider><ListPage /></AuthProvider>} />
-            <Route path="/form" element={<MemorialForm />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen bg-memorial-dark text-white">
+          <Navigation />
+          <main className="container mx-auto px-4 py-8">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/our-heroes" element={<OurHeroes />} />
+              <Route path="/virtual-museum" element={<VirtualMuseum />} />
+              <Route path="/story" element={<Story />} />
+              <Route path="/tigray-history" element={<TigrayHistory />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route
+                path="/list"
+                element={
+                  <ProtectedRoute>
+                    <ListPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/form" element={<MemorialForm />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

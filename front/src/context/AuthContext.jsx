@@ -9,14 +9,17 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const isAuthenticated = !!user;
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const res = await axios.get('/api/auth/me');
+          const res = await axios.get('/api/users/me');
           setUser(res.data.data)
+          
         }
       } catch (err) {
         console.error(err);
@@ -30,10 +33,20 @@ const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const login = (token) => {
+  const login = async (token) => {
+  try {
     localStorage.setItem('token', token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  };
+
+
+    const res = await axios.get('/api/users/me');
+    console.log('User data after login:', res.data.data);
+    setUser(res.data.data);
+  } catch (err) {
+    console.error('Failed to fetch user after login:', err);
+    logout();
+  }
+};
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -42,7 +55,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
