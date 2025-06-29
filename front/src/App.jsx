@@ -19,7 +19,7 @@ import ProtectedRoute from './layouts/ProtectedRoutes';
 import RoleProtectedRoute from './layouts/RoleProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
 import NotFound from './pages/NotFound';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile'
 
 function App() {
   return (
