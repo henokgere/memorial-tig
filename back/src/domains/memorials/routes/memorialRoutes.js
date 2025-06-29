@@ -9,9 +9,11 @@ const {
 } = require('../controllers/memorialController');
 const { protect } = require('../../../middlewares/authMiddleware');
 
+const upload = require('../../../middlewares/uploadMiddleware');
+
 router.route('/')
   .get(getMemorials)
-  .post(protect, createMemorial);
+  .post(protect, upload.single('image'), createMemorial);
 
 router.route('/:id')
   .get(getMemorial)

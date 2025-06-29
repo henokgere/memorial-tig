@@ -1,5 +1,6 @@
 const Memorial = require('../models/Memorial');
 const asyncHandler = require('express-async-handler');
+const uploadToCloudinary = require('../../../utils/cloudinary');
 
 // @desc    Get all memorials
 // @route   GET /api/memorials
@@ -35,14 +36,28 @@ exports.getMemorial = asyncHandler(async (req, res) => {
 // @desc    Create memorial
 // @route   POST /api/memorials
 // @access  Private
-exports.createMemorial = asyncHandler(async (req, res) => {
-  const memorial = await Memorial.create(req.body);
-  
-  res.status(201).json({
-    success: true,
-    data: memorial
-  });
-});
+exports.createMemorial =asyncHandler(async (req, res) => {
+  try {
+    const { body, file, user } = req;
+
+    let imageUrl = '';
+    if (file) {
+      const result = await uploadToCloudinary(file.buffer, Date.now().toString());
+      imageUrl = result.secure_url;
+    }
+
+    const memorial = await Memorial.create({
+      ...body,
+      imageUrl,
+      createdBy: user._id,
+    });
+
+    res.status(201).json(memorial);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to create memorial', error: err.message });
+  }
+})
 
 // @desc    Update memorial
 // @route   PUT /api/memorials/:id
