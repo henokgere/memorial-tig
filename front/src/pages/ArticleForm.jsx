@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from '../layouts/ProtectedRoutes';
+import api from '../utils/axios';
 
 function ArticleForm() {
   const [title, setTitle] = useState('');
@@ -10,15 +13,13 @@ function ArticleForm() {
   const [tags, setTags] = useState('');
   const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError('');
-
+    
     try {
       const formData = new FormData();
       formData.append('title', title);
@@ -27,22 +28,33 @@ function ArticleForm() {
       formData.append('tags', tags);
       if (image) formData.append('image', image);
 
-      const response = await fetch('/api/articles', {
-        method: 'POST',
+      const { data } = await api.post('/articles', formData, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: formData
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
+      toast.success(t('article_published_success'), {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
 
-      const data = await response.json();
       navigate(`/articles/${data.slug}`);
     } catch (err) {
-      setError(err.message);
+      const errorMessage = err.response?.data?.message || err.message || t('error_publishing');
+      
+      toast.error(errorMessage, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -52,12 +64,6 @@ function ArticleForm() {
     <ProtectedRoute>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">{t('create_article')}</h1>
-        
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            {error}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
           <div className="mb-6">
@@ -69,7 +75,7 @@ function ArticleForm() {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
               required
             />
           </div>
@@ -82,7 +88,7 @@ function ArticleForm() {
               id="excerpt"
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
               rows="3"
               required
             />
@@ -96,7 +102,7 @@ function ArticleForm() {
               id="content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
               rows="10"
               required
             />
@@ -111,7 +117,7 @@ function ArticleForm() {
               id="tags"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
             />
           </div>
 
@@ -123,7 +129,7 @@ function ArticleForm() {
               type="file"
               id="image"
               onChange={(e) => setImage(e.target.files[0])}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
               accept="image/*"
             />
           </div>
