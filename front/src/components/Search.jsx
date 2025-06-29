@@ -13,7 +13,7 @@ export default function Search() {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query)}`);
+      navigate(`/our-heroes?q=${encodeURIComponent(query)}`);
       setIsOpen(false);
       setQuery('');
     }
