@@ -1,8 +1,10 @@
+// components/Navigation.jsx
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Globe, UserCircle2 } from 'lucide-react';
 import i18n from '../i18n';
+import Search from './Search';
 
 const navLinks = [
   { path: "/", name: "home" },
@@ -47,7 +49,7 @@ export default function Navigation() {
             {navLinks.map((link) =>
               link.dropdown ? (
                 <div key={link.name} className="relative group">
-                  <button className="text-sm font-medium text-gray-500 hover:text-gray-700 pb-1 px-1">
+                  <button className="text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-md pb-1 px-3 py-2 transition-colors duration-200">
                     {t(link.name)}
                   </button>
                   <div className="absolute left-0 top-full w-40 bg-white border rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
@@ -57,8 +59,8 @@ export default function Navigation() {
                         to={child.path}
                         className={({ isActive }) =>
                           `block px-4 py-2 text-sm ${
-                            isActive ? 'text-[#383C00]' : 'text-gray-700 hover:bg-gray-100'
-                          }`
+                            isActive ? 'text-[#383C00] bg-gray-50 underline' : 'text-gray-700 hover:bg-gray-100'
+                          } transition-colors duration-200`
                         }
                       >
                         {t(child.name)}
@@ -73,9 +75,9 @@ export default function Navigation() {
                   className={({ isActive }) =>
                     `text-sm font-medium ${
                       isActive
-                        ? 'text-[#383C00] border-b-2 border-[#383C00]'
-                        : 'text-gray-500 hover:text-gray-700'
-                    } pb-1 px-1`
+                        ? 'text-[#383C00] bg-gray-50 underline rounded-md'
+                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-md'
+                    } pb-1 px-3 py-2 transition-colors duration-200`
                   }
                 >
                   {t(link.name)}
@@ -89,9 +91,9 @@ export default function Navigation() {
                 className={({ isActive }) =>
                   `text-sm font-medium ${
                     isActive
-                      ? 'text-[#383C00] border-b-2 border-[#383C00]'
-                      : 'text-gray-500 hover:text-gray-700'
-                  } pb-1 px-1`
+                      ? 'text-[#383C00] bg-gray-50 underline rounded-md'
+                      : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-md'
+                  } pb-1 px-3 py-2 transition-colors duration-200`
                 }
               >
                 {t("list")}
@@ -102,7 +104,7 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center text-gray-600 hover:text-gray-800"
+                className="flex items-center text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md px-3 py-2 transition-colors duration-200"
               >
                 <Globe className="w-5 h-5 mr-1" />
                 {i18n.language}
@@ -113,7 +115,7 @@ export default function Navigation() {
                     <button
                       key={lng}
                       onClick={() => changeLanguage(lng)}
-                      className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left"
+                      className="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100 w-full text-left transition-colors duration-200"
                     >
                       {lng === "en" && "English"}
                       {lng === "am" && "አማርኛ"}
@@ -125,17 +127,22 @@ export default function Navigation() {
               )}
             </div>
 
-            <Link to="/profile">
+            <Link 
+              to="/profile" 
+              className="hover:bg-gray-200 rounded-md p-2 transition-colors duration-200"
+            >
               <UserCircle2 color="#383C00" />
             </Link>
+            <Search />
           </div>
 
           {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-600 hover:text-gray-800 focus:outline-none"
+              className="flex items-center text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md p-2 transition-colors duration-200"
             >
+              <Search />
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -161,9 +168,9 @@ export default function Navigation() {
                         to={child.path}
                         onClick={() => setMenuOpen(false)}
                         className={({ isActive }) =>
-                          `text-sm ${
-                            isActive ? 'text-[#383C00]' : 'text-gray-700 hover:text-gray-900'
-                          }`
+                          `text-sm px-3 py-2 rounded-md ${
+                            isActive ? 'text-[#383C00] bg-gray-50 underline' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200'
+                          } transition-colors duration-200`
                         }
                       >
                         {t(child.name)}
@@ -177,11 +184,11 @@ export default function Navigation() {
                   to={link.path}
                   onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
-                    `block text-sm font-medium ${
+                    `block text-sm font-medium px-3 py-2 rounded-md ${
                       isActive
-                        ? 'text-[#383C00] border-b-2 border-[#383C00]'
-                        : 'text-gray-500 hover:text-gray-700'
-                    } pb-1 px-1`
+                        ? 'text-[#383C00] bg-gray-50'
+                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200'
+                    } transition-colors duration-200`
                   }
                 >
                   {t(link.name)}
@@ -194,11 +201,11 @@ export default function Navigation() {
                 to="/list"
                 onClick={() => setMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block text-sm font-medium ${
+                  `block text-sm font-medium px-3 py-2 rounded-md ${
                     isActive
-                      ? 'text-[#383C00] border-b-2 border-[#383C00]'
-                      : 'text-gray-500 hover:text-gray-700'
-                  } pb-1 px-1`
+                      ? 'text-[#383C00] bg-gray-50'
+                      : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200'
+                  } transition-colors duration-200`
                 }
               >
                 {t("list")}
@@ -213,7 +220,7 @@ export default function Navigation() {
                   <button
                     key={lng}
                     onClick={() => changeLanguage(lng)}
-                    className="text-left text-gray-700 text-sm hover:underline"
+                    className="text-left text-gray-700 text-sm px-3 py-2 rounded-md hover:bg-gray-200 transition-colors duration-200"
                   >
                     {lng === "en" && "English"}
                     {lng === "am" && "አማርኛ"}
@@ -224,7 +231,11 @@ export default function Navigation() {
               </div>
             </div>
 
-            <Link to="/login">
+            <Link 
+              to="/profile" 
+              className="px-3 py-2 hover:bg-gray-200 rounded-md transition-colors duration-200"
+              onClick={() => setMenuOpen(false)}
+            >
               <UserCircle2 color="#383C00" />
             </Link>
           </div>

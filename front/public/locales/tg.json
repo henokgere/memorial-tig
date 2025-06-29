@@ -1,4 +1,6 @@
 {
+    "TMMA": "መሰትኣ",
+    "Welcome": "እንኳዕ ደሓን መፁ",
     "Memorial": "ዝኽሪ",
     "home": "ዋና ገፅ",
     "our_heroes": "ማህደር ጀጋኑ",
@@ -8,9 +10,13 @@
     "follow us": "ተኸታተሉና",
     "list": "ዝርዝር",
 
+    "search": "ምድላይ",
+    "search_placeholder": "መዘከርታታት ድለዩ...",
+    "search_results": "ውጽኢት ምድላይ",
+
     "Honoring the Lives of Tigrians": "ምኽባር ህይወት ተጋሩ",
     "Lost in the Tigray War": "ኣብ ኩናት ትግራይ ዝጠፍአ",
-    "A tribute to the bright friends taken too soon—may their legacy inspire future generations.": "ነቶም ኣብ ቀረባ እዋን ዝተወሰዱ ንፉዓት ኣዕሩኽ ክብሪ-ሕድሮም ንመጻኢ ወለዶታት የነቓቕሕ።",
+    "A tribute to the bright friends taken too soon—may their legacy inspire future generations.": "ነቶም ኣብ ቀረባ እዋን ዝተወሰዱ ጀጋኑ ኣዕሩኽ ክብሪ-ሕድሮም ንመጻኢ ወለዶታት የነቓቕሕ።",
     "View Memorial": "ዝኽሪ ርአ",
     "Donate Now": "ሕጂ ወፈያ",
     "Gallery": "ማዕከለ-ስዕላት",
