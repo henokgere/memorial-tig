@@ -34,7 +34,7 @@ export default function Home() {
       <MemorialTribute />
       {!loading && (
         <section className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[#383C00] mb-8 text-center">
             {t('latest_articles')}
           </h2>
           
