@@ -1,5 +1,7 @@
+// App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import Header from './components/Header'; // Add this import
 import Home from './pages/Home';
 import OurHeroes from './pages/OurHeroes';
 import Story from './pages/Story';
@@ -26,6 +28,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="min-h-screen bg-memorial-dark text-white">
+          <Header /> {/* Add the Header component here */}
           <Navigation />
           <main className="container mx-auto px-4 py-8">
             <Routes>
