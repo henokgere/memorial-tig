@@ -11,8 +11,8 @@ const {
   getArticlesByArchive,
   addComment
 } = require('../controllers/articleController');
-const { protect } = require('../middleware/authMiddleware');
-const upload = require('../middleware/multer');
+const { protect } = require('../../../middlewares/authMiddleware');
+const upload = require('../../../middlewares/uploadMiddleware');
 
 router.route('/')
   .get(getArticles)
