@@ -18,6 +18,16 @@ const navLinks = [
     ]
   },
   { path: "/tigray-history", name: "tigray_history" },
+  {
+    name: "Article",
+    path: "article",
+    dropdown: true,
+    children: [
+      { path: "/article", name: "Article" },
+      { path: "/archive", name: "Archive" },
+      { path: "/article-form", name: "Make article" }
+    ]
+  },  
   { path: "/about-us", name: "about_us" },
   { path: "/contact-us", name: "contact_us" }
 ];

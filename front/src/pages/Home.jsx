@@ -1,3 +1,4 @@
+import ArticleCard from '../components/ArticleCard';
 import HeroSection from '../components/HeroSection';
 import HomeVideoPreview from '../components/HomeVideoPreview';
 import MemorialGrid from '../components/MemorialGrid';
@@ -8,6 +9,7 @@ export default function Home() {
     <div className="bg-memorial-dark">
       <HeroSection />
       <MemorialTribute />
+      <ArticleCard />
       <HomeVideoPreview />
       <MemorialGrid />
     </div>
