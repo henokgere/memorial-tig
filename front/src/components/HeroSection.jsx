@@ -57,7 +57,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[450px] my-8 flex items-center justify-center bg-memorial-dark text-white overflow-hidden">
+    <section className="relative min-h-[500px] mb-9 flex items-center justify-center bg-memorial-dark text-white overflow-hidden">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 

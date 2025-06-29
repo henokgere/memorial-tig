@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -15,11 +16,15 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const { login } = useContext(AuthContext);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/users/login', { email, password });
+      console.log('Login response:', res.data.token);
       localStorage.setItem('token', res.data.token);
+      await login(res.data.token);
       toast.success('Login successful!', { position: 'top-right' });
       setTimeout(() => navigate('/'), 1500);
     } catch (err) {

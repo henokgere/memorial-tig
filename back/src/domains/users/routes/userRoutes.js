@@ -185,5 +185,6 @@ router.get(
 
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
+router.get('/me', getMe);
 
 module.exports = router;
