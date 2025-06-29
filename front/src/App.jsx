@@ -28,7 +28,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="min-h-screen bg-memorial-dark text-white">
-          <Header /> {/* Add the Header component here */}
+          <Header /> 
           <Navigation />
           <main className="container mx-auto px-4 py-8">
             <Routes>
