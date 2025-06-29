@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Globe, UserCircle2 } from 'lucide-react';
 import i18n from '../i18n';
+import Search from './Search';
 
 const navLinks = [
   { path: "/", name: "home" },
@@ -132,14 +133,16 @@ export default function Navigation() {
             >
               <UserCircle2 color="#383C00" />
             </Link>
+            <Search />
           </div>
 
           {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md p-2 transition-colors duration-200"
+              className="flex items-center text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md p-2 transition-colors duration-200"
             >
+              <Search />
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />

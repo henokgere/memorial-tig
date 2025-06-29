@@ -8,5 +8,8 @@
   "about_us": "About us",
   "contact_us": "Contact us",
   "follow us": "Follow us",
-  "list": "Lists"
+  "list": "Lists",
+  "search": "Search",
+  "search_placeholder": "Search memorials...",
+  "search_results": "Search Results"
 }
