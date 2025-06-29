@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const Article = require('../models/Article');
 const Comment = require('../models/Comment');
-const ErrorResponse = require('../utils/errorResponse');
-const uploadToCloudinary = require('../utils/cloudinary');
+const ErrorResponse = require('../../../utils/errorResponse');
+const uploadToCloudinary = require('../../../utils/cloudinary');
 
 // @desc    Get all articles
 // @route   GET /api/articles
