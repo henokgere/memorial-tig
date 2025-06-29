@@ -22,6 +22,9 @@ import RoleProtectedRoute from './layouts/RoleProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile'
+import ArticlePage from './pages/ArticlePage';
+import ArticleForm from './pages/ArticleForm';
+import ArchivePage from './pages/ArchivePage';
 
 function App() {
   return (
@@ -49,6 +52,9 @@ function App() {
               <Route path="/our-heroes" element={<OurHeroes />} />
               <Route path="/virtual-museum" element={<VirtualMuseum />} />
               <Route path="/story" element={<Story />} />
+              <Route path="/article" element={<ArticlePage />} />
+              <Route path="/archive" element={<ArchivePage />} />
+              <Route path="/article-form" element={<ArticleForm />} />
               <Route path="/tigray-history" element={<TigrayHistory />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/contact-us" element={<ContactUs />} />
