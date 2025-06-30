@@ -25,6 +25,8 @@ import Profile from './pages/Profile'
 import ArticlePage from './pages/ArticlePage';
 import ArticleForm from './pages/ArticleForm';
 import ArchivePage from './pages/ArchivePage';
+import BookForm from './pages/BookForm';
+import BookList from './pages/BookList';
 
 function App() {
   return (
@@ -55,6 +57,15 @@ function App() {
               <Route path="/article" element={<ArticlePage />} />
               <Route path="/archive" element={<ArchivePage />} />
               <Route path="/article-form" element={<ArticleForm />} />
+              <Route path="/books" element={<BookList />} />
+              <Route
+                path="/book-form"
+                element={
+                  <RoleProtectedRoute allowedRoles={['admin', 'creator']}>
+                    <BookForm />
+                  </RoleProtectedRoute>
+                }
+              />
               <Route path="/tigray-history" element={<TigrayHistory />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/contact-us" element={<ContactUs />} />

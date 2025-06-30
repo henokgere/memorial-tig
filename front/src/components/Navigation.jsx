@@ -17,6 +17,7 @@ const navLinks = [
       { path: "/virtual-museum", name: "virtual_museum" }
     ]
   },
+  { name: "Documentation", path: "/books" },
   { path: "/tigray-history", name: "tigray_history" },
   {
     name: "Article",
