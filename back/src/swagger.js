@@ -28,6 +28,8 @@ const options = {
   apis: [
     "./src/domains/users/routes/*.js",
     "./src/domains/memorials/routes/*.js",
+    "./src/domains/books/routes/*.js", 
+    "./src/domains/articles/routes/*.js"
   ],
 };
 

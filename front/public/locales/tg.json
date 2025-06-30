@@ -4,7 +4,11 @@
     "Memorial": "ዝኽሪ",
     "home": "ዋና ገፅ",
     "our_heroes": "ማህደር ጀጋኑ",
+    "Documentation": "ሰነድ ምግባር",
     "tigray_history": "ታሪኽ ትግራይ",
+    "Article": "ዓንቀጽ",
+    "Archive": "መዝገበ",
+    "Make article": "ቅጥዒ ጽሑፍ",
     "about_us": "ብዛዕባና",
     "contact_us": "ርኸቡና",
     "follow us": "ተኸታተሉና",
@@ -27,7 +31,12 @@
     "Support Our Mission": "ተልእኾና ደግፉ",
     "We remember the bright young minds whose lives were tragically cut short, their dreams left unfulfilled, Though they are no longer with us, their legacy of hope, ambition, and resilience will live on in the hearts of those who knew them and the generations they continue to inspire.": "ህይወቶም ብዘሕዝን መንገዲ ዝተሓጽረ፡ ሕልምታቶም ከይተፈጸመ ዝተረፉ ንፉዓት መንእሰያት ኣእምሮታት ንዝክር፡ ድሕሪ ሕጂ ምሳና እኳ እንተዘይሃለዉ፡ ሕድሪ ተስፋኦምን ህርፋንን ጽንዓትን ኣብ ልቢ እቶም ዝፈልጥዎምን ብቐጻሊ ዘነቓቕሕዎም ወለዶታትን ክነብር እዩ።",
     "Your contribution helps preserve the memory of those we've lost.": "ኣበርክቶኹም ዝኽሪ ናይቶም ዝሰኣንናዮም ንምዕቃብ ይሕግዝ።",
-    
+    "latest_articles": "እዋናዊ ጽሑፋት",
+    "no_articles_found": "ዝኾነ ጽሑፍ ኣይተረኽበን",
+
+    "Available Books": "መጻሕፍቲ",
+    "Add Book": "መጽሓፍ ወስኹ",
+
     "Tigray Through History": "ትግራይ ብታሪኽ",
     "Kingdom of Axum": "ንግስነት ኣክሱም",
     "Emperor Yohanes IV": "ሃጸይ ዮሃንስ ራብዓይ",
