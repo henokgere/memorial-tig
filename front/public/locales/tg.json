@@ -4,6 +4,7 @@
     "Memorial": "ዝኽሪ",
     "home": "ዋና ገፅ",
     "our_heroes": "ማህደር ጀጋኑ",
+    "Documentation": "ሰነድ ምግባር",
     "tigray_history": "ታሪኽ ትግራይ",
     "Article": "ዓንቀጽ",
     "Archive": "መዝገበ",
@@ -32,6 +33,9 @@
     "Your contribution helps preserve the memory of those we've lost.": "ኣበርክቶኹም ዝኽሪ ናይቶም ዝሰኣንናዮም ንምዕቃብ ይሕግዝ።",
     "latest_articles": "እዋናዊ ጽሑፋት",
     "no_articles_found": "ዝኾነ ጽሑፍ ኣይተረኽበን",
+
+    "Available Books": "መጻሕፍቲ",
+    "Add Book": "መጽሓፍ ወስኹ",
 
     "Tigray Through History": "ትግራይ ብታሪኽ",
     "Kingdom of Axum": "ንግስነት ኣክሱም",
