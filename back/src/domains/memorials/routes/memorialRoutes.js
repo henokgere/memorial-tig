@@ -38,17 +38,63 @@ const upload = require('../../../middlewares/uploadMiddleware');
  *         multipart/form-data:
  *           schema:
  *             type: object
+ *             required:
+ *               - name
+ *               - fatherName
+ *               - birthDate
+ *               - deathDate
  *             properties:
  *               name:
  *                 type: string
+ *                 example: "Girmay Teklay"
  *               fatherName:
  *                 type: string
+ *                 example: "Teklay Hagos"
+ *               grandfatherName:
+ *                 type: string
+ *                 example: "Hagos Girmay"
+ *               birthDate:
+ *                 type: string
+ *                 format: date
+ *                 example: "1950-01-01"
+ *               deathDate:
+ *                 type: string
+ *                 format: date
+ *                 example: "2020-06-01"
+ *               placeOfBirth:
+ *                 type: string
+ *                 example: "Mekelle, Tigray"
+ *               placeOfDeath:
+ *                 type: string
+ *                 example: "Adigrat, Tigray"
+ *               causeOfDeath:
+ *                 type: string
+ *                 example: "Conflict"
+ *               burialLocation:
+ *                 type: string
+ *                 example: "Martyrs Cemetery"
+ *               familyMember:
+ *                 type: string
+ *                 example: "Son"
+ *               shortStory:
+ *                 type: string
+ *                 example: "He was a brave freedom fighter..."
+ *               memorialMessage:
+ *                 type: string
+ *                 example: "We will never forget your sacrifice."
+ *               obituary:
+ *                 type: string
+ *                 example: "Passed away in the line of duty..."
  *               image:
  *                 type: string
  *                 format: binary
  *     responses:
  *       201:
  *         description: Memorial created successfully
+ *       400:
+ *         description: Invalid input
+ *       401:
+ *         description: Unauthorized
  */
 router.route('/')
   .get(getMemorials)

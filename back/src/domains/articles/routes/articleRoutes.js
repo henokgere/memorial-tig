@@ -42,17 +42,43 @@ const upload = require('../../../middlewares/uploadMiddleware');
  *         multipart/form-data:
  *           schema:
  *             type: object
+ *             required:
+ *               - title
+ *               - excerpt
+ *               - content
+ *               - author
  *             properties:
  *               title:
  *                 type: string
+ *                 example: The Rise of Tigray Voices
+ *               excerpt:
+ *                 type: string
+ *                 example: A short summary of the article goes here.
  *               content:
  *                 type: string
+ *                 example: Full article content with potential formatting.
+ *               tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["Tigray", "War", "Peace"]
+ *               author:
+ *                 type: string
+ *                 description: MongoDB ObjectId of the author
+ *                 example: 60f6c1b2c9e77b001c4e8abc
  *               image:
+ *                 type: string
+ *                 format: binary
+ *               video:
  *                 type: string
  *                 format: binary
  *     responses:
  *       201:
- *         description: Article created
+ *         description: Article created successfully
+ *       400:
+ *         description: Invalid input
+ *       401:
+ *         description: Unauthorized
  */
 router.route('/')
   .get(getArticles)
