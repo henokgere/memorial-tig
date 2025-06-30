@@ -1,30 +1,30 @@
-const asyncHandler = require('express-async-handler');
-const Article = require('../models/Article');
-const Comment = require('../models/Comment');
-const ErrorResponse = require('../../../utils/errorResponse');
-const uploadToCloudinary = require('../../../utils/cloudinary');
+const asyncHandler = require("express-async-handler");
+const Article = require("../models/Article");
+const Comment = require("../models/Comment");
+const ErrorResponse = require("../../../utils/errorResponse");
+const uploadToCloudinary = require("../../../utils/cloudinary");
 
 // @desc    Get all articles
 // @route   GET /api/articles
 // @access  Public
 exports.getArticles = asyncHandler(async (req, res) => {
   // Filtering
-  const queryObj = { ...req.query, status: 'published' };
-  const excludedFields = ['page', 'sort', 'limit', 'fields'];
-  excludedFields.forEach(el => delete queryObj[el]);
+  const queryObj = { ...req.query, status: "published" };
+  const excludedFields = ["page", "sort", "limit", "fields"];
+  excludedFields.forEach((el) => delete queryObj[el]);
 
   // Advanced filtering
   let queryStr = JSON.stringify(queryObj);
-  queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+  queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
   let query = Article.find(JSON.parse(queryStr));
 
   // Sorting
   if (req.query.sort) {
-    const sortBy = req.query.sort.split(',').join(' ');
+    const sortBy = req.query.sort.split(",").join(" ");
     query = query.sort(sortBy);
   } else {
-    query = query.sort('-createdAt');
+    query = query.sort("-createdAt");
   }
 
   // Pagination
@@ -40,7 +40,7 @@ exports.getArticles = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     count: articles.length,
-    data: articles
+    data: articles,
   });
 });
 
@@ -51,12 +51,14 @@ exports.getArticle = asyncHandler(async (req, res, next) => {
   const article = await Article.findOne({ slug: req.params.slug });
 
   if (!article) {
-    return next(new ErrorResponse(`Article not found with slug ${req.params.slug}`, 404));
+    return next(
+      new ErrorResponse(`Article not found with slug ${req.params.slug}`, 404)
+    );
   }
 
   res.status(200).json({
     success: true,
-    data: article
+    data: article,
   });
 });
 
@@ -65,16 +67,16 @@ exports.getArticle = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.createArticle = asyncHandler(async (req, res, next) => {
   // Add user to req.body
-  req.body.author = req.user.id;
+    req.body.author = req.user.id;
 
   // Handle image upload
-  if (req.files?.image) {
+  if (req.files?.image && req.files.image.size > 0) {
     const result = await uploadToCloudinary(req.files.image.tempFilePath, 'articles');
     req.body.image = result.secure_url;
   }
 
   // Handle video upload
-  if (req.files?.video) {
+  if (req.files?.video && req.files.video.size > 0) {
     const result = await uploadToCloudinary(req.files.video.tempFilePath, 'articles/videos');
     req.body.video = result.secure_url;
   }
@@ -84,7 +86,7 @@ exports.createArticle = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    data: article
+    data: article,
   });
 });
 
@@ -95,23 +97,33 @@ exports.updateArticle = asyncHandler(async (req, res, next) => {
   let article = await Article.findById(req.params.id);
 
   if (!article) {
-    return next(new ErrorResponse(`Article not found with id ${req.params.id}`, 404));
+    return next(
+      new ErrorResponse(`Article not found with id ${req.params.id}`, 404)
+    );
   }
 
   // Check ownership
-  if (article.author.toString() !== req.user.id && req.user.role !== 'admin') {
-    return next(new ErrorResponse('Not authorized to update this article', 401));
+  if (article.author.toString() !== req.user.id && req.user.role !== "admin") {
+    return next(
+      new ErrorResponse("Not authorized to update this article", 401)
+    );
   }
 
   // Handle image upload
   if (req.files?.image) {
-    const result = await uploadToCloudinary(req.files.image.tempFilePath, 'articles');
+    const result = await uploadToCloudinary(
+      req.files.image.tempFilePath,
+      "articles"
+    );
     req.body.image = result.secure_url;
   }
 
   // Handle video upload
   if (req.files?.video) {
-    const result = await uploadToCloudinary(req.files.video.tempFilePath, 'articles/videos');
+    const result = await uploadToCloudinary(
+      req.files.video.tempFilePath,
+      "articles/videos"
+    );
     req.body.video = result.secure_url;
   }
 
@@ -122,12 +134,12 @@ exports.updateArticle = asyncHandler(async (req, res, next) => {
 
   article = await Article.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
 
   res.status(200).json({
     success: true,
-    data: article
+    data: article,
   });
 });
 
@@ -138,19 +150,23 @@ exports.deleteArticle = asyncHandler(async (req, res, next) => {
   const article = await Article.findById(req.params.id);
 
   if (!article) {
-    return next(new ErrorResponse(`Article not found with id ${req.params.id}`, 404));
+    return next(
+      new ErrorResponse(`Article not found with id ${req.params.id}`, 404)
+    );
   }
 
   // Check ownership
-  if (article.author.toString() !== req.user.id && req.user.role !== 'admin') {
-    return next(new ErrorResponse('Not authorized to delete this article', 401));
+  if (article.author.toString() !== req.user.id && req.user.role !== "admin") {
+    return next(
+      new ErrorResponse("Not authorized to delete this article", 401)
+    );
   }
 
   await article.remove();
 
   res.status(200).json({
     success: true,
-    data: {}
+    data: {},
   });
 });
 
@@ -161,18 +177,20 @@ exports.getRelatedArticles = asyncHandler(async (req, res, next) => {
   const article = await Article.findOne({ slug: req.params.slug });
 
   if (!article) {
-    return next(new ErrorResponse(`Article not found with slug ${req.params.slug}`, 404));
+    return next(
+      new ErrorResponse(`Article not found with slug ${req.params.slug}`, 404)
+    );
   }
 
   const relatedArticles = await Article.find({
     tags: { $in: article.tags },
     _id: { $ne: article._id },
-    status: 'published'
+    status: "published",
   }).limit(3);
 
   res.status(200).json({
     success: true,
-    data: relatedArticles
+    data: relatedArticles,
   });
 });
 
@@ -182,45 +200,45 @@ exports.getRelatedArticles = asyncHandler(async (req, res, next) => {
 exports.getArticleArchive = asyncHandler(async (req, res) => {
   const archive = await Article.aggregate([
     {
-      $match: { status: 'published' }
+      $match: { status: "published" },
     },
     {
       $group: {
         _id: {
-          year: { $year: '$createdAt' },
-          month: { $month: '$createdAt' }
+          year: { $year: "$createdAt" },
+          month: { $month: "$createdAt" },
         },
-        count: { $sum: 1 }
-      }
+        count: { $sum: 1 },
+      },
     },
     {
       $group: {
-        _id: '$_id.year',
+        _id: "$_id.year",
         months: {
           $push: {
-            month: '$_id.month',
-            count: '$count'
-          }
+            month: "$_id.month",
+            count: "$count",
+          },
         },
-        count: { $sum: '$count' }
-      }
+        count: { $sum: "$count" },
+      },
     },
     {
-      $sort: { _id: -1 }
+      $sort: { _id: -1 },
     },
     {
       $project: {
-        year: '$_id',
+        year: "$_id",
         months: 1,
         count: 1,
-        _id: 0
-      }
-    }
+        _id: 0,
+      },
+    },
   ]);
 
   res.status(200).json({
     success: true,
-    data: archive
+    data: archive,
   });
 });
 
@@ -231,7 +249,7 @@ exports.getArticlesByArchive = asyncHandler(async (req, res) => {
   const { year, month } = req.params;
 
   let startDate, endDate;
-  
+
   if (month) {
     startDate = new Date(year, month - 1, 1);
     endDate = new Date(year, month, 1);
@@ -243,15 +261,15 @@ exports.getArticlesByArchive = asyncHandler(async (req, res) => {
   const articles = await Article.find({
     createdAt: {
       $gte: startDate,
-      $lt: endDate
+      $lt: endDate,
     },
-    status: 'published'
-  }).sort('-createdAt');
+    status: "published",
+  }).sort("-createdAt");
 
   res.status(200).json({
     success: true,
     count: articles.length,
-    data: articles
+    data: articles,
   });
 });
 
@@ -266,6 +284,6 @@ exports.addComment = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    data: comment
+    data: comment,
   });
 });

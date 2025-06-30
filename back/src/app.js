@@ -35,10 +35,16 @@ app.use("/api/books", books);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  //console.error(err.stack);
+  console.log("Error:", err);
   res.status(500).json({
     success: false,
-    error: "Server Error",
+    //error: "Server Error",
+    error:
+      process.env.NODE_ENV === "development" && err.message
+        ? err.message
+        : "server error",
+    details: process.env.NODE_ENV === "development" ? err : undefined,
   });
 });
 
