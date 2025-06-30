@@ -11,6 +11,7 @@ const swaggerSpec = require("./swagger");
 const memorials = require("./domains/memorials/routes/memorialRoutes");
 const users = require("./domains/users/routes/userRoutes");
 const articles = require("./domains/articles/routes/articleRoutes");
+const books = require("./domains/books/routes/bookRoutes");
 // const tributes = require('./domains/tributes/routes/tributeRoutes');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/memorials", memorials);
 app.use("/api/users", users);
 app.use("/api/articles", articles);
+app.use("/api/books", books);
 // app.use('/api/tributes', tributes);
 
 // Error handling middleware
