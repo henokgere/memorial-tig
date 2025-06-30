@@ -17,7 +17,8 @@ export default function Home() {
       try {
         setLoading(true);
         const { data } = await api.get('/articles');
-        setArticles(data);
+        console.log(data.data)
+        setArticles(data.data);
       } catch (err) {
         console.error('Error fetching articles:', err);
       } finally {

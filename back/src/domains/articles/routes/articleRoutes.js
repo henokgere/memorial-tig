@@ -1,3 +1,4 @@
+// src/domains/articles/routes/articleRoutes.js
 const express = require('express');
 const router = express.Router();
 const {
@@ -14,6 +15,45 @@ const {
 const { protect } = require('../../../middlewares/authMiddleware');
 const upload = require('../../../middlewares/uploadMiddleware');
 
+/**
+ * @swagger
+ * tags:
+ *   name: Articles
+ *   description: Article API
+ */
+
+/**
+ * @swagger
+ * /api/articles:
+ *   get:
+ *     summary: Get all articles
+ *     tags: [Articles]
+ *     responses:
+ *       200:
+ *         description: List of articles
+ *   post:
+ *     summary: Create a new article
+ *     tags: [Articles]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Article created
+ */
 router.route('/')
   .get(getArticles)
   .post(protect, upload.fields([
@@ -21,21 +61,60 @@ router.route('/')
     { name: 'video', maxCount: 1 }
   ]), createArticle);
 
-router.route('/archive')
-  .get(getArticleArchive);
+/**
+ * @swagger
+ * /api/articles/archive:
+ *   get:
+ *     summary: Get article archives
+ *     tags: [Articles]
+ *     responses:
+ *       200:
+ *         description: Archive list
+ */
+router.get('/archive', getArticleArchive);
 
-router.route('/archive/:year')
-  .get(getArticlesByArchive);
+/**
+ * @swagger
+ * /api/articles/archive/{year}:
+ *   get:
+ *     summary: Get articles for a given year
+ *     tags: [Articles]
+ */
+router.get('/archive/:year', getArticlesByArchive);
+router.get('/archive/:year/:month', getArticlesByArchive);
 
-router.route('/archive/:year/:month')
-  .get(getArticlesByArchive);
+/**
+ * @swagger
+ * /api/articles/{slug}:
+ *   get:
+ *     summary: Get article by slug
+ *     tags: [Articles]
+ */
+router.get('/:slug', getArticle);
 
-router.route('/:slug')
-  .get(getArticle);
+/**
+ * @swagger
+ * /api/articles/{slug}/related:
+ *   get:
+ *     summary: Get related articles
+ *     tags: [Articles]
+ */
+router.get('/:slug/related', getRelatedArticles);
 
-router.route('/:slug/related')
-  .get(getRelatedArticles);
-
+/**
+ * @swagger
+ * /api/articles/{id}:
+ *   put:
+ *     summary: Update an article
+ *     tags: [Articles]
+ *     security:
+ *       - bearerAuth: []
+ *   delete:
+ *     summary: Delete an article
+ *     tags: [Articles]
+ *     security:
+ *       - bearerAuth: []
+ */
 router.route('/:id')
   .put(protect, upload.fields([
     { name: 'image', maxCount: 1 },
@@ -43,7 +122,15 @@ router.route('/:id')
   ]), updateArticle)
   .delete(protect, deleteArticle);
 
-router.route('/:id/comments')
-  .post(protect, addComment);
+/**
+ * @swagger
+ * /api/articles/{id}/comments:
+ *   post:
+ *     summary: Add comment to article
+ *     tags: [Articles]
+ *     security:
+ *       - bearerAuth: []
+ */
+router.post('/:id/comments', protect, addComment);
 
 module.exports = router;
