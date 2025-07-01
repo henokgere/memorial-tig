@@ -34,9 +34,9 @@ export default function BookList() {
         {books.map((book) => (
           <div key={book._id} className="bg-white p-4 rounded shadow">
             <img src={book.image||'/book.jpg'} alt={book.title} className="w-full h-48 object-cover mb-2" />
-            <h3 className="text-lg font-semibold">{book.title}</h3>
+            <h3 className="text-lg text-gray-600 font-semibold">{book.title}</h3>
             <p className="text-sm text-gray-600">{book.author}</p>
-            <p className="text-sm">{book.description}</p>
+            <p className="text-sm text-gray-500">{book.description}</p>
             {book.bookUrl && (
               <a href={book.bookUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 mt-2 inline-block">
                 Read or Purchase
