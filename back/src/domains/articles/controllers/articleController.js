@@ -169,6 +169,21 @@ exports.deleteArticle = asyncHandler(async (req, res, next) => {
     data: {},
   });
 });
+// Controller
+exports.getArticleYears = asyncHandler(async (req, res) => {
+  const years = await Article.aggregate([
+    {
+      $group: {
+        _id: { $year: "$createdAt" }
+      }
+    },
+    {
+      $sort: { _id: -1 }
+    }
+  ]);
+
+  res.status(200).json({ years: years.map((y) => y._id) });
+});
 
 // @desc    Get related articles
 // @route   GET /api/articles/:slug/related

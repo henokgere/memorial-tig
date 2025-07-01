@@ -12,6 +12,12 @@ export default function Header() {
         </div>
         <div className="text-sm font-bold">
           {t('Welcome')}
+          <a
+            href="https://donateme/donate"
+            className="mx-3 px-6 py-3 shadow bg-[#d8d7d7] hover:bg-[#ebebeb] rounded-lg transition text-gray-600 font-semibold"
+          >
+            {t("Donate Now")}
+          </a>
         </div>
         {/* <div className="flex space-x-4">
           <Link to="/login" className="text-sm hover:underline">
