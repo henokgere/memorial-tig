@@ -10,7 +10,8 @@ const {
   getRelatedArticles,
   getArticleArchive,
   getArticlesByArchive,
-  addComment
+  addComment,
+  getArticleYears
 } = require('../controllers/articleController');
 const { protect } = require('../../../middlewares/authMiddleware');
 const upload = require('../../../middlewares/uploadMiddleware');
@@ -89,6 +90,9 @@ router.route('/')
     { name: 'image', maxCount: 1 },
     { name: 'video', maxCount: 1 }
   ]), createArticle);
+
+  // Route
+router.route('/years').get(getArticleYears);
 
 /**
  * @swagger
