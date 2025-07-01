@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UserCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import api from '../utils/axios';
 
 export default function CommentSection({ articleId, comments: initialComments }) {
   const [comments, setComments] = useState(initialComments || []);
@@ -13,22 +15,14 @@ export default function CommentSection({ articleId, comments: initialComments })
     if (!newComment.trim()) return;
 
     try {
-      const response = await fetch(`/api/articles/${articleId}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ content: newComment })
+      const { data } = await api.post(`/articles/${articleId}/comments`, {
+        content: newComment
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setComments([data, ...comments]);
-        setNewComment('');
-      }
+      setComments([data, ...comments]);
+      setNewComment('');
     } catch (error) {
-      console.error('Error submitting comment:', error);
+      console.error('Error submitting comment:', error.response?.data || error.message);
     }
   };
 
