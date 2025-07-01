@@ -1,6 +1,6 @@
 export default function MemorialCard({ name, years, imageUrl }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col items-center pt-8 pb-16 px-2">
+    <div className="bg-white w-[300px] rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col items-center pt-8 pb-16 px-2">
       {/* Circular image container with centered background */}
       <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-100 shadow-inner mb-5">
         <div 
