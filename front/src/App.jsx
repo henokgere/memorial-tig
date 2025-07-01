@@ -27,6 +27,7 @@ import ArticleForm from './pages/ArticleForm';
 import ArchivePage from './pages/ArchivePage';
 import BookForm from './pages/BookForm';
 import BookList from './pages/BookList';
+import MemorialDetail from './pages/MemorialDetails';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
               />
               <Route path="/" element={<Home />} />
               <Route path="/our-heroes" element={<OurHeroes />} />
+              <Route path="/memorial/:id" element={<MemorialDetail />} />
               <Route path="/virtual-museum" element={<VirtualMuseum />} />
               <Route path="/story" element={<Story />} />
               <Route path="/article" element={<ArticlePage />} />

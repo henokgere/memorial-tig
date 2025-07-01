@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import MemorialCard from '../components/MemorialCard';
 import api from '../utils/axios';
+import { Link } from 'react-router-dom';
 
 export default function OurHeroes() {
   const [memorialData, setMemorialData] = useState([]);
@@ -42,11 +43,16 @@ export default function OurHeroes() {
             <div key={person._id} className="flex flex-col items-center">
               <MemorialCard
                 name={person.name}
-                years={`${person.birthDate} - ${person.deathDate}`}
+                years={`${new Date(person.birthDate).getFullYear()} - ${new Date(person.deathDate).getFullYear()}`}
+                imageUrl={person.imageUrl}
               />
-              <button className="mt-2 text-sm font-semibold text-400 hover:underline pointer-events-auto">
+              <Link
+                to={`/memorial/${person._id}`}
+                state={{ person }}
+                className="mt-2 text-sm font-semibold text-gray-400 hover:underline"
+              >
                 View Detail
-              </button>
+              </Link>
             </div>
           ))}
         </div>

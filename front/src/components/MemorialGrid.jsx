@@ -1,13 +1,32 @@
+import { useEffect, useState } from 'react';
 import MemorialCard from './MemorialCard';
+import api from '../utils/axios';
 
-const memorialData = [
-  { id: 1, name: "Full Name", years: "1990 - 2015" },
-  { id: 2, name: "Full Name", years: "1990 - 2015" },
-  { id: 3, name: "Full Name", years: "1990 - 2015" },
-  // Add more entries as needed
-];
 
 export default function MemorialGrid() {
+  const [ memorialData, setMemorialData ] = useState([])
+
+  useEffect(() => {
+    const fetchMemorials = async () => {
+      try {
+        const response = await api.get('/memorials');
+        console.log('RAW response.data:', response.data);
+  
+        const arrayData = response.data.data; 
+  
+        if (!Array.isArray(arrayData)) {
+          throw new Error('Invalid data format received');
+        }
+  
+        setMemorialData(arrayData.slice(1, 4));
+      } catch (error) {
+        console.error('Failed to fetch memorial data', error);
+      }
+    };
+  
+    fetchMemorials();
+  }, []);
+
   return (
     <section className="py-16 px-4 bg-[#4E4E4E]">
       <div className="max-w-6xl mx-auto">
@@ -20,7 +39,8 @@ export default function MemorialGrid() {
             <MemorialCard 
               key={person.id}
               name={person.name}
-              years={person.years}
+              years={`${new Date(person.birthDate).getFullYear()} - ${new Date(person.deathDate).getFullYear()}`}
+              imageUrl={person.imageUrl}
             />
           ))}
         </div>
