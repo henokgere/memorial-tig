@@ -17,8 +17,7 @@ export default function Home() {
       try {
         setLoading(true);
         const { data } = await api.get('/articles');
-        console.log(data.data)
-        setArticles(data.slice(0, 3));
+        setArticles(data.data);
       } catch (err) {
         console.error('Error fetching articles:', err);
       } finally {
@@ -39,21 +38,26 @@ export default function Home() {
             {t('latest_articles')}
           </h2>
           
-          {articles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {articles.map(article => (
-                <ArticleCard 
-                  key={article._id} 
-                  article={article} 
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                />
-              ))}
-            </div>
-          ) : (
+          {loading ? 
             <p className="text-gray-400 text-center">
-              {loading ? 'Loading articles...' : t('no_articles_found')}
-            </p>
-          )}
+              {t('Loading articles...')}
+            </p>:
+            articles.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {articles.map(article => (
+                  <ArticleCard 
+                    key={article._id} 
+                    article={article} 
+                    className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-400 text-center">
+                {t('no_articles_found')}
+              </p>
+            )
+          }
         </section>
       )}
       <HomeVideoPreview />
