@@ -66,6 +66,9 @@ const upload = require('../../../middlewares/uploadMiddleware');
  *                 type: string
  *                 description: MongoDB ObjectId of the author
  *                 example: 60f6c1b2c9e77b001c4e8abc
+ *               status:
+ *                  type: string
+ *                  enum: [published, not-published]
  *               image:
  *                 type: string
  *                 format: binary
