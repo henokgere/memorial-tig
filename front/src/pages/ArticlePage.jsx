@@ -1,13 +1,11 @@
-
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ArticleCard from '../components/ArticleCard';
 import CommentSection from '../components/CommentSection';
 import api from '../utils/axios';
 
 export default function ArticlePage() {
-  const { slug } = useParams();
   const navigate = useNavigate();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,22 +18,19 @@ export default function ArticlePage() {
       try {
         setLoading(true);
         setError(null);
+    
+        const articlesResponse = await api.get('/articles');
         
-        if (!slug) {
-          throw new Error('Missing article identifier');
-        }
-
-        // Using Axios to make parallel requests
-        const [articleResponse, relatedResponse] = await Promise.all([
-          api.get(`/articles/${slug}`),
-          api.get(`/articles/${slug}/related`)
-        ]);
-        
-        setArticle(articleResponse.data);
-        setRelatedArticles(relatedResponse.data);
+        const firstArticle = articlesResponse.data.data?.[0];
+    
+        if (!firstArticle) throw new Error('No articles found');
+    
+        const relatedResponse = await api.get(`/articles/${firstArticle.slug}/related`);
+    
+        setArticle(firstArticle);
+        setRelatedArticles(articlesResponse.data.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message || t('error_fetching_article'));
-        // Redirect to 404 page if article not found
         if (err.response?.status === 404) {
           navigate('/404', { replace: true });
         }
@@ -43,9 +38,8 @@ export default function ArticlePage() {
         setLoading(false);
       }
     };
-
     fetchArticleData();
-  }, [slug, t, navigate]);
+  }, [navigate, t]);
 
   if (loading) {
     return (
@@ -58,7 +52,7 @@ export default function ArticlePage() {
   if (error) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1>{error} </h1>
+        <h1 className='text-red-400'>{error}</h1>
         <button 
           onClick={() => window.location.reload()}
           className="mt-4 px-4 py-2 bg-[#383C00] text-white rounded hover:bg-[#2c2f00]"
@@ -72,7 +66,7 @@ export default function ArticlePage() {
   if (!article) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1>{t('article_not_found')} </h1>
+        <h1>{t('article_not_found')}</h1>
       </div>
     );
   }
@@ -120,7 +114,7 @@ export default function ArticlePage() {
         )}
 
         <div 
-          className="prose max-w-none mb-12"
+          className="prose text-gray-500 max-w-none mb-12"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
@@ -142,18 +136,16 @@ export default function ArticlePage() {
         <CommentSection articleId={article._id} comments={article.comments} />
       </article>
 
-      {relatedArticles.length > 0 && (
-        <section className="mt-16">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-            {t('related_articles')}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedArticles.map(article => (
-              <ArticleCard key={article._id} article={article} />
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="mt-16">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+          {t('related_articles')}
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedArticles.map(article => (
+            <ArticleCard key={article._id} article={article} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

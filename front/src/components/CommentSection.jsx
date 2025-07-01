@@ -44,7 +44,7 @@ export default function CommentSection({ articleId, comments: initialComments })
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder={t('write_comment')}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
+            className="w-full text-gray-600 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
             rows="3"
             required
           />
