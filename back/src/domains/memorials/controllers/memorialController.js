@@ -10,7 +10,7 @@ exports.getMemorials = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     count: memorials.length,
-    data: memorials
+    data: memorials,
   });
 });
 
@@ -19,103 +19,88 @@ exports.getMemorials = asyncHandler(async (req, res) => {
 // @access  Public
 exports.getMemorial = asyncHandler(async (req, res) => {
   const memorial = await Memorial.findById(req.params.id);
-  
   if (!memorial) {
-    return res.status(404).json({
-      success: false,
-      error: 'Memorial not found'
-    });
+    res.status(404);
+    throw new Error('Memorial not found');
   }
 
   res.status(200).json({
     success: true,
-    data: memorial
+    data: memorial,
   });
 });
 
-// @desc    Create memorial
+// @desc    Create a new memorial
 // @route   POST /api/memorials
 // @access  Private
-exports.createMemorial =asyncHandler(async (req, res) => {
-  try {
-    const { body, file, user } = req;
+exports.createMemorial = asyncHandler(async (req, res) => {
+  const { body, file, user } = req;
 
-    let imageUrl = '';
-    if (file) {
-      const result = await uploadToCloudinary(file.buffer, Date.now().toString());
-      imageUrl = result.secure_url;
-    }
-
-    const memorial = await Memorial.create({
-      ...body,
-      imageUrl,
-      createdBy: user._id,
-    });
-
-    res.status(201).json(memorial);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to create memorial', error: err.message });
+  let imageUrl = '';
+  if (file) {
+    const result = await uploadToCloudinary(file.buffer, Date.now().toString());
+    imageUrl = result.secure_url;
   }
-})
 
-// @desc    Update memorial
+  const memorial = await Memorial.create({
+    ...body,
+    imageUrl,
+    createdBy: user.id,
+  });
+
+  res.status(201).json({
+    success: true,
+    data: memorial,
+  });
+});
+
+// @desc    Update a memorial
 // @route   PUT /api/memorials/:id
 // @access  Private
 exports.updateMemorial = asyncHandler(async (req, res) => {
-  let memorial = await Memorial.findById(req.params.id);
-
+  const memorial = await Memorial.findById(req.params.id);
   if (!memorial) {
-    return res.status(404).json({
-      success: false,
-      error: 'Memorial not found'
-    });
+    res.status(404);
+    throw new Error('Memorial not found');
   }
 
-  // Check ownership
+  // Only owner can update
   if (memorial.createdBy.toString() !== req.user.id) {
-    return res.status(401).json({
-      success: false,
-      error: 'Not authorized to update this memorial'
-    });
+    res.status(401);
+    throw new Error('Not authorized to update this memorial');
   }
 
-  memorial = await Memorial.findByIdAndUpdate(req.params.id, req.body, {
+  const updated = await Memorial.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
 
   res.status(200).json({
     success: true,
-    data: memorial
+    data: updated,
   });
 });
 
-// @desc    Delete memorial
+// @desc    Delete a memorial
 // @route   DELETE /api/memorials/:id
 // @access  Private
 exports.deleteMemorial = asyncHandler(async (req, res) => {
   const memorial = await Memorial.findById(req.params.id);
-
   if (!memorial) {
-    return res.status(404).json({
-      success: false,
-      error: 'Memorial not found'
-    });
+    res.status(404);
+    throw new Error('Memorial not found');
   }
 
-  // Check ownership
+  // Only owner can delete
   if (memorial.createdBy.toString() !== req.user.id) {
-    return res.status(401).json({
-      success: false,
-      error: 'Not authorized to delete this memorial'
-    });
+    res.status(401);
+    throw new Error('Not authorized to delete this memorial');
   }
 
   await memorial.remove();
 
   res.status(200).json({
     success: true,
-    data: {}
+    message: 'Memorial deleted successfully',
   });
 });
