@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import { FaGoogle, FaFacebookF } from 'react-icons/fa';
-import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from '../context/AuthContext';
+import React, { useContext, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const { email, password } = formData;
@@ -21,25 +21,25 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/users/login', { email, password });
-      console.log('Login response:', res.data.token);
-      localStorage.setItem('token', res.data.token);
+      const res = await axios.post("/api/users/login", { email, password });
+      console.log("Login response:", res.data.token);
+      localStorage.setItem("token", res.data.token);
       await login(res.data.token);
-      toast.success('Login successful!', { position: 'top-right' });
-      setTimeout(() => navigate('/'), 1500);
+      toast.success("Login successful!", { position: "top-right" });
+      setTimeout(() => navigate("/"), 1500);
     } catch (err) {
-      toast.error(err.response?.data?.error || 'Login failed', {
-        position: 'top-right'
+      toast.error(err.response?.data?.error || "Login failed", {
+        position: "top-right",
       });
     }
   };
 
   const googleLogin = () => {
-    window.open(`${process.env.REACT_APP_API_URL}/api/auth/google`, '_self');
+    window.open(`${process.env.REACT_APP_API_URL}/api/auth/google`, "_self");
   };
 
   const facebookLogin = () => {
-    window.open(`${process.env.REACT_APP_API_URL}/api/auth/facebook`, '_self');
+    window.open(`${process.env.REACT_APP_API_URL}/api/auth/facebook`, "_self");
   };
 
   return (
@@ -52,7 +52,10 @@ const Login = () => {
 
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email Address
             </label>
             <input
@@ -67,7 +70,10 @@ const Login = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -98,31 +104,34 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="flex items-center my-5">
+        {/* <div className="flex items-center my-5">
           <div className="flex-grow h-px bg-gray-300"></div>
           <span className="mx-2 text-sm text-gray-400">OR</span>
           <div className="flex-grow h-px bg-gray-300"></div>
-        </div>
+        </div> */}
 
-        <button
+        {/* <button
           onClick={googleLogin}
           className="w-full border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 rounded-md mb-3 flex items-center justify-center gap-2"
         >
           <FaGoogle className="w-5 h-5" />
           Continue with Google
-        </button>
+        </button> */}
 
-        <button
+        {/* <button
           onClick={facebookLogin}
           className="w-full border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 rounded-md flex items-center justify-center gap-2"
         >
           <FaFacebookF className="w-5 h-5" />
           Continue with Facebook
-        </button>
+        </button> */}
 
         <p className="text-center text-sm mt-5 text-gray-600">
-          Don't have an account?{' '}
-          <Link to="/register" className="text-gray-900 font-medium hover:underline">
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            className="text-gray-900 font-medium hover:underline"
+          >
             Register
           </Link>
         </p>
