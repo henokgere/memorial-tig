@@ -1,8 +1,46 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
+import {
+  FaTwitter,
+  FaInstagram,
+  FaTelegram,
+  FaYoutube,
+  FaFacebook,
+} from "react-icons/fa";
 export default function Footer() {
   const { t } = useTranslation();
+  const socialLinks = [
+    {
+      name: "Twitter",
+      icon: <FaTwitter />,
+      handle: "@tigray_jeganu",
+      url: "#",
+    },
+    {
+      name: "Instagram",
+      icon: <FaInstagram />,
+      handle: "@tigray_jeganu",
+      url: "#",
+    },
+    {
+      name: "Telegram",
+      icon: <FaTelegram />,
+      handle: "t.me/tigray_jeganu",
+      url: "#",
+    },
+    {
+      name: "YouTube",
+      icon: <FaYoutube />,
+      handle: "youtube.com/tigray_jeganu",
+      url: "https://www.youtube.com/@TMMA-1",
+    },
+    {
+      name: "Facebook",
+      icon: <FaFacebook />,
+      handle: "facebook.com/tigray_jeganu",
+      url: "https://web.facebook.com/profile.php?id=61577920920979",
+    },
+  ];
 
   return (
     <footer className="bg-[#434343] text-white py-12 px-4">
@@ -26,7 +64,7 @@ export default function Footer() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                tigray_leganu@locationok.com
+                tigray_jeganu@locationok.com
               </p>
               <p className="flex items-center">
                 <svg
@@ -73,42 +111,28 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold mb-2">{t("follow us")}</h3>
             <div className="flex flex-col space-y-2 text-sm">
-              {[
-                { name: "Twitter", icon: "🐦", handle: "@tigray_jeganu" },
-                { name: "Instagram", icon: "📷", handle: "@tigray_jeganu" },
-                { name: "Telegram", icon: "📨", handle: "t.me/tigray_jeganu" },
-                {
-                  name: "YouTube",
-                  icon: "📺",
-                  handle: "youtube.com/tigray_jeganu",
-                  url: "https://www.youtube.com/@TMMA-1",
-                },
-                {
-                  name: "Facebook",
-                  icon: "📱",
-                  handle: "facebook.com/tigray_jeganu",
-                  url: "https://web.facebook.com/profile.php?id=61577920920979",
-                },
-              ].map((social, index) => (
+              {socialLinks.map((social, index) => (
                 <a
                   key={index}
-                  href="#"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-gray-300 transition flex items-center"
                 >
-                  <span className="mr-1">{social.icon}</span>
+                  <span className="mr-2 text-lg">{social.icon}</span>
                   {social.handle}
                 </a>
               ))}
             </div>
             <p className="text-xs text-gray-300">
-              Get updates at: notime.tigrayleganu.org
+              Get updates at: notime.tigrayjeganu.org
             </p>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="border-t border-gray-600 pt-6 text-center text-xs text-gray-400">
-          © {new Date().getFullYear()} Tigray Leganu Memorial. All rights
+          © {new Date().getFullYear()} Tigray Jeganu Memorial. All rights
           reserved.
         </div>
       </div>
