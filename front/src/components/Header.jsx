@@ -12,6 +12,7 @@ export default function Header() {
         </div>
         <div className="text-sm font-bold">
           {t('Welcome')}
+          {new Date().toLocaleString()}
           <a
             href="https://donateme/donate"
             className="mx-3 px-6 py-3 shadow bg-[#d8d7d7] hover:bg-[#ebebeb] rounded-lg transition text-gray-600 font-semibold"
