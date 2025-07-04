@@ -1,7 +1,46 @@
 import { useTranslation } from "react-i18next";
+import api from "../utils/axios";
+import { useState } from "react";
 
 export default function ContactUs() {
   const { t } = useTranslation();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await api.post("/contactus", formData); // ✅ send only the data
+
+    if (res.status === 201) {
+      setStatus({ type: "success", message: res.data.message });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } else {
+      setStatus({
+        type: "error",
+        message: res.data.error || "Something went wrong.",
+      });
+    }
+  } catch (error) {
+      setStatus({
+        type: "error",
+        message: "Server error. Please try again later.",
+      });
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Page Header */}
@@ -73,51 +112,72 @@ export default function ContactUs() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md text-gray-700">
             <h2 className="text-2xl font-bold mb-6 text-[#383C00]">
               Send Us a Message
             </h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              {status && (
+                <div
+                  className={`p-2 rounded text-sm ${
+                    status.type === "success"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {status.message}
+                </div>
+              )}
+
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium mb-1"
                 >
                   Your Name
                 </label>
                 <input
                   type="text"
                   id="name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#383C00] focus:border-[#383C00]"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   placeholder="Full Name"
+                  required
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium mb-1"
                 >
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#383C00] focus:border-[#383C00]"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   placeholder="your@email.com"
+                  required
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium mb-1"
                 >
                   Subject
                 </label>
                 <select
                   id="subject"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#383C00] focus:border-[#383C00]"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                  required
                 >
                   <option value="">Select a topic</option>
                   <option value="story">Share a Memorial Story</option>
@@ -131,15 +191,18 @@ export default function ContactUs() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium mb-1"
                 >
                   Your Message
                 </label>
                 <textarea
                   id="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#383C00] focus:border-[#383C00]"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   placeholder="Type your message here..."
+                  required
                 ></textarea>
               </div>
 

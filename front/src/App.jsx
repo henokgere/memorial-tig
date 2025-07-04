@@ -29,6 +29,8 @@ import BookForm from './pages/BookForm';
 import BookList from './pages/BookList';
 import MemorialDetail from './pages/MemorialDetails';
 import ArticleDetail from './pages/ArticleDetail';
+import AdminContactMessages from './pages/adminContactusMessages';
+import AdminDashboard from './pages/adminDashboard';
 
 function App() {
   return (
@@ -74,6 +76,14 @@ function App() {
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route
+                path="/admin/contact-us"
+                element={
+                  <RoleProtectedRoute allowedRoles={['admin', 'creator']}>
+                    <AdminContactMessages />
+                  </RoleProtectedRoute>
+                }
+              />
+              <Route
                 path="/list"
                 element={
                   <RoleProtectedRoute allowedRoles={['admin', 'editor']}>
@@ -86,6 +96,15 @@ function App() {
                 element={
                   <RoleProtectedRoute allowedRoles={['admin', 'creator']}>
                     <MemorialForm />
+                  </RoleProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/admin"
+                element={
+                  <RoleProtectedRoute allowedRoles={['admin', 'creator']}>
+                    <AdminDashboard />
                   </RoleProtectedRoute>
                 }
               />
