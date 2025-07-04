@@ -15,7 +15,7 @@ const {submitContactForm, getContactMessages} = require('../controllers/contact'
 
 /**
  * @swagger
- * /api/contacts:
+ * /api/contactus:
  *   post:
  *     summary: Submit a new contact message
  *     tags: [Contacts]
