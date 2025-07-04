@@ -49,7 +49,7 @@ const { protect, admin } = require('../../../middlewares/authMiddleware');
  *         description: Feedback submitted successfully
  */
 router.route('/')
-  .get(protect, admin, getFeedbacks)
+  .get(protect, getFeedbacks)
   .post(createFeedback);
 
 /**
@@ -72,6 +72,6 @@ router.route('/')
  *         description: Feedback deleted
  */
 router.route('/:id')
-  .delete(protect, admin, deleteFeedback);
+  .delete(protect, deleteFeedback);
 
 module.exports = router;
