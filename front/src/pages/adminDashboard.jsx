@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const adminLinks = [
   { name: 'Contact Messages', path: '/admin/contact-us' },
   { name: 'Users', path: '/admin/users' },
-  { name: 'Feedback', path: '/admin/feedbacks' },
   { name: 'Memorials', path: '/admin/memorials' },
   { name: 'Articles', path: '/admin/articles' },
   { name: 'Books', path: '/admin/books' },
