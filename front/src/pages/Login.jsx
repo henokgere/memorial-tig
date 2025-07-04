@@ -24,9 +24,16 @@ const Login = () => {
       const res = await axios.post("/api/users/login", { email, password });
       console.log("Login response:", res.data.token);
       localStorage.setItem("token", res.data.token);
-      await login(res.data.token);
+      const user = await login(res.data.token);
       toast.success("Login successful!", { position: "top-right" });
-      setTimeout(() => navigate("/"), 1500);
+      // Redirect based on role
+      setTimeout(() => {
+        if (user?.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }, 1000);
     } catch (err) {
       toast.error(err.response?.data?.error || "Login failed", {
         position: "top-right",

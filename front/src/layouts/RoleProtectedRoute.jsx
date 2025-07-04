@@ -1,10 +1,13 @@
-// src/layouts/RoleProtectedRoute.js
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const RoleProtectedRoute = ({ children, allowedRoles }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!currentUser) {
     return <Navigate to="/login" replace />;

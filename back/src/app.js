@@ -12,7 +12,7 @@ const memorials = require("./domains/memorials/routes/memorialRoutes");
 const users = require("./domains/users/routes/userRoutes");
 const articles = require("./domains/articles/routes/articleRoutes");
 const books = require("./domains/books/routes/bookRoutes");
-const feedbacks = require('./domains/feedback/routes/feedbackRoutes');
+const contactUs = require("./domains/contactus/routes/contactRoutes");
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.use("/api/memorials", memorials);
 app.use("/api/users", users);
 app.use("/api/articles", articles);
 app.use("/api/books", books);
-app.use('/api/feedbacks', feedbacks);
+app.use('/api/contactus', contactUs);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
