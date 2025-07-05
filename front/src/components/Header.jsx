@@ -17,7 +17,7 @@ export default function Header() {
           <span>{t("Welcome")}</span>
           <a
             href="https://donateme/donate"
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md transition duration-200 shadow-sm"
+            className="px-4 py-2 bg-[#880000] hover:bg-[#880000] text-white rounded-md transition duration-200 shadow-sm"
           >
             {t("Donate Now")}
           </a>

@@ -1,4 +1,3 @@
-// components/Search.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search as SearchIcon } from 'lucide-react';
@@ -6,14 +5,26 @@ import { useTranslation } from 'react-i18next';
 
 export default function Search() {
   const [query, setQuery] = useState('');
+  const [type, setType] = useState('memorials'); // default search type
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/our-heroes?q=${encodeURIComponent(query)}`);
+      let route = '';
+      switch (type) {
+        case 'articles':
+          route = '/articles';
+          break;
+        case 'docs':
+          route = '/books';
+          break;
+        default:
+          route = '/our-heroes';
+      }
+      navigate(`${route}?q=${encodeURIComponent(query)}`);
       setIsOpen(false);
       setQuery('');
     }
@@ -21,7 +32,7 @@ export default function Search() {
 
   return (
     <div className="relative">
-      {/* Search Button (Mobile/Desktop) */}
+      {/* Toggle Search */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md transition-colors duration-200"
@@ -30,16 +41,26 @@ export default function Search() {
         <SearchIcon className="w-5 h-5" />
       </button>
 
-      {/* Search Input */}
+      {/* Search Input + Filter */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-120 bg-white rounded-md shadow-lg z-50">
           <form onSubmit={handleSearch} className="flex">
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="text-sm px-2 py-2 border-r border-gray-300 bg-gray-400 rounded-l-md focus:outline-none"
+            >
+              <option value="memorials">{t('Memorials')}</option>
+              <option value="docs">{t('Docs')}</option>
+              <option value="articles">{t('Articles')}</option>
+            </select>
+
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t('search_placeholder')}
-              className="flex-1 px-4 py-2 text-sm text-gray-700 focus:outline-none rounded-l-md"
+              className="flex-1 px-4 py-2 text-sm text-gray-700 focus:outline-none"
               autoFocus
             />
             <button

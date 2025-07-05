@@ -79,7 +79,7 @@ export default function OurHeroes() {
             />
             <button
               type="submit"
-              className="px-4 bg-[#383C00] text-white rounded-r-md hover:bg-[#2c2f00] flex items-center"
+              className="px-4 bg-[#b88608] text-white rounded-r-md hover:bg-[#2c2f00] flex items-center"
             >
               <SearchIcon className="w-5 h-5" />
             </button>
@@ -106,7 +106,7 @@ export default function OurHeroes() {
                 <Link
                   to={`/memorial/${person._id}`}
                   state={{ person }}
-                  className="mt-2 text-sm font-semibold text-gray-400 hover:underline"
+                  className="mt-2 text-sm font-semibold text-[#242424] hover:underline"
                 >
                   View Detail
                 </Link>

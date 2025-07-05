@@ -15,7 +15,7 @@ export default function MemorialCard({ name, years, imageUrl }) {
       
       {/* Content */}
       <div className="text-center w-full">
-        <h3 className="text-2xl font-medium text-gray-900 mb-1.5">{name}</h3>
+        <h3 className="text-2xl font-medium text-[#b88608] mb-1.5">{name}</h3>
         <p className="text-sm text-gray-600 mb-4">{years}</p>
         
         <div className="border-t border-gray-200 w-3/4 mx-auto my-3"></div>
