@@ -48,12 +48,12 @@ export default function ContactUs() {
         <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">
           {t("Connect & Support")}
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
           {t(
             "Reach out to share stories, ask questions, or support our memorial efforts."
           )}
         </p>
-        <div className="w-24 h-1 bg-[#383C00] mx-auto mt-4"></div>
+        <div className="w-24 h-1 bg-blue-800 mx-auto mt-4"></div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
@@ -61,7 +61,7 @@ export default function ContactUs() {
         <div className="space-y-6">
           {/* Fundraising Section */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">
+            <h2 className="text-2xl font-bold mb-4 text-gray-700">
               {t("Support Our Cause")}
             </h2>
             <div className="space-y-4">
@@ -81,7 +81,7 @@ export default function ContactUs() {
                 </div>
                 <div>
                   <h3 className="font-bold">"{t("GoFundMe Campaign")}</h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     {t("Help us expand the memorial and support families")}
                   </p>
                 </div>
@@ -113,7 +113,7 @@ export default function ContactUs() {
 
           {/* Contact Form */}
           <div className="bg-white p-6 rounded-lg shadow-md text-gray-700">
-            <h2 className="text-2xl font-bold mb-6 text-[#383C00]">
+            <h2 className="text-2xl font-bold mb-6 text-gay-700">
               Send Us a Message
             </h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -208,7 +208,7 @@ export default function ContactUs() {
 
               <button
                 type="submit"
-                className="w-full md:w-auto px-6 py-2 bg-[#383C00] text-white rounded-md hover:bg-[#2a2d00] transition"
+                className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-800 transition"
               >
                 Send Message
               </button>
@@ -220,7 +220,7 @@ export default function ContactUs() {
         <div className="space-y-6">
           {/* Contact Information */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">
+            <h2 className="text-2xl font-bold mb-4 text-gray-700">
               Other Ways to Connect
             </h2>
 
@@ -228,7 +228,7 @@ export default function ContactUs() {
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <svg
-                    className="w-5 h-5 text-[#383C00]"
+                    className="w-5 h-5 text-gay-700"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -252,7 +252,7 @@ export default function ContactUs() {
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <svg
-                    className="w-5 h-5 text-[#383C00]"
+                    className="w-5 h-5 text-gray-700"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -274,7 +274,7 @@ export default function ContactUs() {
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <svg
-                    className="w-5 h-5 text-[#383C00]"
+                    className="w-5 h-5 text-gray-700"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -309,7 +309,7 @@ export default function ContactUs() {
 
           {/* Social Media Section */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-[#383C00]">
+            <h2 className="text-2xl font-bold mb-4 text-gray-700">
               Follow Our Work
             </h2>
             <div className="grid grid-cols-2 gap-4">
@@ -392,7 +392,7 @@ export default function ContactUs() {
                   rel="noopener noreferrer"
                   className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition"
                 >
-                  <span className="mr-3 text-[#383C00]">{social.icon}</span>
+                  <span className="mr-3 text-gray-700">{social.icon}</span>
                   <div>
                     <p className="font-medium">{social.name}</p>
                     <p className="text-sm text-gray-600">{social.handle}</p>

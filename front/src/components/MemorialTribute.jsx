@@ -4,7 +4,7 @@ export default function MemorialTribute() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 px-4 bg-[#4E4E4E] text-white">
+    <section className="py-20 px-4 bg-gray-700 text-white">
       <div className="max-w-4xl mx-auto text-center">
         <div className="relative mb-12">
           {/* Decorative elements */}
@@ -58,13 +58,7 @@ export default function MemorialTribute() {
             {t(
               "Your contribution helps preserve the memory of those we've lost."
             )}
-          </p>
-          <a
-            href="/donate"
-            className="inline-block shadow px-6 py-3  bg-red-700 hover:bg-red-500 rounded-md transition text-white font-medium text-sm"
-          >
-            {t("Donate Now")}
-          </a>
+          </p>      
         </div>
       </div>
     </section>
