@@ -16,7 +16,7 @@ export default function Search() {
       let route = '';
       switch (type) {
         case 'articles':
-          route = '/articles';
+          route = '/article';
           break;
         case 'docs':
           route = '/books';
