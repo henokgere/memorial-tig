@@ -62,7 +62,7 @@ export default function Navigation() {
             {navLinks.map((link) =>
               link.dropdown ? (
                 <div key={link.name} className="relative group">
-                  <button className="text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-yellow-200 rounded-md pb-1 px-3 py-2 transition-colors duration-200">
+                  <button className="text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 rounded-md pb-1 px-3 py-2 transition-colors duration-200">
                     {t(link.name)}
                   </button>
                   <div className="absolute left-0 top-full w-40 bg-white border rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
@@ -73,8 +73,8 @@ export default function Navigation() {
                         className={({ isActive }) =>
                           `block px-4 py-2 text-sm ${
                             isActive
-                              ? "text-black bg-yellow-200 underline"
-                              : "text-gray-700 hover:bg-yellow-200"
+                              ? "text-gray-800 bg-gray-200 underline rounded-md"
+                              : "text-gray-700 hover:bg-gray-100 rounded-md"
                           } transition-colors duration-200`
                         }
                       >
@@ -90,8 +90,8 @@ export default function Navigation() {
                   className={({ isActive }) =>
                     `text-sm font-medium ${
                       isActive
-                        ? "text-black bg-yellow-200 underline rounded-md"
-                        : "text-gray-500 hover:text-gray-900 hover:bg-yellow-200 rounded-md"
+                        ? "text-gray-800 bg-gray-200 underline rounded-md"
+                        : "text-gray-700 hover:bg-gray-100 rounded-md"
                     } pb-1 px-3 py-2 transition-colors duration-200`
                   }
                 >
@@ -106,8 +106,8 @@ export default function Navigation() {
                 className={({ isActive }) =>
                   `text-sm font-medium ${
                     isActive
-                      ? "text-black bg-yellow-200 underline rounded-md"
-                      : "text-gray-500 hover:text-gray-900 hover:bg-yellow-200 rounded-md"
+                      ? "text-gray-800 bg-gray-200 underline rounded-md"
+                      : "text-gray-700 hover:bg-gray-100 rounded-md"
                   } pb-1 px-3 py-2 transition-colors duration-200`
                 }
               >
@@ -119,7 +119,7 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center text-gray-600 hover:text-gray-900 hover:bg-yellow-200 rounded-md px-3 py-2 transition-colors duration-200"
+                className="flex items-center text-gray-600 hover:text-gray-900 rounded-md px-3 py-2 transition-colors duration-200"
               >
                 <Globe className="w-5 h-5 mr-1" />
                 {i18n.language}
@@ -130,7 +130,7 @@ export default function Navigation() {
                     <button
                       key={lng}
                       onClick={() => changeLanguage(lng)}
-                      className="block px-4 py-2 text-gray-700 text-sm hover:bg-yellow-200 w-full text-left transition-colors duration-200"
+                      className="block px-4 py-2 text-gray-700 text-sm hover:text-gray-900 w-full text-left transition-colors duration-200"
                     >
                       {lng === "en" && "English"}
                       {lng === "am" && "አማርኛ"}
@@ -144,7 +144,7 @@ export default function Navigation() {
 
             <Link
               to="/profile"
-              className="hover:bg-yellow-200 rounded-md p-2 transition-colors duration-200"
+              className="hover:text-gray-900 rounded-md p-2 transition-colors duration-200"
             >
               <UserCircle2 color="#383C00" />
             </Link>
@@ -155,7 +155,7 @@ export default function Navigation() {
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center text-gray-600 hover:text-gray-900 hover:bg-yellow-200 rounded-md p-2 transition-colors duration-200"
+              className="flex items-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-md p-2 transition-colors duration-200"
             >
               <Search />
               <svg
@@ -202,8 +202,8 @@ export default function Navigation() {
                         className={({ isActive }) =>
                           `text-sm px-3 py-2 rounded-md ${
                             isActive
-                              ? "text-black bg-yellow-200 underline"
-                              : "text-gray-700 hover:text-gray-900 hover:bg-yellow-200"
+                              ? "text-black hover:text-gray-900 underline"
+                              : "text-gray-700 hover:text-gray-900 rounded-md"
                           } transition-colors duration-200`
                         }
                       >
@@ -220,8 +220,8 @@ export default function Navigation() {
                   className={({ isActive }) =>
                     `block text-sm font-medium px-3 py-2 rounded-md ${
                       isActive
-                        ? "text-black bg-yellow-200"
-                        : "text-gray-500 hover:text-gray-900 hover:bg-yellow-200"
+                        ? "text-black hover:text-gray-900 rounded-md"
+                        : "text-gray-500 hover:text-gray-900 rounded-md"
                     } transition-colors duration-200`
                   }
                 >
@@ -237,8 +237,8 @@ export default function Navigation() {
                 className={({ isActive }) =>
                   `block text-sm font-medium px-3 py-2 rounded-md ${
                     isActive
-                      ? "text-black bg-yellow-200"
-                      : "text-gray-500 hover:text-gray-900 hover:bg-yellow-200"
+                      ? "text-black bg-gray-100"
+                      : "text-gray-500 hover:text-gray-900 rounded-md"
                   } transition-colors duration-200`
                 }
               >
@@ -269,7 +269,7 @@ export default function Navigation() {
 
             <Link
               to="/profile"
-              className="px-3 py-2 hover:bg-yellow-200 rounded-md transition-colors duration-200"
+              className="px-3 py-2 hover:text-gray-900 rounded-md transition-colors duration-200"
               onClick={() => setMenuOpen(false)}
             >
               <UserCircle2 color="#383C00" />

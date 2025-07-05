@@ -7,52 +7,54 @@ import {
   FaYoutube,
   FaFacebook,
 } from "react-icons/fa";
+
 export default function Footer() {
   const { t } = useTranslation();
+
   const socialLinks = [
     {
       name: "Twitter",
-      icon: <FaTwitter />,
+      icon: <FaTwitter className="text-blue-500" />,
       handle: "@tigray_jeganu",
       url: "#",
     },
     {
       name: "Instagram",
-      icon: <FaInstagram />,
+      icon: <FaInstagram className="text-blue-500" />,
       handle: "@tigray_jeganu",
       url: "#",
     },
     {
       name: "Telegram",
-      icon: <FaTelegram />,
+      icon: <FaTelegram className="text-blue-500" />,
       handle: "t.me/tigray_jeganu",
       url: "#",
     },
     {
       name: "YouTube",
-      icon: <FaYoutube />,
+      icon: <FaYoutube className="text-blue-500" />,
       handle: "youtube.com/tigray_jeganu",
       url: "https://www.youtube.com/@TMMA-1",
     },
     {
       name: "Facebook",
-      icon: <FaFacebook />,
+      icon: <FaFacebook className="text-blue-500" />,
       handle: "facebook.com/tigray_jeganu",
       url: "https://web.facebook.com/profile.php?id=61577920920979",
     },
   ];
 
   return (
-    <footer className="bg-[#434343] text-white py-12 px-4">
+    <footer className="bg-gray-800 text-gray-200 py-12 px-4 border-t border-gray-900">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Contact Information */}
+        <div className="grid grid-cols-1 md:grid-cols-2 mb-10">
+          {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold mb-2">{t("contact_us")}</h3>
-            <div className="space-y-2 text-sm">
-              <p className="flex items-center">
+            <h3 className="text-lg font-semibold">{t("Contact Us")}</h3>
+            <ul className="text-sm space-y-2">
+              <li className="flex items-center">
                 <svg
-                  className="w-4 h-4 mr-2"
+                  className="w-4 h-4 mr-2 text-blue-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -65,10 +67,10 @@ export default function Footer() {
                   />
                 </svg>
                 tigray_jeganu@locationok.com
-              </p>
-              <p className="flex items-center">
+              </li>
+              <li className="flex items-center">
                 <svg
-                  className="w-4 h-4 mr-2"
+                  className="w-4 h-4 mr-2 text-blue-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -81,10 +83,10 @@ export default function Footer() {
                   />
                 </svg>
                 +1 (617) 555-0192
-              </p>
-              <p className="flex items-start">
+              </li>
+              <li className="flex items-start">
                 <svg
-                  className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"
+                  className="w-4 h-4 mr-2 text-blue-500 mt-0.5 flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -93,7 +95,7 @@ export default function Footer() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                   />
                   <path
                     strokeLinecap="round"
@@ -103,37 +105,37 @@ export default function Footer() {
                   />
                 </svg>
                 Tigray Cultural Office, Mekelle, Ethiopia
-              </p>
-            </div>
+              </li>
+            </ul>
           </div>
 
-          {/* Social Media Links */}
+          {/* Social Media */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold mb-2">{t("follow us")}</h3>
-            <div className="flex flex-col space-y-2 text-sm">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-gray-300 transition flex items-center"
-                >
-                  <span className="mr-2 text-lg">{social.icon}</span>
-                  {social.handle}
-                </a>
+            <h3 className="text-lg font-semibold">{t("Follow Us")}</h3>
+            <ul className="flex flex-col space-y-2 text-sm">
+              {socialLinks.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center hover:text-blue-600 transition"
+                  >
+                    <span className="mr-2 text-lg">{link.icon}</span>
+                    {link.handle}
+                  </a>
+                </li>
               ))}
-            </div>
-            <p className="text-xs text-gray-300">
-              Get updates at: notime.tigrayjeganu.org
+            </ul>
+            <p className="text-xs text-gray-500">
+              {t("Get updates at")}: notime.tigrayjeganu.org
             </p>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-600 pt-6 text-center text-xs text-gray-400">
-          © {new Date().getFullYear()} Tigray Jeganu Memorial. All rights
-          reserved.
+        {/* Footer Bottom */}
+        <div className="text-center text-xs text-gray-400 border-t pt-6">
+          © {new Date().getFullYear()} Tigray Jeganu Memorial. {t("All rights reserved.")}.
         </div>
       </div>
     </footer>
