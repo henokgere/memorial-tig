@@ -204,3 +204,34 @@ exports.getMe = async (req, res) => {
     res.status(500).json({ success: false, error: "Server Error" });
   }
 };
+
+exports.getUsers = async(req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    res.status(500).json({ success: false, error: "Server Error" });
+  }
+}
+
+exports.registerAdminUser = async(req, res) => {
+  const { name, email, password, role } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res
+        .status(400)
+        .json({ success: false, error: "User already exists" });
+    }
+
+    user = await User.create({ name, email, password, role });
+
+    // Optionally send email verification
+    //await sendEmailVerification(user);
+
+    sendTokenResponse(user, 201, res);
+  } catch (err) {
+    res.status(500).json({ success: false, error: "Server Error" });
+  }
+}

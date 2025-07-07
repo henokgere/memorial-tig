@@ -11,7 +11,9 @@ const {
   deleteUser,
   assignRole,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  getUsers,
+  registerAdminUser
 } = require("../controllers/userController");
 
 // Auth routes
@@ -146,6 +148,12 @@ router.delete("/:id", protect, deleteUser);
  *         description: User not found
  */
 router.put("/:id/role", protect, /*admin,*/ assignRole);
+
+//admin users get
+router.get("/users", protect, /*admin,*/ getUsers);
+
+//admin route register
+router.post("/admin/register", protect, registerAdminUser);
 
 // Google OAuth
 router.get(

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import api from '../utils/axios';
+import api from '../../utils/axios';
 
 export default function AdminContactMessages() {
   const [messages, setMessages] = useState([]);
