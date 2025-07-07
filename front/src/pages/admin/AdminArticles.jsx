@@ -3,17 +3,21 @@ import api from "../../utils/axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SearchFilter from "../../components/admin/SearchFilter";
 
 const AdminArticlesPage = () => {
   const [articles, setArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchArticles = async () => {
     try {
-      const res = await api.get("/articles"); // Adjust the endpoint if needed
-      setArticles(res.data.data || res.data);
+      const res = await api.get("/articles"); // Update endpoint if necessary
+      const data = res.data.data || res.data;
+      setArticles(data);
+      setFilteredArticles(data);
     } catch (err) {
-        console.log(err);
+      console.error(err);
       toast.error("Failed to fetch articles");
     } finally {
       setLoading(false);
@@ -27,6 +31,7 @@ const AdminArticlesPage = () => {
       await api.delete(`/articles/${id}`);
       toast.success("Article deleted successfully");
       setArticles((prev) => prev.filter((article) => article._id !== id));
+      setFilteredArticles((prev) => prev.filter((article) => article._id !== id));
     } catch {
       toast.error("Failed to delete article");
     }
@@ -41,12 +46,19 @@ const AdminArticlesPage = () => {
       <ToastContainer />
       <h1 className="text-2xl font-bold text-gray-800 mb-6">All Articles</h1>
 
+      {/* ✅ Search Filter */}
+      <SearchFilter
+        data={articles}
+        onFilter={setFilteredArticles}
+        placeholder="Search by title, author, or content..."
+      />
+
       {loading ? (
         <p>Loading articles...</p>
-      ) : articles.length === 0 ? (
+      ) : filteredArticles.length === 0 ? (
         <p>No articles found.</p>
       ) : (
-        <div className="overflow-x-auto text-gray-700">
+        <div className="overflow-x-auto">
           <table className="w-full table-auto border-collapse">
             <thead>
               <tr className="bg-gray-100 text-left">
@@ -58,7 +70,7 @@ const AdminArticlesPage = () => {
               </tr>
             </thead>
             <tbody>
-              {articles.map((article) => (
+              {filteredArticles.map((article) => (
                 <tr key={article._id} className="border-t hover:bg-gray-50">
                   <td className="py-3 px-4 font-medium">{article.title}</td>
                   <td className="py-3 px-4">{article.author || "N/A"}</td>

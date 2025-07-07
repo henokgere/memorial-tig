@@ -4,9 +4,11 @@ import { AuthContext } from "../../context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SearchFilter from "../../components/admin/SearchFilter";
 
 const AdminUsersPage = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +17,7 @@ const AdminUsersPage = () => {
       const res = await api.get("/users/users");
       console.log("res: ", res.data);
       setUsers(res.data.data || res.data);
+      setFilteredUsers(res.data.data || res.data);
     } catch (err) {
       console.error("Error fetching users:", err);
       toast.error("Failed to fetch users");
@@ -47,6 +50,8 @@ const AdminUsersPage = () => {
         All Registered Users
       </h1>
 
+      <SearchFilter data={users} onFilter={setFilteredUsers} placeholder="Search users..." />
+
       {loading ? (
         <p>Loading users...</p>
       ) : users.length === 0 ? (
@@ -63,7 +68,7 @@ const AdminUsersPage = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user._id} className="border hover:bg-gray-50">
                   <td className="py-3 px-4">{user.name}</td>
                   <td className="py-3 px-4">{user.email}</td>

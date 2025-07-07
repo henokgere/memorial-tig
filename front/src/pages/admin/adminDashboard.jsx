@@ -7,6 +7,7 @@ const adminLinks = [
   { name: 'heroes', path: '/admin/heroes' },
   { name: 'Articles', path: '/admin/articles' },
   { name: 'Books', path: '/admin/books' },
+  { name: 'Create Admins', path: '/admin/register' },
 ];
 
 const AdminDashboard = () => {

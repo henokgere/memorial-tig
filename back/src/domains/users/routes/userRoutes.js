@@ -12,7 +12,8 @@ const {
   assignRole,
   forgotPassword,
   resetPassword,
-  getUsers
+  getUsers,
+  registerAdminUser
 } = require("../controllers/userController");
 
 // Auth routes
@@ -150,6 +151,9 @@ router.put("/:id/role", protect, /*admin,*/ assignRole);
 
 //admin users get
 router.get("/users", protect, /*admin,*/ getUsers);
+
+//admin route register
+router.post("/admin/register", protect, registerAdminUser);
 
 // Google OAuth
 router.get(

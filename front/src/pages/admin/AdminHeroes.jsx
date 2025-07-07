@@ -3,18 +3,21 @@ import api from "../../utils/axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SearchFilter from "../../components/admin/SearchFilter";
 
 const AdminHeroesPage = () => {
   const [heroes, setHeroes] = useState([]);
+  const [filteredHeroes, setFilteredHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchHeroes = async () => {
     try {
       const res = await api.get("/memorials");
-      console.log("Fetched heroes:", res.data);
-      setHeroes(res.data.data || res.data);
+      const data = res.data.data || res.data;
+      setHeroes(data);
+      setFilteredHeroes(data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       toast.error("Failed to fetch heroes");
     } finally {
       setLoading(false);
@@ -28,8 +31,9 @@ const AdminHeroesPage = () => {
       await api.delete(`/heroes/${id}`);
       toast.success("Hero deleted successfully");
       setHeroes((prev) => prev.filter((hero) => hero._id !== id));
+      setFilteredHeroes((prev) => prev.filter((hero) => hero._id !== id));
     } catch (err) {
-        console.log(err)
+      console.error(err);
       toast.error("Failed to delete hero");
     }
   };
@@ -41,13 +45,18 @@ const AdminHeroesPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <ToastContainer />
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">
-        All Memorial Heroes
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">All Memorial Heroes</h1>
+
+      {/* ✅ Search Filter */}
+      <SearchFilter
+        data={heroes}
+        onFilter={setFilteredHeroes}
+        placeholder="Search heroes by name, bio, or date..."
+      />
 
       {loading ? (
         <p>Loading heroes...</p>
-      ) : heroes.length === 0 ? (
+      ) : filteredHeroes.length === 0 ? (
         <p>No heroes found.</p>
       ) : (
         <div className="overflow-x-auto text-gray-700">
@@ -62,7 +71,7 @@ const AdminHeroesPage = () => {
               </tr>
             </thead>
             <tbody>
-              {heroes.map((hero) => (
+              {filteredHeroes.map((hero) => (
                 <tr key={hero._id} className="border-t hover:bg-gray-50">
                   <td className="py-3 px-4 font-medium">{hero.name}</td>
                   <td className="py-3 px-4">{hero.dob}</td>

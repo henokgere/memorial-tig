@@ -3,15 +3,19 @@ import api from "../../utils/axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SearchFilter from "../../components/admin/SearchFilter";
 
 const AdminBooksPage = () => {
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchBooks = async () => {
     try {
       const res = await api.get("/books");
-      setBooks(res.data.data || res.data);
+      const data = res.data.data || res.data;
+      setBooks(data);
+      setFilteredBooks(data);
     } catch {
       toast.error("Failed to fetch books");
     } finally {
@@ -20,14 +24,13 @@ const AdminBooksPage = () => {
   };
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this book?"
-    );
+    const confirm = window.confirm("Are you sure you want to delete this book?");
     if (!confirm) return;
 
     try {
       await api.delete(`/books/${id}`);
       setBooks((prev) => prev.filter((book) => book._id !== id));
+      setFilteredBooks((prev) => prev.filter((book) => book._id !== id));
       toast.success("Book deleted successfully");
     } catch {
       toast.error("Failed to delete book");
@@ -43,9 +46,16 @@ const AdminBooksPage = () => {
       <ToastContainer />
       <h1 className="text-2xl font-bold text-gray-800 mb-6">All Books</h1>
 
+      {/* ✅ Search Filter */}
+      <SearchFilter
+        data={books}
+        onFilter={setFilteredBooks}
+        placeholder="Search by title, author, description..."
+      />
+
       {loading ? (
         <p>Loading books...</p>
-      ) : books.length === 0 ? (
+      ) : filteredBooks.length === 0 ? (
         <p>No books found.</p>
       ) : (
         <div className="overflow-x-auto">
@@ -60,7 +70,7 @@ const AdminBooksPage = () => {
               </tr>
             </thead>
             <tbody>
-              {books.map((book) => (
+              {filteredBooks.map((book) => (
                 <tr key={book._id} className="border-t hover:bg-gray-50">
                   <td className="py-3 px-4 font-medium">{book.title}</td>
                   <td className="py-3 px-4">{book.author || "N/A"}</td>

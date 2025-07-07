@@ -270,7 +270,7 @@ export default function Navigation() {
             <Link
               to="/profile"
               className="px-3 py-2 hover:text-gray-900 rounded-md transition-colors duration-200"
-              onClick={() => setMenuOpen(false)}
+              
             >
               <UserCircle2 color="#383C00" />
             </Link>
