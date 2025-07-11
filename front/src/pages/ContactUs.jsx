@@ -244,7 +244,7 @@ export default function ContactUs() {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-gray-900">Email</h3>
                   <p className="text-sm text-gray-500">
-                    TMMA@locationok.com
+                  tesfayonemail@gmail.com
                   </p>
                 </div>
               </div>
@@ -267,7 +267,7 @@ export default function ContactUs() {
                 </div>
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-gray-900">Phone</h3>
-                  <p className="text-sm text-gray-500">+251938768302</p>
+                  <p className="text-sm text-gray-500">+251914794475</p>
                 </div>
               </div>
 
