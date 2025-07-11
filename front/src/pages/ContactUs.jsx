@@ -66,7 +66,7 @@ export default function ContactUs() {
             </h2>
             <div className="space-y-4">
               <a
-                href="https://gofundme.com/tigray-memorial"
+                href="https://gofundme.com/TMMA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition"
@@ -244,7 +244,7 @@ export default function ContactUs() {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-gray-900">Email</h3>
                   <p className="text-sm text-gray-500">
-                    contact@tigray-memorial.org
+                    TMMA@locationok.com
                   </p>
                 </div>
               </div>
@@ -267,7 +267,7 @@ export default function ContactUs() {
                 </div>
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-gray-900">Phone</h3>
-                  <p className="text-sm text-gray-500">+1 (617) 555-0192</p>
+                  <p className="text-sm text-gray-500">+251938768302</p>
                 </div>
               </div>
 
@@ -296,11 +296,8 @@ export default function ContactUs() {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-gray-900">Address</h3>
                   <p className="text-sm text-gray-500">
-                    Tigray Memorial Foundation
-                    <br />
-                    77 Massachusetts Ave
-                    <br />
-                    Cambridge, MA 02139
+                    Tigray Cultural Office
+                    <br /> Mekelle, Ethiopia
                   </p>
                 </div>
               </div>

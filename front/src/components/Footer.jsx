@@ -15,31 +15,31 @@ export default function Footer() {
     {
       name: "Twitter",
       icon: <FaTwitter className="text-blue-500" />,
-      handle: "@tigray_jeganu",
+      handle: "@TMMA",
       url: "#",
     },
     {
       name: "Instagram",
       icon: <FaInstagram className="text-blue-500" />,
-      handle: "@tigray_jeganu",
+      handle: "@TMMA",
       url: "#",
     },
     {
       name: "Telegram",
       icon: <FaTelegram className="text-blue-500" />,
-      handle: "t.me/tigray_jeganu",
+      handle: "t.me/TMMA",
       url: "#",
     },
     {
       name: "YouTube",
       icon: <FaYoutube className="text-blue-500" />,
-      handle: "youtube.com/tigray_jeganu",
+      handle: "youtube.com/TMMA",
       url: "https://www.youtube.com/@TMMA-1",
     },
     {
       name: "Facebook",
       icon: <FaFacebook className="text-blue-500" />,
-      handle: "facebook.com/tigray_jeganu",
+      handle: "facebook.com/TMMA",
       url: "https://web.facebook.com/profile.php?id=61577920920979",
     },
   ];
@@ -66,7 +66,7 @@ export default function Footer() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                tigray_jeganu@locationok.com
+                TMMA@locationok.com
               </li>
               <li className="flex items-center">
                 <svg
@@ -82,7 +82,7 @@ export default function Footer() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                +1 (617) 555-0192
+                +251938768302
               </li>
               <li className="flex items-start">
                 <svg
