@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom"
 import { useTranslation } from "react-i18next";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -222,9 +223,24 @@ export default function AboutUs() {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[
             {
-              name: "Yohannes Berhe",
-              role: "Historical Researcher",
-              bio: "Ensuring accurate documentation of history",
+              name: "Tsige G/michael",
+              role: "Office Manager & Finance Head",
+              bio: "Manages operations and finances efficiently",
+            },
+            {
+              name: "Mulugeta Assefa Hailu",
+              role: "Mobilation and awareness Creation",
+              bio: "Leads outreach and awareness efforts",
+            },
+            {
+              name: "Tsegay Kidane Gidey",
+              role: "Coordinator of Design & Planning",
+              bio: "Plans and coordinates creative projects",
+            },
+            {
+              name: "Tesfay Gebrekirstos Hailu",
+              role: "ICT and New Media Director",
+              bio: "Heads digital and tech initiatives",
             },
             {
               name: "Mahlet G/her",
@@ -288,9 +304,11 @@ export default function AboutUs() {
             "Whether by contributing stories, volunteering, or supporting our initiatives, you help honor the sacrifices and build a better future."
           )}
         </p>
-        <button className="px-6 py-2 bg-[#383C00] text-white rounded-md hover:bg-[#2a2d00] transition transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#383C00] focus:ring-opacity-50 hover:animate-pulse">
-          {t("Get Involved")}
-        </button>
+        <Link to={'/login'}>
+          <button className="px-6 py-2 bg-[#383C00] text-white rounded-md hover:bg-[#2a2d00] transition transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#383C00] focus:ring-opacity-50 hover:animate-pulse">
+            {t("Get Involved")}
+          </button>
+        </Link>
       </div>
     </div>
   );
