@@ -46,7 +46,7 @@ export default function Navigation() {
 
   return (
     <nav className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-full mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/">
             <div className="flex items-center space-x-4">

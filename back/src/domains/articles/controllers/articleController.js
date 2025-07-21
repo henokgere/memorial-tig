@@ -288,6 +288,47 @@ exports.getArticlesByArchive = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Search articles
+// @route   GET /api/articles/search
+// @access  Public
+exports.searchArticles = asyncHandler(async (req, res, next) => {
+  const { q } = req.query;
+
+  if (!q || typeof q !== 'string') {
+    return next(new ErrorResponse('Please provide a valid search query', 400));
+  }
+
+  const searchQuery = q.trim();
+  if (searchQuery.length < 2) {
+    return next(new ErrorResponse('Search query must be at least 2 characters', 400));
+  }
+
+  try {
+    let articles;
+    articles = await Article.find({
+          $or: [
+            { title: new RegExp(searchQuery, 'i') },
+            { content: new RegExp(searchQuery, 'i') },
+            { tags: new RegExp(searchQuery, 'i') }
+          ]
+        });
+
+    console.log({
+      success: true,
+      count: articles.length,
+      data: articles
+    })
+    res.status(200).json({
+      success: true,
+      count: articles.length,
+      data: articles
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 // @desc    Add comment to article
 // @route   POST /api/articles/:id/comments
 // @access  Private

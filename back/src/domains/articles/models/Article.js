@@ -61,6 +61,12 @@ const articleSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
+articleSchema.index({
+  title: 'text',
+  content: 'text',
+  tags: 'text'
+});
+
 // Virtual for comments
 articleSchema.virtual('comments', {
   ref: 'Comment',

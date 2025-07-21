@@ -144,6 +144,7 @@ const {
   createBook,
   updateBook,
   deleteBook,
+  searchBooks
 } = require('../controllers/bookController');
 const { protect } = require('../../../middlewares/authMiddleware');
 const upload = require('../../../middlewares/uploadMiddleware');
@@ -151,10 +152,61 @@ const upload = require('../../../middlewares/uploadMiddleware');
 router.route('/')
   .get(getBooks)
   .post(protect, upload.single('coverImage'), createBook);
+  
+/**
+ * @swagger
+ * /api/books/search:
+ *   get:
+ *     summary: Search books
+ *     tags: [Books]
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         description: Search query (searches title, author, description)
+ *       - in: query
+ *         name: title
+ *         schema:
+ *           type: string
+ *         description: Filter by title
+ *       - in: query
+ *         name: author
+ *         schema:
+ *           type: string
+ *         description: Filter by author
+ *       - in: query
+ *         name: category
+ *         schema:
+ *           type: string
+ *           enum: [fiction, non-fiction, poetry, biography, essay, other]
+ *         description: Filter by category
+ *       - in: query
+ *         name: yearFrom
+ *         schema:
+ *           type: integer
+ *         description: Filter by creation year (from)
+ *       - in: query
+ *         name: yearTo
+ *         schema:
+ *           type: integer
+ *         description: Filter by creation year (to)
+ *     responses:
+ *       200:
+ *         description: List of matching books
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Book'
+ */
+router.get('/search', searchBooks);
 
 router.route('/:id')
   .get(getBook)
   .put(protect, upload.single('coverImage'), updateBook)
   .delete(protect, deleteBook);
+
 
 module.exports = router;

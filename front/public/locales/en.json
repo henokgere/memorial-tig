@@ -11,5 +11,12 @@
   "list": "Lists",
   "search": "Search",
   "search_placeholder": "Search memorials...",
-  "search_results": "Search Results"
+  "search_results": "Search Results",
+  "search_results_for": "Search results for",
+  "no_results_found": "No results found.",
+  "articles": "Articles",
+  "books": "Books",
+  "memorials": "Memorials",
+  "read_or_purchase": "Read or Purchase",
+  "search_error": "Search failed. Please try again."
 }

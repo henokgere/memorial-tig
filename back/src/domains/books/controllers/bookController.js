@@ -1,4 +1,6 @@
+const expressAsyncHandler = require('express-async-handler');
 const Book = require('../models/Books');
+const ErrorResponse = require('../../../utils/errorResponse');
 
 // Create Book
 exports.createBook = async (req, res) => {
@@ -30,6 +32,60 @@ exports.getBooks = async (req, res) => {
     res.status(500).json({ success: false, error: 'Server Error' });
   }
 };
+
+// @desc    Search books
+// @route   GET /api/books/search
+// @access  Public
+exports.searchBooks = expressAsyncHandler(async (req, res, next) => {
+  const { q, category } = req.query;
+
+  // Validate query
+  if (!q || typeof q !== 'string') {
+    return next(new ErrorResponse('Please provide a valid search query', 400));
+  }
+
+  const searchQuery = q.trim();
+  if (searchQuery.length < 2) {
+    return next(new ErrorResponse('Search query must be at least 2 characters', 400));
+  }
+
+  try {
+    // Build query
+    const query = {
+      $or: [
+        { title: new RegExp(searchQuery, 'i') },
+        { author: new RegExp(searchQuery, 'i') },
+        { description: new RegExp(searchQuery, 'i') }
+      ]
+    };
+
+    // Add category filter if provided
+    if (category) {
+      query.category = category;
+    }
+
+    // Try text search first if available
+    let books;
+
+    books = await Book.find(query);
+
+
+    console.log({
+      success: true,
+      count: books.length,
+      data: books
+    })
+    res.status(200).json({
+      success: true,
+      count: books.length,
+      data: books
+    });
+
+  } catch (err) {
+    console.error('Book search error:', err);
+    next(new ErrorResponse('Search failed. Please try again.', 500));
+  }
+});
 
 // Get Single Book
 exports.getBook = async (req, res) => {
