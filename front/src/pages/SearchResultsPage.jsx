@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import api from '../utils/axios';
 import ArticleCard from '../components/ArticleCard';
 import MemorialCard from '../components/MemorialCard';
+import {data} from '../assets/staff.json';
 import { LoaderIcon } from 'lucide-react';
 
 export default function SearchResultsPage() {
@@ -15,6 +16,7 @@ export default function SearchResultsPage() {
     articles: [],
     books: [],
     memorials: [],
+    stuff: [],
     loading: true,
     error: null
   });
@@ -38,10 +40,17 @@ export default function SearchResultsPage() {
           api.get(`/memorials/search?q=${query}`)
         ]);
 
+        const filteredStuff = data.filter(member =>
+          member.name.toLowerCase().includes(query.toLowerCase()) ||
+          member.role.toLowerCase().includes(query.toLowerCase()) ||
+          member.bio.toLowerCase().includes(query.toLowerCase())
+        );        
+
         setResults({
           articles: articlesRes.data?.data || [],
           books: booksRes.data?.data || [],
           memorials: memorialsRes.data?.data || [],
+          stuff: filteredStuff,
           loading: false,
           error: null
         });
@@ -72,7 +81,7 @@ export default function SearchResultsPage() {
   }
 
   const totalResults =
-    results.articles.length + results.books.length + results.memorials.length;
+    results.articles.length + results.books.length + results.memorials.length + results.stuff.length;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -157,6 +166,34 @@ export default function SearchResultsPage() {
               </div>
             </section>
           )}
+
+          {/* Stuff (Local Team) */}
+          {results.stuff.length > 0 && (
+            <section>
+              <h2 className="text-xl text-gray-500 font-semibold mb-4">
+                {t('staff')} ({results.stuff.length})
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {results.stuff.map((member, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-4 rounded-lg shadow-sm text-center transition-transform duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:bg-[#f3f4f6]"
+                  >
+                    <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-yellow-500 text-lg font-bold">
+                      {member.name
+                        .split(' ')
+                        .map(n => n[0])
+                        .join('')}
+                    </div>
+                    <h3 className="font-bold text-gray-400">{member.name}</h3>
+                    <p className="text-sm text-[#383C00] mb-2">{member.role}</p>
+                    <p className="text-xs text-gray-600">{member.bio}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
         </div>
       )}
     </div>
