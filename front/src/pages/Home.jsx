@@ -6,6 +6,7 @@ import HomeVideoPreview from '../components/HomeVideoPreview';
 import MemorialGrid from '../components/MemorialGrid';
 import MemorialTribute from '../components/MemorialTribute';
 import api from '../utils/axios';
+import StatsSection from '../components/StatsSection';
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -32,6 +33,7 @@ export default function Home() {
     <div className="bg-memorial-dark">
       <HeroSection />
       <MemorialTribute />
+      <StatsSection />
       {!loading && (
         <section className="container mx-auto px-4 py-12">
           <h2 className="text-3xl font-bold text-[#383C00] mb-8 text-center">
