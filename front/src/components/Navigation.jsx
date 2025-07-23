@@ -41,6 +41,7 @@ export default function Navigation() {
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem({"lng": lng})
     setLangMenuOpen(false);
   };
 
