@@ -149,8 +149,9 @@ function ArticleForm() {
               id="image"
               onChange={(e) => setImage(e.target.files[0])}
               className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
-              accept="image/*"
+              accept="image/*,video/*,application/pdf"
             />
+
           </div>
 
           <button
