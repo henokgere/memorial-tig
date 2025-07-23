@@ -15,52 +15,51 @@ function ArticleForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const [mediaFile, setMediaFile] = useState(null);
+  const [mediaType, setMediaType] = useState("");
+  
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    setMediaFile(file);
+    if (file.type.startsWith("image/")) setMediaType("image");
+    else if (file.type.startsWith("video/")) setMediaType("video");
+    else if (file.type === "application/pdf") setMediaType("file");
+    else setMediaType("");
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+  
     try {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("excerpt", excerpt);
       formData.append("content", content);
       formData.append("tags", tags);
-      if (image && image.size > 0) formData.append("image", image);
-
+  
+      if (mediaFile && mediaFile.size > 0) {
+        if (mediaType === "image") formData.append("image", mediaFile);
+        else if (mediaType === "video") formData.append("video", mediaFile);
+        else if (mediaType === "file") formData.append("file", mediaFile);
+      }
+  
       const { data } = await api.post("/articles", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      toast.success(t("article_published_success"), {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      console.log("data:", data);
-
+  
+      toast.success(t("article_published_success"));
       navigate(`/articles/${data.data.slug}`);
     } catch (err) {
-      const errorMessage =
-        err.response?.data?.message || err.message || t("error_publishing");
-
-      toast.error(errorMessage, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(err.response?.data?.message || t("error_publishing"));
     } finally {
       setIsSubmitting(false);
     }
-  };
+  };  
 
   return (
     <ProtectedRoute>
@@ -146,10 +145,10 @@ function ArticleForm() {
             </label>
             <input
               type="file"
-              id="image"
-              onChange={(e) => setImage(e.target.files[0])}
+              id="media"
+              onChange={handleFileChange}
               className="w-full px-4 py-2 border border-gray-300 text-gray-600 rounded-lg focus:ring-2 focus:ring-[#383C00] focus:border-transparent"
-              accept="image/*"
+              accept="image/*,video/*,application/pdf"
             />
           </div>
 
