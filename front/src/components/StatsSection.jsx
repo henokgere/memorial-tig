@@ -1,49 +1,71 @@
-// src/components/StatsSection.jsx
 import React, { useEffect, useState } from "react";
-
-const stats = [
-  { label: "Users", value: 100 },
-  { label: "Memorials", value: 35000 },
-  { label: "Books", value: 400 },
-  { label: "Articles", value: 1200 },
-];
+import { useInView } from "react-intersection-observer";
+import api from "../utils/axios";
 
 function formatNumber(num) {
   return num >= 1000 ? `${(num / 1000).toFixed(1)}k` : num;
 }
 
 export default function StatsSection() {
-  const [counts, setCounts] = useState(stats.map(() => 0));
+  const [stats, setStats] = useState([]);
+  const [counts, setCounts] = useState([]);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
 
   useEffect(() => {
-    const duration = 1500; // ms
-    const frameRate = 30; // ms/frame
-    const totalFrames = duration / frameRate;
-
-    const intervals = stats.map((stat, i) => {
-      const increment = stat.value / totalFrames;
-      return setInterval(() => {
-        setCounts(prev => {
-          const updated = [...prev];
-          updated[i] = Math.min(updated[i] + increment, stat.value);
-          return updated;
-        });
-      }, frameRate);
-    });
-
-    const timeout = setTimeout(() => {
-      setCounts(stats.map(s => s.value));
-      intervals.forEach(clearInterval);
-    }, duration + 100);
-
-    return () => {
-      intervals.forEach(clearInterval);
-      clearTimeout(timeout);
+    const fetchStats = async () => {
+      try {
+        const res = await api.get("/stats");
+        const apiStats = [
+          { label: "Users", value: res.data.data.users },
+          { label: "Memorials", value: res.data.data.memorials },
+          { label: "Books", value: res.data.data.books },
+          { label: "Articles", value: res.data.data.articles },
+        ];
+        setStats(apiStats);
+        setCounts(apiStats.map(() => 0));
+      } catch (err) {
+        console.error("Failed to fetch stats", err);
+      }
     };
+
+    fetchStats();
   }, []);
 
+  useEffect(() => {
+    if (inView && stats.length > 0 && !hasAnimated) {
+      const duration = 1500;
+      const frameRate = 30;
+      const totalFrames = duration / frameRate;
+
+      const intervals = stats.map((stat, i) => {
+        const increment = stat.value / totalFrames;
+        return setInterval(() => {
+          setCounts((prev) => {
+            const updated = [...prev];
+            if (updated[i] < stat.value) {
+              updated[i] = Math.min(updated[i] + increment, stat.value);
+            }
+            return updated;
+          });
+        }, frameRate);
+      });
+
+      const timeout = setTimeout(() => {
+        setCounts(stats.map(s => s.value));
+        intervals.forEach(clearInterval);
+      }, duration + 100);
+
+      setHasAnimated(true);
+    }
+  }, [inView, stats, hasAnimated]);
+
   return (
-    <section className="bg-[#f9f9f9] my-20 py-12">
+    <section ref={ref} className="bg-[#f9f9f9] my-20 py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat, i) => (

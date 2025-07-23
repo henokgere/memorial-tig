@@ -13,6 +13,7 @@ const users = require("./domains/users/routes/userRoutes");
 const articles = require("./domains/articles/routes/articleRoutes");
 const books = require("./domains/books/routes/bookRoutes");
 const contactUs = require("./domains/contactus/routes/contactRoutes");
+const stats = require("./domains/statistics/routes/statsRoutes");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/api/users", users);
 app.use("/api/articles", articles);
 app.use("/api/books", books);
 app.use('/api/contactus', contactUs);
+app.use('/api/stats', stats);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
