@@ -89,7 +89,8 @@ router.route('/')
   .get(getArticles)
   .post(protect, upload.fields([
     { name: 'image', maxCount: 1 },
-    { name: 'video', maxCount: 1 }
+    { name: 'video', maxCount: 1 },
+    { name: 'file', maxCount: 1 }
   ]), createArticle);
 
 router.route('/search').get(searchArticles);
@@ -154,7 +155,8 @@ router.get('/:slug/related', getRelatedArticles);
 router.route('/:id')
   .put(protect, upload.fields([
     { name: 'image', maxCount: 1 },
-    { name: 'video', maxCount: 1 }
+    { name: 'video', maxCount: 1 },
+    { name: 'file', maxCount: 1 }
   ]), updateArticle)
   .delete(protect, deleteArticle);
 

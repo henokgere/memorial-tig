@@ -221,6 +221,7 @@ export default function ArticlePage() {
           </div>
         </header>
 
+        {/* Image */}
         {article.image && (
           <img
             src={article.image}
@@ -230,7 +231,8 @@ export default function ArticlePage() {
           />
         )}
 
-        {article.video && (
+        {/* Video */}
+        {article.video && !article.file && (
           <div className="mb-8 aspect-video w-full">
             <video
               controls
@@ -240,6 +242,20 @@ export default function ArticlePage() {
               <source src={article.video} type="video/mp4" />
               {t("browser_not_support_video")}
             </video>
+          </div>
+        )}
+
+        {/* PDF file */}
+        {article.file && article.file.endsWith(".pdf") && (
+          <div className="mt-2">
+            <a
+              href={article.file}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline text-sm"
+            >
+              {t("download_pdf") || "Download PDF"}
+            </a>
           </div>
         )}
 

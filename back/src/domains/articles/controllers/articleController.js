@@ -81,6 +81,12 @@ exports.createArticle = asyncHandler(async (req, res, next) => {
     req.body.video = result.secure_url;
   }
 
+  // Handle PDF/file upload
+  if (req.files?.file && req.files.file.size > 0) {
+    const result = await uploadToCloudinary(req.files.file.tempFilePath, 'articles/files');
+    req.body.file = result.secure_url;
+  }
+
   // Create article
   const article = await Article.create(req.body);
 
@@ -126,6 +132,16 @@ exports.updateArticle = asyncHandler(async (req, res, next) => {
     );
     req.body.video = result.secure_url;
   }
+
+  // Handle PDF/file upload
+  if (req.files?.file) {
+    const result = await uploadToCloudinary(
+      req.files.file.tempFilePath,
+      "articles/files"
+    );
+    req.body.file = result.secure_url;
+  }
+
 
   // Update slug if title changed
   if (req.body.title && req.body.title !== article.title) {

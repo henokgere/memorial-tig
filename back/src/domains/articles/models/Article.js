@@ -33,6 +33,13 @@ const articleSchema = new mongoose.Schema({
       message: 'Please provide a valid video URL'
     }
   },
+  file: {
+    type: String,
+    validate: {
+      validator: (value) => !value || validator.isURL(value),
+      message: 'Please provide a valid file URL'
+    }
+  },  
   tags: [String],
   author: {
     type: mongoose.Schema.Types.ObjectId,
