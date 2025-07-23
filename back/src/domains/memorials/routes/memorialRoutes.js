@@ -6,7 +6,8 @@ const {
   getMemorial,
   createMemorial,
   updateMemorial,
-  deleteMemorial
+  deleteMemorial,
+  searchMemorials
 } = require('../controllers/memorialController');
 const { protect } = require('../../../middlewares/authMiddleware');
 const upload = require('../../../middlewares/uploadMiddleware');
@@ -99,6 +100,55 @@ const upload = require('../../../middlewares/uploadMiddleware');
 router.route('/')
   .get(getMemorials)
   .post(protect, upload.single('image'), createMemorial);
+  
+/**
+* @swagger
+* /api/memorials/search:
+*   get:
+*     summary: Search memorials
+*     tags: [Memorials]
+*     parameters:
+*       - in: query
+*         name: q
+*         schema:
+*           type: string
+*         description: Search query
+*       - in: query
+*         name: name
+*         schema:
+*           type: string
+*         description: Filter by name
+*       - in: query
+*         name: placeOfBirth
+*         schema:
+*           type: string
+*         description: Filter by place of birth
+*       - in: query
+*         name: placeOfDeath
+*         schema:
+*           type: string
+*         description: Filter by place of death
+*       - in: query
+*         name: yearFrom
+*         schema:
+*           type: integer
+*         description: Filter by birth year (from)
+*       - in: query
+*         name: yearTo
+*         schema:
+*           type: integer
+*         description: Filter by birth year (to)
+*     responses:
+*       200:
+*         description: List of matching memorials
+*         content:
+*           application/json:
+*             schema:
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/Memorial'
+*/
+router.get('/search', searchMemorials);
 
 /**
  * @swagger
@@ -150,5 +200,7 @@ router.route('/:id')
   .get(getMemorial)
   .put(protect, updateMemorial)
   .delete(protect, deleteMemorial);
+
+
 
 module.exports = router;

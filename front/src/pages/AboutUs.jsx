@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom"
 import { useTranslation } from "react-i18next";
+import {data} from '../assets/staff.json'
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -221,63 +222,7 @@ export default function AboutUs() {
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-center">{t("Our Team")}</h2>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[
-            {
-              name: "Tsige G/michael",
-              role: "Office Manager & Finance Head",
-              bio: "Manages operations and finances efficiently",
-            },
-            {
-              name: "Mulugeta Assefa Hailu",
-              role: "Mobilation and awareness Creation",
-              bio: "Leads outreach and awareness efforts",
-            },
-            {
-              name: "Tsegay Kidane Gidey",
-              role: "Coordinator of Design & Planning",
-              bio: "Plans and coordinates creative projects",
-            },
-            {
-              name: "Tesfay Gebrekirstos Hailu",
-              role: "ICT and New Media Director",
-              bio: "Heads digital and tech initiatives",
-            },
-            {
-              name: "Mahlet G/her",
-              role: "Community Liaison",
-              bio: "Connecting with families of martyrs",
-            },
-            {
-              name: "Henok Gebremedhin",
-              role: "Design Director",
-              bio: "Creating meaningful memorial spaces",
-            },
-            {
-              name: "Kaleab Enderias",
-              role: "Technology Lead",
-              bio: "Building digital memorial platforms",
-            },
-            {
-              name: "Muley Tsegay",
-              role: "Outreach Coordinator",
-              bio: "Engaging with partners and donors",
-            },
-            {
-              name: "Tesfay Gebre",
-              role: "Program Manager",
-              bio: "Overseeing charitable initiatives",
-            },
-            {
-              name: "Team of Volunteers",
-              role: "Dedicated Support",
-              bio: "Committed to honoring the martyrs",
-            },
-            {
-              name: "You",
-              role: "Visitor",
-              bio: "Keeping their memories alive",
-            },
-          ].map((member, index) => (
+          {data.map((member, index) => (
             <div
               key={index}
               className="bg-white p-4 rounded-lg shadow-sm text-center transition-transform duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:bg-[#f3f4f6] hover:animate-bounce"

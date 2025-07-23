@@ -54,6 +54,51 @@ exports.createMemorial = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Search memorials
+// @route   GET /api/memorials/search
+// @access  Public
+exports.searchMemorials = asyncHandler(async (req, res, next) => {
+  const { q } = req.query;
+
+  if (!q || typeof q !== 'string') {
+    return next(new ErrorResponse('Please provide a valid search query', 400));
+  }
+
+  const searchQuery = q.trim();
+  if (searchQuery.length < 2) {
+    return next(new ErrorResponse('Search query must be at least 2 characters', 400));
+  }
+
+  try {
+    let memorials;
+
+    memorials = await Memorial.find({
+      $or: [
+        { name: new RegExp(searchQuery, 'i') },
+        { fathersName: new RegExp(searchQuery, 'i') },
+        { grandfatherName: new RegExp(searchQuery, 'i') },
+        { burialLocation: new RegExp(searchQuery, 'i') },
+        { familyMember: new RegExp(searchQuery, 'i') }
+      ]
+    });
+  
+    console.log({
+      success: true,
+      count: memorials.length,
+      data: memorials
+    })
+    res.status(200).json({
+      success: true,
+      count: memorials.length,
+      data: memorials
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
 // @desc    Update a memorial
 // @route   PUT /api/memorials/:id
 // @access  Private

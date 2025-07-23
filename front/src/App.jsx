@@ -43,6 +43,7 @@ import AdminBooksPage from "./pages/admin/AdminBooks";
 import AdminRegisterUser from "./pages/admin/AdminRegisterUses";
 import AdminContactMessages from "./pages/admin/adminContactusMessages";
 import AdminLayout from "./layouts/AdminLayout";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/our-heroes" element={<OurHeroes />} />
+                      <Route path="/search" element={<SearchResultsPage />} />
                       <Route
                         path="/memorial/:id"
                         element={<MemorialDetail />}

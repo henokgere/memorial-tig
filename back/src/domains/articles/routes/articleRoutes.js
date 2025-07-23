@@ -8,6 +8,7 @@ const {
   updateArticle,
   deleteArticle,
   getRelatedArticles,
+  searchArticles,
   getArticleArchive,
   getArticlesByArchive,
   addComment,
@@ -90,6 +91,8 @@ router.route('/')
     { name: 'image', maxCount: 1 },
     { name: 'video', maxCount: 1 }
   ]), createArticle);
+
+router.route('/search').get(searchArticles);
 
   // Route
 router.route('/years').get(getArticleYears);

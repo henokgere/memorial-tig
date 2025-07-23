@@ -40,4 +40,17 @@ const bookSchema = new mongoose.Schema({
   },
 });
 
+bookSchema.index({
+  title: 'text',
+  author: 'text', 
+  description: 'text'
+}, {
+  weights: {
+    title: 5,    // title matches are most important
+    author: 3,   // author matches are somewhat important
+    description: 1 // description matches are least important
+  },
+  name: 'book_text_search' // optional index name
+});
+
 module.exports = mongoose.model('Book', bookSchema);

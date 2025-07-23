@@ -78,6 +78,27 @@ const memorialSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
+// In your Memorial model file
+memorialSchema.index({
+  name: 'text',
+  fatherName: 'text',
+  placeOfBirth: 'text',
+  placeOfDeath: 'text',
+  shortStory: 'text',
+  memorialMessage: 'text',
+  obituary: 'text'
+}, {
+  weights: {
+    name: 5,
+    fatherName: 3,
+    placeOfBirth: 2,
+    placeOfDeath: 2,
+    shortStory: 1,
+    memorialMessage: 1,
+    obituary: 1
+  }
+});
+
 // Virtual for tributes
 // memorialSchema.virtual('tributes', {
 //   ref: 'Tribute',
