@@ -3,6 +3,7 @@ import "@fontsource/rock-salt"; // Artistic handwritten font
 import "@fontsource/caveat"; // Optional for subtitle
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 const images = ["/1.png", "/2.png", "/3.png"];
 
@@ -54,6 +55,37 @@ export default function HeroSection() {
 
     return () => clearInterval(interval);
   }, []);
+
+  if(localStorage.getItem("lgn") === "tg" || i18n.language === "tg"){
+    return (
+      <section className="relative min-h-[500px] mb-12 flex items-center justify-center bg-black text-white overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{
+            backgroundImage: `url('/hero.png')`,
+          }}
+        >
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+        </div>
+
+        {/* Proverb Content */}
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto space-y-6">
+          <h1 className="text-3xl md:text-4xl font-bold leading-relaxed text-yellow-200 drop-shadow-md">
+            ኣብ ምግባር ሰብ ዝንበረ ንብረቱ እዩ።
+          </h1>
+          <p className="text-lg text-gray-200 italic">
+            (A person is known by their actions — Tigrigna Proverb)
+          </p>
+          <Link
+            to="/our-heroes"
+            className="inline-block mt-4 px-6 py-3 bg-[#af2e2e] hover:bg-[#932121] text-white rounded-md text-lg font-medium shadow-lg transition"
+          >
+            ጀጋኑ ኣርእዩ
+          </Link>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="relative min-h-[500px] mb-9 flex items-center justify-center bg-memorial-dark text-white overflow-hidden">
