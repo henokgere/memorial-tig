@@ -46,13 +46,12 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav className="bg-[#FFF8E1] shadow-sm">
       <div className="max-w-full mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/">
             <div className="flex items-center space-x-4">
-              <img src="/vite.png" width={30} alt="" />
-              <span className="text-xl font-semibold text-gray-900">
+              <span className="text-xl font-bold text-[#D62828]">
                 {t("Memorial")}
               </span>
             </div>
@@ -72,12 +71,12 @@ export default function Navigation() {
                         key={child.path}
                         to={child.path}
                         className={({ isActive }) =>
-                          `block px-4 py-2 text-sm ${
+                          `text-sm font-medium ${
                             isActive
-                              ? "text-gray-800 bg-gray-200 underline rounded-md"
-                              : "text-gray-700 hover:bg-gray-100 rounded-md"
-                          } transition-colors duration-200`
-                        }
+                              ? "text-[#D62828] bg-yellow-200 underline rounded-md"
+                              : "text-[#4B0000] hover:bg-yellow-100 rounded-md"
+                          } pb-1 px-3 py-2 transition-colors duration-200`
+                        }                        
                       >
                         {t(child.name)}
                       </NavLink>
@@ -91,10 +90,10 @@ export default function Navigation() {
                   className={({ isActive }) =>
                     `text-sm font-medium ${
                       isActive
-                        ? "text-gray-800 bg-gray-200 underline rounded-md"
-                        : "text-gray-700 hover:bg-gray-100 rounded-md"
+                        ? "text-[#D62828] bg-yellow-200 underline rounded-md"
+                        : "text-[#4B0000] hover:bg-yellow-100 rounded-md"
                     } pb-1 px-3 py-2 transition-colors duration-200`
-                  }
+                  }                  
                 >
                   {t(link.name)}
                 </NavLink>
@@ -120,7 +119,7 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center text-gray-600 hover:text-gray-900 rounded-md px-3 py-2 transition-colors duration-200"
+                className="flex items-center text-[#4B0000] hover:text-[#D62828] rounded-md px-3 py-2 transition-colors duration-200"
               >
                 <Globe className="w-5 h-5 mr-1" />
                 {i18n.language}

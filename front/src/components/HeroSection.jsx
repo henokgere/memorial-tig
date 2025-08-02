@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
 
-const images = ["/1.png", "/2.png", "/3.png"];
+const images = ["/1.png", "/2.png", "/hero.png"];
 
 const styles = {
   textWrapper: {
@@ -62,10 +62,10 @@ export default function HeroSection() {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: `url('/hero.png')`,
+            backgroundImage: `url('/3.png')`,
           }}
         >
-          <div className="absolute inset-0 bg-black opacity-60"></div>
+          <div className="absolute inset-0 bg-black opacity-30"></div>
         </div>
 
         {/* Proverb Content */}

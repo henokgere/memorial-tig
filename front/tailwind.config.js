@@ -12,7 +12,12 @@ export default {
             primary: '#16213e',
             accent: '#0f3460',
             light: '#194560',
+            
           },
+          tigrayRed: '#D62828',
+          tigrayYellow: '#FDC500',
+          tigrayDark: '#4B0000',
+          tigrayCream: '#FFF8E1',
         },
       },
     },
