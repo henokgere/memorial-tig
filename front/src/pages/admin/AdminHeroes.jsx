@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchFilter from "../../components/admin/SearchFilter";
+import DynamicTable from "../../components/DynamicTable";
 
 const AdminHeroesPage = () => {
   const [heroes, setHeroes] = useState([]);
@@ -59,38 +60,19 @@ const AdminHeroesPage = () => {
       ) : filteredHeroes.length === 0 ? (
         <p>No heroes found.</p>
       ) : (
-        <div className="overflow-x-auto text-gray-700">
-          <table className="w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="py-3 px-4 border-b">Name</th>
-                <th className="py-3 px-4 border-b">DOB</th>
-                <th className="py-3 px-4 border-b">DOD</th>
-                <th className="py-3 px-4 border-b">Biography</th>
-                <th className="py-3 px-4 border-b">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredHeroes.map((hero) => (
-                <tr key={hero._id} className="border-t hover:bg-gray-50">
-                  <td className="py-3 px-4 font-medium">{hero.name}</td>
-                  <td className="py-3 px-4">{hero.dob}</td>
-                  <td className="py-3 px-4">{hero.dod}</td>
-                  <td className="py-3 px-4 max-w-xs truncate">{hero.bio}</td>
-                  <td className="py-3 px-4">
-                    <button
-                      onClick={() => handleDelete(hero._id)}
-                      className="text-red-600 hover:text-red-800 transition"
-                      title="Delete Hero"
-                    >
-                      <DeleteIcon />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DynamicTable
+          data={filteredHeroes}
+          columns={Object.keys(filteredHeroes[0] || {}).filter(k => k !== '__v')}
+          actions={(article) => (
+            <button
+              onClick={() => handleDelete(article._id)}
+              className="text-red-600 hover:text-red-800 transition"
+              title="Delete Article"
+            >
+              <DeleteIcon />
+            </button>
+          )}
+        />
       )}
     </div>
   );
