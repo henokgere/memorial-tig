@@ -45,7 +45,7 @@ export default function Footer() {
   ];
 
   return (
-      <footer className="bg-tigrayDark text-tigrayCream py-12 px-4 border-t border-red-900">
+      <footer className="bg-[#D62828] text-[#FFF8E1] py-12 px-4 border-t border-red-900">
         <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 mb-10">
           {/* Contact Info */}
@@ -104,7 +104,7 @@ export default function Footer() {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                Tigray Cultural Office, Mekelle, Ethiopia
+                Debre damo, Mekelle, Ethiopia
               </li>
             </ul>
           </div>

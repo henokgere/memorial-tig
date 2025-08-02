@@ -53,7 +53,7 @@ export default function ContactUs() {
             "Reach out to share stories, ask questions, or support our memorial efforts."
           )}
         </p>
-        <div className="w-24 h-1 bg-blue-800 mx-auto mt-4"></div>
+        <div className="w-24 h-1 bg-red-800 mx-auto mt-4"></div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
@@ -91,10 +91,10 @@ export default function ContactUs() {
                 href="https://paypal.com/donate?hosted_button_id=XYZ123"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition"
+                className="flex items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition"
               >
                 <div className="bg-white p-2 rounded-md mr-4">
-                  <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 text-red-600" viewBox="0 0 24 24">
                     <path
                       fill="currentColor"
                       d="M10 13l2 5 2-5h4l-4-8-4 8h4z"
@@ -208,7 +208,7 @@ export default function ContactUs() {
 
               <button
                 type="submit"
-                className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-800 transition"
+                className="w-full md:w-auto px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-800 transition"
               >
                 Send Message
               </button>
@@ -296,7 +296,7 @@ export default function ContactUs() {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-gray-900">Address</h3>
                   <p className="text-sm text-gray-500">
-                    Tigray Cultural Office
+                    Debre damo, Mekelle, Ethiopia
                     <br /> Mekelle, Ethiopia
                   </p>
                 </div>
