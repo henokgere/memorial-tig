@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchFilter from "../../components/admin/SearchFilter";
+import DynamicTable from "../../components/DynamicTable";
 
 const AdminUsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -57,40 +58,19 @@ const AdminUsersPage = () => {
       ) : users.length === 0 ? (
         <p>No users found.</p>
       ) : (
-        <div className="overflow-x-auto text-gray-800">
-          <table className="min-w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="py-3 px-4 border-b">Name</th>
-                <th className="py-3 px-4 border-b">Email</th>
-                <th className="py-3 px-4 border-b">Role</th>
-                <th className="py-3 px-4 border-b">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map((user) => (
-                <tr key={user._id} className="border hover:bg-gray-50">
-                  <td className="py-3 px-4">{user.name}</td>
-                  <td className="py-3 px-4">{user.email}</td>
-                  <td className="py-3 px-4 capitalize">{user.role}</td>
-                  <td className="py-3 px-4">
-                    {currentUser?._id !== user._id ? (
-                      <button
-                        onClick={() => handleDelete(user._id)} className="text-red-600 hover:text-red-800 transition duration-200"
-                      >
-                        <DeleteIcon />
-                      </button>
-                    ) : (
-                      <span className="text-gray-400 text-sm">
-                        Current User
-                      </span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DynamicTable
+          data={filteredUsers}
+          columns={Object.keys(filteredUsers[0] || {}).filter(k => k !== '__v')}
+          actions={(article) => (
+            <button
+              onClick={() => handleDelete(article._id)}
+              className="text-red-600 hover:text-red-800 transition"
+              title="Delete Article"
+            >
+              <DeleteIcon />
+            </button>
+          )}
+        />
       )}
     </div>
   );

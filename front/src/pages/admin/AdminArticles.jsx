@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchFilter from "../../components/admin/SearchFilter";
+import DynamicTable from "../../components/DynamicTable";
 
 const AdminArticlesPage = () => {
   const [articles, setArticles] = useState([]);
@@ -14,6 +15,7 @@ const AdminArticlesPage = () => {
     try {
       const res = await api.get("/articles"); // Update endpoint if necessary
       const data = res.data.data || res.data;
+      console.log(data)
       setArticles(data);
       setFilteredArticles(data);
     } catch (err) {
@@ -45,55 +47,27 @@ const AdminArticlesPage = () => {
     <div className="max-w-6xl mx-auto px-4 py-10 text-gray-700">
       <ToastContainer />
       <h1 className="text-2xl font-bold text-gray-800 mb-6">All Articles</h1>
-
-      {/* ✅ Search Filter */}
       <SearchFilter
         data={articles}
         onFilter={setFilteredArticles}
         placeholder="Search by title, author, or content..."
       />
-
       {loading ? (
         <p>Loading articles...</p>
-      ) : filteredArticles.length === 0 ? (
-        <p>No articles found.</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="py-3 px-4 border-b">Title</th>
-                <th className="py-3 px-4 border-b">Author</th>
-                <th className="py-3 px-4 border-b">Date</th>
-                <th className="py-3 px-4 border-b">Excerpt</th>
-                <th className="py-3 px-4 border-b">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredArticles.map((article) => (
-                <tr key={article._id} className="border-t hover:bg-gray-50">
-                  <td className="py-3 px-4 font-medium">{article.title}</td>
-                  <td className="py-3 px-4">{article.author || "N/A"}</td>
-                  <td className="py-3 px-4">
-                    {new Date(article.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="py-3 px-4 max-w-xs truncate">
-                    {article.content?.slice(0, 100) || "No content"}
-                  </td>
-                  <td className="py-3 px-4">
-                    <button
-                      onClick={() => handleDelete(article._id)}
-                      className="text-red-600 hover:text-red-800 transition"
-                      title="Delete Article"
-                    >
-                      <DeleteIcon />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DynamicTable
+          data={filteredArticles}
+          columns={["title", "author", "createdAt", "content"]}
+          actions={(article) => (
+            <button
+              onClick={() => handleDelete(article._id)}
+              className="text-red-600 hover:text-red-800 transition"
+              title="Delete Article"
+            >
+              <DeleteIcon />
+            </button>
+          )}
+        />
       )}
     </div>
   );
