@@ -30,18 +30,23 @@ export default function ArticlePage() {
         setLoading(true);
         setError(null);
 
-        const articlesResponse = await api.get("/articles");
-
-        const firstArticle = articlesResponse.data.data?.[0];
-
-        if (!firstArticle) throw new Error("No articles found");
-
-        const relatedResponse = await api.get(
-          `/articles/${firstArticle.slug}/related`
+        // Get the latest 5 articles using backend pagination and sorting
+        const articlesResponse = await api.get(
+          "/articles?limit=5&sort=-createdAt"
         );
 
-        setArticle(firstArticle);
-        setRelatedArticles(articlesResponse.data.data);
+        const allArticles = articlesResponse.data.data || [];
+
+        if (allArticles.length === 0) throw new Error("No articles found");
+
+        // The newest article (first in the array) becomes the main article
+        const mainArticle = allArticles[0];
+
+        // The remaining articles become related articles
+        const relatedArticles = allArticles.slice(1);
+
+        setArticle(mainArticle);
+        setRelatedArticles(relatedArticles);
       } catch (err) {
         setError(
           err.response?.data?.message ||
