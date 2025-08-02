@@ -4,7 +4,7 @@ export default function MemorialTribute() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 px-4 bg-gray-700 text-white">
+    <section className="py-20 px-4 bg-[#D62828] text-white">
       <div className="max-w-4xl mx-auto text-center">
         <div className="relative mb-12">
           {/* Decorative elements */}
@@ -34,7 +34,7 @@ export default function MemorialTribute() {
         </div>
 
         {/* Candle icon */}
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 text-yellow-400 flex justify-center">
           <svg
             className="w-12 h-12 text-memorial-light animate-flicker"
             fill="currentColor"

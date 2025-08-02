@@ -28,7 +28,7 @@ export default function MemorialGrid() {
   }, []);
 
   return (
-    <section className="py-16 px-4 bg-[#4E4E4E]">
+    <section className="my-4 py-16 px-4 bg-[#b88608]">
       <div className="max-w-6xl mx-auto">
         {/* <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
           We Remember Them

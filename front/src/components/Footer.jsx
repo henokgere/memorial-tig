@@ -14,39 +14,39 @@ export default function Footer() {
   const socialLinks = [
     {
       name: "Twitter",
-      icon: <FaTwitter className="text-blue-500" />,
+      icon: <FaTwitter className="text-yellow-400" />,
       handle: "@TMMA",
       url: "#",
     },
     {
       name: "Instagram",
-      icon: <FaInstagram className="text-blue-500" />,
+      icon: <FaInstagram className="text-yellow-400" />,
       handle: "@TMMA",
       url: "#",
     },
     {
       name: "Telegram",
-      icon: <FaTelegram className="text-blue-500" />,
+      icon: <FaTelegram className="text-yellow-400" />,
       handle: "t.me/TMMA",
       url: "#",
     },
     {
       name: "YouTube",
-      icon: <FaYoutube className="text-blue-500" />,
+      icon: <FaYoutube className="text-yellow-400" />,
       handle: "youtube.com/TMMA",
       url: "https://www.youtube.com/@TMMA-1",
     },
     {
       name: "Facebook",
-      icon: <FaFacebook className="text-blue-500" />,
+      icon: <FaFacebook className="text-yellow-400" />,
       handle: "facebook.com/TMMA",
       url: "https://web.facebook.com/profile.php?id=61577920920979",
     },
   ];
 
   return (
-    <footer className="bg-gray-800 text-gray-200 py-12 px-4 border-t border-gray-900">
-      <div className="max-w-6xl mx-auto">
+      <footer className="bg-[#D62828] text-[#FFF8E1] py-12 px-4 border-t border-red-900">
+        <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 mb-10">
           {/* Contact Info */}
           <div className="space-y-4">
@@ -54,7 +54,7 @@ export default function Footer() {
             <ul className="text-sm space-y-2">
               <li className="flex items-center">
                 <svg
-                  className="w-4 h-4 mr-2 text-blue-500"
+                  className="w-4 h-4 mr-2 text-yellow-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="w-4 h-4 mr-2 text-blue-500"
+                  className="w-4 h-4 mr-2 text-yellow-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -86,7 +86,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start">
                 <svg
-                  className="w-4 h-4 mr-2 text-blue-500 mt-0.5 flex-shrink-0"
+                  className="w-4 h-4 mr-2 text-yellow-300 mt-0.5 flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ export default function Footer() {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                Tigray Cultural Office, Mekelle, Ethiopia
+                Debre damo, Mekelle, Ethiopia
               </li>
             </ul>
           </div>
@@ -119,7 +119,7 @@ export default function Footer() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center hover:text-blue-600 transition"
+                    className="flex items-center hover:text-yellow-300 transition"
                   >
                     <span className="mr-2 text-lg">{link.icon}</span>
                     {link.handle}
@@ -128,14 +128,14 @@ export default function Footer() {
               ))}
             </ul>
             <p className="text-xs text-gray-500">
-              {t("Get updates at")}: notime.tigrayjeganu.org
+              {t("Get updates at")}: notime.tigraymartyriesmemorialahferom.org
             </p>
           </div>
         </div>
 
         {/* Footer Bottom */}
-        <div className="text-center text-xs text-gray-400 border-t pt-6">
-          © {new Date().getFullYear()} Tigray Jeganu Memorial. {t("All rights reserved.")}.
+        <div className="text-center text-xs text-tigrayYellow border-t border-tigrayRed pt-6">
+          © {new Date().getFullYear()} Tigray Martyries Memorial Ahferom. {t("All rights reserved.")}.
         </div>
       </div>
     </footer>
