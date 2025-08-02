@@ -45,7 +45,7 @@ export default function Footer() {
   ];
 
   return (
-      <footer className="bg-[#4B0000] text-yellow-100 py-12 px-4 border-t border-red-900">
+      <footer className="bg-tigrayDark text-tigrayCream py-12 px-4 border-t border-red-900">
         <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 mb-10">
           {/* Contact Info */}
@@ -134,7 +134,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="text-center text-xs text-yellow-200 border-t border-red-800 pt-6">
+        <div className="text-center text-xs text-tigrayYellow border-t border-tigrayRed pt-6">
           © {new Date().getFullYear()} Tigray Martyries Memorial Ahferom. {t("All rights reserved.")}.
         </div>
       </div>
