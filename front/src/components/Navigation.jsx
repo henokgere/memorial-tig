@@ -58,14 +58,14 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex flex-nowrap items-center space-x-6">
             {navLinks.map((link) =>
               link.dropdown ? (
                 <div key={link.name} className="relative group">
-                  <button className="text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 rounded-md pb-1 px-3 py-2 transition-colors duration-200">
-                    {t(link.name)}
+                  <button className="text-sm font-medium text-[#4B0000] hover:bg-gray-100 hover:text-gray-900 rounded-md pb-1 px-3 py-2 transition-colors duration-200">
+                    {t(link.name)} ⌵
                   </button>
-                  <div className="absolute left-0 top-full w-40 bg-white border rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
+                  <div className="absolute flex flex-col left-0 top-full w-40 bg-white border rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
                     {link.children.map((child) => (
                       <NavLink
                         key={child.path}
@@ -100,20 +100,20 @@ export default function Navigation() {
               )
             )}
 
-            {isRegistered && (
+            {/* {isRegistered && (
               <NavLink
                 to="/list"
                 className={({ isActive }) =>
                   `text-sm font-medium ${
                     isActive
-                      ? "text-gray-800 bg-gray-200 underline rounded-md"
-                      : "text-gray-700 hover:bg-gray-100 rounded-md"
+                      ? "text-[#D62828] bg-yellow-200 underline rounded-md"
+                      : "text-[#4B0000] hover:bg-yellow-100 rounded-md"
                   } pb-1 px-3 py-2 transition-colors duration-200`
                 }
               >
                 {t("list")}
               </NavLink>
-            )}
+            )} */}
 
             {/* Language Switcher */}
             <div className="relative">
@@ -125,7 +125,7 @@ export default function Navigation() {
                 {i18n.language}
               </button>
               {langMenuOpen && (
-                <div className="absolute right-0 mt-2 w-28 bg-white border rounded shadow z-10">
+                <div className="absolute right-0 mt-2 w-28 bg-white border rounded shadow z-50">
                   {["en", "am", "tg", "fr"].map((lng) => (
                     <button
                       key={lng}
