@@ -1,11 +1,11 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { AuthContext } from '../context/AuthContext';
+import DynamicTable from '../components/DynamicTable';
 
 export default function ListPage() {
-  const tableRef = useRef();
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
 
@@ -17,7 +17,7 @@ export default function ListPage() {
       highlight: 'The war was merciless. Weeks turned into months...',
       shortStory: 'When the war broke out, everything changed...',
       memorialMessage: 'We remember your courage and sacrifice...',
-      createdAt: '12-04-2024',
+      createdAt: '2024-12-04',
       image: 'https://via.placeholder.com/40'
     },
     // More data...
@@ -60,6 +60,31 @@ export default function ListPage() {
     link.click();
   };
 
+  // Columns to show in DynamicTable
+  const columns = ['image', 'id', 'fullName', 'highlight', 'createdAt'];
+
+  // Actions for each row
+  const actions = (item) => (
+    <div className="space-x-2">
+      <button 
+        className="text-blue-600 hover:text-blue-800"
+        onClick={() => navigate(`/memorial/${item.id}`)}
+      >
+        View
+      </button>
+      {['admin', 'editor'].includes(currentUser?.role) && (
+        <>
+          <button className="text-yellow-600 hover:text-yellow-800">
+            Edit
+          </button>
+          <button className="text-red-600 hover:text-red-800">
+            Delete
+          </button>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
@@ -71,7 +96,6 @@ export default function ListPage() {
             Export CSV
           </button>
         </div>
-        
         {showAddButton && (
           <button 
             onClick={() => navigate('/form')} 
@@ -81,51 +105,12 @@ export default function ListPage() {
           </button>
         )}
       </div>
-
       <div className="overflow-x-auto bg-white rounded-lg shadow">
-        <table ref={tableRef} className="min-w-full">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="p-3 text-left">Image</th>
-              <th className="p-3 text-left">ID</th>
-              <th className="p-3 text-left">Full Name</th>
-              <th className="p-3 text-left">Highlight</th>
-              <th className="p-3 text-left">Created At</th>
-              <th className="p-3 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {sampleData.map((item, idx) => (
-              <tr key={idx} className="hover:bg-gray-50">
-                <td className="p-3">
-                  <img src={item.image} alt="Profile" className="w-10 h-10 rounded-full object-cover" />
-                </td>
-                <td className="p-3">{item.id}</td>
-                <td className="p-3 font-medium">{item.fullName}</td>
-                <td className="p-3 max-w-xs truncate">{item.highlight}</td>
-                <td className="p-3">{item.createdAt}</td>
-                <td className="p-3 space-x-2">
-                  <button 
-                    className="text-blue-600 hover:text-blue-800"
-                    onClick={() => navigate(`/memorial/${item.id}`)}
-                  >
-                    View
-                  </button>
-                  {['admin', 'editor'].includes(currentUser?.role) && (
-                    <>
-                      <button className="text-yellow-600 hover:text-yellow-800">
-                        Edit
-                      </button>
-                      <button className="text-red-600 hover:text-red-800">
-                        Delete
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <DynamicTable
+          data={sampleData}
+          columns={columns}
+          actions={actions}
+        />
       </div>
     </div>
   );

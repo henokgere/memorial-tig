@@ -102,7 +102,7 @@ export default function AboutUs() {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-48 h-48 rounded-full border-4 border-[#383C00] flex items-center justify-center bg-gray-100">
             {/* Placeholder for logo - replace with actual logo */}
-            <span className="text-4xl">TMMA</span>
+            <img src="/vite.png" className="w-48 h-48 rounded-full" />
           </div>
           <div className="flex-1">
             <p className="text-gray-600 mb-4">
