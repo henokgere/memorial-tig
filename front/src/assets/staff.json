@@ -2,12 +2,14 @@
     {
       "name": "Tsige G/michael",
       "role": "Office Manager & Finance Head",
-      "bio": "Manages operations and finances efficiently"
+      "bio": "Manages operations and finances efficiently",
+      "image": "/tsige.jpeg"
     },
     {
       "name": "Mulugeta Assefa Hailu",
       "role": "Mobilation and awareness Creation",
-      "bio": "Leads outreach and awareness efforts"
+      "bio": "Leads outreach and awareness efforts",
+      "image": "/mulugeta.jpeg"
     },
     {
       "name": "Tsegay Kidane Gidey",
@@ -17,7 +19,8 @@
     {
       "name": "Tesfay Gebrekirstos Hailu",
       "role": "ICT and New Media Director",
-      "bio": "Heads digital and tech initiatives"
+      "bio": "Heads digital and tech initiatives",
+      "image": "/tesfay.jpeg"
     },
     {
       "name": "Tesfay Gebre",
