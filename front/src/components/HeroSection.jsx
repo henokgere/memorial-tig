@@ -74,7 +74,7 @@ export default function HeroSection() {
             ኣብ ምግባር ሰብ ዝንበረ ንብረቱ እዩ።
           </h1>
           <p className="text-lg text-gray-200 italic">
-            (A person is known by their actions — Tigrigna Proverb)
+            ተሞክሮ ቀዳሞት ብምክፋል፣ ታሪኻዊ ጅግንነት ወለዶና ነቐፅል
           </p>
           <Link
             to="/our-heroes"
