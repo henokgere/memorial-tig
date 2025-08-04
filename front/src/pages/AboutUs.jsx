@@ -227,12 +227,16 @@ export default function AboutUs() {
               key={index}
               className="bg-white p-4 rounded-lg shadow-sm text-center transition-transform duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:bg-[#f3f4f6] hover:animate-bounce"
             >
-              <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-yellow-500">
-                {member.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </div>
+              {member.image?
+                <img src={member.image} alt={member.name} className="w-20 h-20 mx-auto mb-3 rounded-full object-cover" />
+                :
+                <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-yellow-500">
+                  {member.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </div>
+              }
               <h3 className="font-bold text-gray-400">{member.name}</h3>
               <p className="text-sm text-[#383C00] mb-2">{member.role}</p>
               <p className="text-xs text-gray-600">{member.bio}</p>
