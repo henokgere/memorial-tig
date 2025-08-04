@@ -71,11 +71,8 @@ export default function HeroSection() {
         {/* Proverb Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold leading-relaxed text-yellow-200 drop-shadow-md">
-            ኣብ ምግባር ሰብ ዝንበረ ንብረቱ እዩ።
-          </h1>
-          <p className="text-lg text-gray-200 italic">
             ተሞክሮ ቀዳሞት ብምክፋል፣ ታሪኻዊ ጅግንነት ወለዶና ነቐፅል
-          </p>
+          </h1>
           <Link
             to="/our-heroes"
             className="inline-block mt-4 px-6 py-3 bg-[#af2e2e] hover:bg-[#932121] text-white rounded-md text-lg font-medium shadow-lg transition"
