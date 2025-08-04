@@ -53,10 +53,10 @@ export default function BookForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Add New Book</h2>
+      <h2 className="text-[#383C00] text-2xl font-bold mb-4">Add New Book</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="text-[#383C00] space-y-4">
         <input name="title" value={formData.title} onChange={handleChange} placeholder="Title" className="w-full p-2 border rounded" required />
         <input name="author" value={formData.author} onChange={handleChange} placeholder="Author" className="w-full p-2 border rounded" required />
         <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" className="w-full p-2 border rounded" rows="4" required />
