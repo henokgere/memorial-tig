@@ -152,7 +152,7 @@ function App() {
                     <Route
                       path=""
                       element={
-                        <RoleProtectedRoute allowedRoles={["admin", "creator"]}>
+                        <RoleProtectedRoute allowedRoles={["admin", "creator", "editor"]}>
                           <AdminDashboard />
                         </RoleProtectedRoute>
                       }
@@ -168,7 +168,7 @@ function App() {
                     <Route
                       path="heroes"
                       element={
-                        <RoleProtectedRoute allowedRoles={["admin", "creator"]}>
+                        <RoleProtectedRoute allowedRoles={["admin", "creator", "editor"]}>
                           <AdminHeroesPage />
                         </RoleProtectedRoute>
                       }
@@ -176,7 +176,7 @@ function App() {
                     <Route
                       path="articles"
                       element={
-                        <RoleProtectedRoute allowedRoles={["admin", "creator"]}>
+                        <RoleProtectedRoute allowedRoles={["admin", "creator", "editor"]}>
                           <AdminArticlesPage />
                         </RoleProtectedRoute>
                       }
@@ -184,7 +184,7 @@ function App() {
                     <Route
                       path="books"
                       element={
-                        <RoleProtectedRoute allowedRoles={["admin", "creator"]}>
+                        <RoleProtectedRoute allowedRoles={["admin", "creator", "editor"]}>
                           <AdminBooksPage />
                         </RoleProtectedRoute>
                       }
