@@ -7,12 +7,12 @@ export default function Header() {
   return (
     <header className="bg-[#D62828] text-white shadow-md py-4 px-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link to={'/'} className="flex gap-2 text-2xl font-bold tracking-wide text-yellow-300">
-          <img src="/vite.png" width={60} alt="" className="border-r-16" />
-          {t("TMMA")}
+        <Link to={'/'} className="flex gap-2 text-2xl font-bold tracking-wide text-yellow-300 rounded-full">
+          <img src="/vite.png" width={60} alt="" className="border-r-16 rounded-full" />
+          {t("Tigrai Martyrs Memorial Ahferom")}
         </Link>
 
-        <div className="flex items-center space-x-6 text-sm font-medium">
+        <div className="flex items-center justify-between space-x-6 text-sm font-medium">
           <span>{t("Welcome")}</span>
           <a
             href="https://donateme/donate"

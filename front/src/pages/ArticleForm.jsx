@@ -53,7 +53,7 @@ function ArticleForm() {
       });
   
       toast.success(t("article_published_success"));
-      navigate(`/articles/${data.data.slug}`);
+      navigate("admin/articles");
     } catch (err) {
       toast.error(err.response?.data?.message || t("error_publishing"));
     } finally {

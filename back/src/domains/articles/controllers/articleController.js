@@ -172,13 +172,13 @@ exports.deleteArticle = asyncHandler(async (req, res, next) => {
   }
 
   // Check ownership
-  if (article.author.toString() !== req.user.id && req.user.role !== "admin") {
+  if (req.user.role !== "admin") {
     return next(
       new ErrorResponse("Not authorized to delete this article", 401)
     );
   }
 
-  await article.remove();
+  await article.deleteOne();
 
   res.status(200).json({
     success: true,

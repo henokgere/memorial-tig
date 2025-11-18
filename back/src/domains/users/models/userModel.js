@@ -60,7 +60,7 @@ userSchema.pre("save", async function (next) {
 
 // Sign JWT and return
 userSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this._id }, config.jwtSecret, {
+  return jwt.sign({ id: this._id, role: this.role }, config.jwtSecret, {
     expiresIn: process.env.JWT_EXPIRE || "30d",
   });
 };

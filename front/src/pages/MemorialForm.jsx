@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DynamicInput from '../components/DynamicInput';
 import { AuthContext } from '../context/AuthContext';
+import api from '../utils/axios';
 
 export default function MemorialForm() {
   const { currentUser } = useContext(AuthContext);
@@ -52,21 +53,15 @@ export default function MemorialForm() {
         }
       }
 
-      const response = await fetch('/api/memorials', {
-        method: 'POST',
+      await api.post('/memorials', formDataToSend,{
         headers: {
+          'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: formDataToSend
+        }
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create memorial');
-      }
-
-      const data = await response.json();
-      navigate(`/memorial/${data._id}`);
+      
+      navigate("/admin/heroes");
     } catch (err) {
       setError(err.message);
     } finally {
