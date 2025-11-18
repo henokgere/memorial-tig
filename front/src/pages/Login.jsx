@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import { FaGoogle, FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const[isVisible,setIsVisible] = useState(false);
   const navigate = useNavigate();
 
   const { email, password } = formData;
@@ -76,7 +77,7 @@ const Login = () => {
             />
           </div>
 
-          <div>
+          <div className="relative">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
@@ -86,12 +87,22 @@ const Login = () => {
             <input
               id="password"
               name="password"
-              type="password"
+              type={isVisible ? "text" : "password"}
               value={password}
               onChange={onChange}
               required
               className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-gray-800"
             />
+            <span
+              onClick={() => setIsVisible(!isVisible)}
+              className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-gray-500"
+            >
+              {isVisible ? (
+                <FaEyeSlash size={18} />
+              ) : (
+                <FaEye size={18} />
+              )}
+            </span>
           </div>
 
           <div className="text-right mt-1">

@@ -42,7 +42,7 @@ export default function BookForm() {
         }
       });
 
-      navigate('/books');
+      navigate('/admin/books');
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.error || 'Something went wrong');

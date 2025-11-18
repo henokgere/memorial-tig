@@ -152,12 +152,14 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Hamburger */}
-          <div className="md:hidden">
+
+          <div className="md:hidden flex">
+            <Search />
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-md p-2 transition-colors duration-200"
             >
-              <Search />
+              
               <svg
                 className="h-6 w-6"
                 fill="none"

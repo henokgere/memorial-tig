@@ -18,7 +18,10 @@ const stats = require("./domains/statistics/routes/statsRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: ['http://localhost:5173', 'https://memorial-tig-fr.vercel.app'],
+};
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
@@ -38,6 +41,8 @@ app.use('/api/stats', stats);
 // Error handling middleware
 app.use((err, req, res, next) => {
   //console.error(err.stack);
+  console.error("🚨 Error occurred:");
+  console.error(err.stack || err);
   console.log("Error:", err);
   res.status(500).json({
     success: false,

@@ -28,7 +28,6 @@ export default function BookList() {
     <section className="py-10 px-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl text-[#383C00] font-bold text-center mb-6">{t("Available Books")}</h2>
-        <Link to="/book-form" className="bg-[#383C00] text-white px-4 py-2 rounded">{t("Add Book")}</Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {books.map((book) => (

@@ -5,11 +5,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchFilter from "../../components/admin/SearchFilter";
 import DynamicTable from "../../components/DynamicTable";
+import { useNavigate } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
 const AdminHeroesPage = () => {
   const [heroes, setHeroes] = useState([]);
   const [filteredHeroes, setFilteredHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const Navigate = useNavigate();
+
+  const handleAdd = async () => {
+    Navigate("/form");
+  }
 
   const fetchHeroes = async () => {
     try {
@@ -60,6 +67,14 @@ const AdminHeroesPage = () => {
       ) : filteredHeroes.length === 0 ? (
         <p>No heroes found.</p>
       ) : (
+        <div>
+          <button
+              onClick={() => handleAdd()}
+              className="text-red-600 hover:text-red-800 transition w-full flex justify-end"
+              title="Add Book"
+            >
+              <p className="flex items-center mb-4"> <AddIcon className="mr-2"/> Add Memorial</p>
+            </button>
         <DynamicTable
           data={filteredHeroes}
           columns={Object.keys(filteredHeroes[0] || {}).filter(k => k !== '__v')}
@@ -73,6 +88,7 @@ const AdminHeroesPage = () => {
             </button>
           )}
         />
+        </div>
       )}
     </div>
   );

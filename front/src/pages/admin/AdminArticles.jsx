@@ -5,11 +5,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchFilter from "../../components/admin/SearchFilter";
 import DynamicTable from "../../components/DynamicTable";
+import { useNavigate } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
 const AdminArticlesPage = () => {
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const Navigate = useNavigate();
 
   const fetchArticles = async () => {
     try {
@@ -39,6 +42,10 @@ const AdminArticlesPage = () => {
     }
   };
 
+  const handleAdd = async () => {
+    Navigate("/article-form");
+  }
+
   useEffect(() => {
     fetchArticles();
   }, []);
@@ -55,20 +62,29 @@ const AdminArticlesPage = () => {
       {loading ? (
         <p>Loading articles...</p>
       ) : (
-        <DynamicTable
-          data={filteredArticles}
-          columns={["title", "author", "createdAt", "content"]}
-          actions={(article) => (
-            <button
-              onClick={() => handleDelete(article._id)}
-              className="text-red-600 hover:text-red-800 transition"
-              title="Delete Article"
+        <div>
+          <button
+              onClick={() => handleAdd()}
+              className="text-red-600 hover:text-red-800 transition w-full flex justify-end"
+              title="Add Article"
             >
-              <DeleteIcon />
+              <p className="flex items-center mb-4"> <AddIcon className="mr-2"/> Add New Article</p>
             </button>
+            <DynamicTable
+              data={filteredArticles}
+              columns={["title", "author", "createdAt", "content"]}
+              actions={(article) => (
+                <button
+                  onClick={() => handleDelete(article._id)}
+                  className="text-red-600 hover:text-red-800 transition"
+                  title="Delete Article"
+                >
+                  <DeleteIcon />
+                </button>
+              )}
+            />
+        </div>
           )}
-        />
-      )}
     </div>
   );
 };

@@ -14,7 +14,7 @@ export default function Search() {
     if (query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query)}`);
       setIsOpen(false);
-      setQuery('');
+      // setQuery('');
     }
   };
 
