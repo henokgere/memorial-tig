@@ -1,0 +1,74 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ----------------------------
+      # 1. Checkout repository
+      # ----------------------------
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # ----------------------------
+      # 2. Copy project to EC2 (excluding unnecessary files)
+      # ----------------------------
+      - name: Copy project to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "./"
+          target: "/home/ubuntu/memorial-tig"
+          rm: true
+          overwrite: true
+          exclude: |
+            .git*
+            node_modules
+            front/node_modules
+            back/node_modules
+            front/dist
+
+      # ----------------------------
+      # 3. Run deployment commands on EC2
+      # ----------------------------
+      - name: Run SSH commands on EC2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "➡️ Creating app directory"
+            mkdir -p /home/ubuntu/memorial-tig
+
+            echo "➡️ Backend: installing dependencies"
+            cd /home/ubuntu/memorial-tig/back
+            npm install --production
+
+            echo "➡️ Ensuring PM2 is installed"
+            if ! command -v pm2 &> /dev/null; then
+              sudo npm install -g pm2
+            fi
+
+            echo "➡️ Restarting backend with PM2"
+            pm2 delete backend || true
+            pm2 start index.js --name backend
+
+            echo "➡️ Frontend: installing deps and building"
+            cd /home/ubuntu/memorial-tig/front
+            npm install
+            npm run build
+
+            echo "➡️ Reloading Nginx"
+            sudo nginx -t && sudo systemctl reload nginx
+
+            echo "✅ Deployment successful"
